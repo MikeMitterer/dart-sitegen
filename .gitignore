@@ -1,0 +1,13 @@
+\#------------------------------------------------
+\# keep IJ Files! in REPO
+\# *.iml
+\# *.ipr
+\# *.iws
+\# .idea/
+
+packages
+.project
+*.dart.js
+*.js_
+*.js.deps
+*.js.map

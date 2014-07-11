@@ -1,0 +1,10 @@
+name: dartpad
+
+dependencies:
+  browser: any
+  logging: any
+  logging_handlers: any
+  validate: any
+
+dev_dependencies:
+  unittest: any
