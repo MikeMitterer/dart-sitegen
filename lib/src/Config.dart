@@ -25,10 +25,10 @@ class Config {
         _settings[Options._ARG_LOGLEVEL]            = 'info';
 
         _settings[Config._CONF_CONTENT_DIR]         = 'html/_content';
-        _settings[Config._CONF_TEMPLATE_DIR]        = 'html/_template';
+        _settings[Config._CONF_TEMPLATE_DIR]        = 'html/_templates';
         _settings[Config._CONF_OUTPUT_DIR]          = 'web';
         _settings[Config._CONF_WORKSPACE_DIR]       = '.';
-        _settings[Config._CONF_DATE_FORMAT]         = 'yMd';
+        _settings[Config._CONF_DATE_FORMAT]         = 'dd.MM.yyyy';
         _settings[Config._CONF_YAML_DELIMITER]      = '~~~';
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
@@ -72,7 +72,7 @@ class Config {
 
         settings["Content folder"]                          = contentfolder;
         settings["Template folder"]                         = templatefolder;
-        settings["Default templagte"]                       = defaulttemplate;
+        settings["Default template"]                        = defaulttemplate;
         settings["Output folder"]                           = outputfolder;
         settings["Workspace"]                               = workspace;
 

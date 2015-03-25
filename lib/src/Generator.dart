@@ -23,65 +23,88 @@ class Generator {
 
     /// Render and output your static site (WARNING: overwrites existing HTML files in output directory).
     void generate(final Config config) {
-        final Directory contentDir = new Directory(path.absolute(config.workspace, config.contentfolder));
-        final Directory templateDir = new Directory(path.absolute(config.workspace, config.templatefolder));
-        final Directory outputDir = new Directory(path.absolute(config.workspace, config.outputfolder));
+        final Directory contentDir = new Directory(path.absolute(config.contentfolder));
+        final Directory templateDir = new Directory(path.absolute(config.templatefolder));
+        final Directory outputDir = new Directory(path.absolute( config.outputfolder));
 
         Validate.isTrue(contentDir.existsSync());
-        Validate.isTrue(templateDir.existsSync());
+        Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
         Validate.isTrue(outputDir.existsSync());
 
         // TODO: support directory hierarchies for markdown, templates and output
         final List<File> files = _listContentFilesIn(contentDir);
         final List<File> templates = _listTemplatesIn(templateDir);
 
+        _logger.info("Generating .html files...");
         for (final File file in files) {
-            // TODO: provide a way to access the list of pages with filenames and titles from a '_site' property
-            _logger.info("File: ${path.basename(file.path)}");
+            final String relativeFileName = file.path.replaceAll("${contentDir.path}","").replaceFirst("/","");
+            final String relativePath = path.dirname(relativeFileName).replaceFirst(".","");
+            _logger.fine("\nFile: ${relativeFileName}, Path: $relativePath");
 
             final List<String> lines = file.readAsLinesSync();
-            Map<String,String> page_options = {};
+            Map<String,String> pageOptions = {};
 
             if (_hasYamlBlock(config.yamldelimeter,lines)) {
                 var yaml_block = _extractYamlBlockFrom(config.yamldelimeter,lines);
-                page_options.addAll(yaml.loadYaml(yaml_block.join('\n')));
+                pageOptions.addAll(yaml.loadYaml(yaml_block.join('\n')));
 
-                lines.removeRange(0, yaml_block.length + 1);
                 // +1 for the YAML-Block-Delimiter ("~~~") line
+                lines.removeRange(0, yaml_block.length + 1);
             }
 
-            page_options = _fillInDefaultPageOptions(config.dateformat,file, page_options,config.siteoptions);
+            pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
 
-            page_options['_content'] = renderTemplate(lines.join('\n'), page_options);
+            pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
 
-            if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, page_options)) {
-                page_options['_content'] = md.markdownToHtml(page_options['_content']);
+            if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
+                pageOptions['_content'] = md.markdownToHtml(pageOptions['_content']);
             }
 
-            final File template = _getTemplateFor(file, page_options, templates, config.defaulttemplate);
-            _logger.info("   Template: ${path.basename(template.path)}");
+            final File template = _getTemplateFor(file, pageOptions, templates, config.defaulttemplate);
+            _logger.fine("Template: ${path.basename(template.path)}");
 
-            var template_str = template.readAsStringSync();
-            final String content = _fixPathRefs(renderTemplate(template_str, page_options),config);
+            final String templateContent = template.readAsStringSync();
+            final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions),config);
 
-            final String filename = "${path.basenameWithoutExtension(file.path)}.html";
-            final File outputFile = new File("${outputDir.path}/$filename");
+            final String outputFilename = "${path.basenameWithoutExtension(relativeFileName)}.html";
+            final Directory outputPath = _createOutputPath(outputDir,relativePath);
+            final File outputFile = new File("${outputPath.path}/$outputFilename");
             outputFile.writeAsStringSync(content);
 
-            _logger.info("${filename} generated!\n");
+            _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - done!");
         }
-
     }
 
     // -- private -------------------------------------------------------------
+
+    Directory _createOutputPath(final Directory outputDir, final String relativePath) {
+        Validate.notNull(outputDir);
+
+        final Directory outputPath = new Directory("${outputDir.path}${relativePath.isNotEmpty ? "/" : ""}${relativePath}");
+        if(!outputPath.existsSync()) {
+            outputPath.createSync(recursive: true);
+        }
+        return outputPath;
+    }
+
     bool isMarkdown(final File file) {
         final String extension = path.extension(file.path).toLowerCase();
         return extension == ".md" || extension == ".markdown";
     }
 
     List<File> _listContentFilesIn(final Directory contentDir) {
-        return contentDir.listSync()
-            .where((file) => file is File && (file.path.endsWith('.md') || file.path.endsWith(".markdown") || file.path.endsWith(".html"))).toList();
+        return contentDir.listSync(recursive: true)
+            .where((file) => file is File && (
+
+                    file.path.endsWith('.md') ||
+                    file.path.endsWith(".markdown") ||
+                    file.path.endsWith(".dart") ||
+                    file.path.endsWith(".js") ||
+                    file.path.endsWith(".html") ||
+                    file.path.endsWith(".scss") ||
+                    file.path.endsWith(".css")
+
+                    )).toList();
     }
 
     List<File> _listTemplatesIn(final Directory templateDir) {
@@ -101,24 +124,26 @@ class Generator {
         return content.takeWhile((line) => !line.startsWith(delimiter)).toList();
     }
 
-    Map _fillInDefaultPageOptions(final String defaultDateFormat,final File file, Map page_options,final Map<String,String> siteOptions) {
+    Map _fillInDefaultPageOptions(final String defaultDateFormat,final File file, Map pageOptions,final Map<String,String> siteOptions) {
         final String filename = path.basenameWithoutExtension(file.path);
-        page_options.putIfAbsent('title', () => filename);
+        pageOptions.putIfAbsent('title', () => filename);
 
-        page_options['_site'] = siteOptions;
+        pageOptions['_site'] = siteOptions;
+
+        //_logger.info(pageOptions.toString());
 
         /// See [DateFormat](https://api.dartlang.org/docs/channels/stable/latest/intl/DateFormat.html) for formatting options
         var date_format = new DateFormat(defaultDateFormat);
 
-        if (page_options.containsKey('date_format')) {
-            var page_date_format = new DateFormat(defaultDateFormat);
-            page_options['_date'] = page_date_format.format(file.lastModifiedSync());
+        if (pageOptions.containsKey('date_format')) {
+            var page_date_format = new DateFormat(pageOptions['date_format']);
+            pageOptions['_date'] = page_date_format.format(file.lastModifiedSync());
         }
         else {
-            page_options['_date'] = date_format.format(file.lastModifiedSync());
+            pageOptions['_date'] = date_format.format(file.lastModifiedSync());
         }
 
-        return page_options;
+        return pageOptions;
     }
 
     File _getTemplateFor(final File file,final Map page_options,final List<File> templates, final String defaultTemplate) {
