@@ -6,6 +6,7 @@
 
 ### Basis auf pub
 - [StillShot][2]
+- [Plugins][5]
 
 ### Sonstiges
 Extension für Mustach-Files: .mustache
@@ -14,3 +15,4 @@ Extension für Mustach-Files: .mustache
 [2]: https://pub.dartlang.org/packages/stillshot
 [3]: https://github.com/janl/mustache.js/
 [4]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[5]: https://pub.dartlang.org/packages/plugins

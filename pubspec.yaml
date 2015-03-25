@@ -1,10 +1,31 @@
 name: dartpad
+version: 0.0.1
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+# Add the bin/dartpad.dart script to the scripts pub installs.
+# Activate local repo:
+#   pub global activate --source path .
+#
+executables:
+  dartpad:
 
 dependencies:
   browser: any
+
   logging: any
   logging_handlers: any
+  console_log_handler: any
+
   validate: any
+
+  args: any
+  path: any
+  yaml: any
+  markdown: any
+  mustache: any
+  intl: any
 
 dev_dependencies:
   unittest: any
