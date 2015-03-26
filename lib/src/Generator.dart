@@ -27,9 +27,9 @@ class Generator {
         final Directory templateDir = new Directory(path.absolute(config.templatefolder));
         final Directory outputDir = new Directory(path.absolute( config.outputfolder));
 
-        Validate.isTrue(contentDir.existsSync());
+        Validate.isTrue(contentDir.existsSync(),"ContentDir ${contentDir.path} must exist!");
         Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
-        Validate.isTrue(outputDir.existsSync());
+        Validate.isTrue(outputDir.existsSync(),"OutputDir ${outputDir.path} must exist!");
 
         // TODO: support directory hierarchies for markdown, templates and output
         final List<File> files = _listContentFilesIn(contentDir);

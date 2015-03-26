@@ -26,7 +26,7 @@ class Application {
             }
 
             if(argResults.wasParsed(Options._ARG_TEST)) {
-                _test(config);
+                _refreshPage(config);
                 return;
             }
 
@@ -41,6 +41,8 @@ class Application {
                 foundOptionToWorkWith = true;
                 new Generator().generate(config);
                 watch(config.contentfolder,config);
+                watch(config.templatefolder,config);
+                watchToRefresh(config.outputfolder,config);
                 watchScss(config.outputfolder,config);
             }
 
@@ -82,12 +84,12 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.info('Observing $folder...');
+        _logger.fine('Observing $folder...');
 
         final List<StreamSubscription<FileSystemEvent>> watchers = new List();
         final File srcDir = new File(folder);
-        srcDir.watch().listen((final FileSystemEvent event) {
-            _logger.info(event.toString());
+        srcDir.watch(recursive: true).listen((final FileSystemEvent event) {
+            _logger.fine(event.toString());
             new Generator().generate(config);
         });
     }
@@ -96,7 +98,7 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.info('Observing $folder (SCSS)... ');
+        _logger.fine('Observing $folder (SCSS)... ');
         final Directory dir = new Directory(folder);
         final List<File> scssFiles = _listSCSSFilesIn(dir);
 
@@ -113,14 +115,28 @@ class Application {
                 final String cssFile = "${path.withoutExtension(scssFile)}.css";
 
                 _compileScss(scssFile,cssFile);
+                //_refreshPage(config);
             });
         });
     }
 
+    void watchToRefresh(final String folder,final Config config) {
+        Validate.notBlank(folder);
+        Validate.notNull(config);
+
+        _logger.fine('Observing $folder...');
+
+        final List<StreamSubscription<FileSystemEvent>> watchers = new List();
+        final File srcDir = new File(folder);
+        srcDir.watch(recursive: true).listen((final FileSystemEvent event) {
+            _logger.fine(event.toString());
+            _refreshPage(config);
+        });
+    }
 
     // -- private -------------------------------------------------------------
 
-    _test(final Config config) {
+    _refreshPage(final Config config) {
 
         final ProcessResult result = Process.runSync("pwd", []);
         if(result.exitCode != 0) {
@@ -128,11 +144,6 @@ class Application {
             _vickiSay("got a sassc error");
             return;
         }
-        _logger.info(result.stdout);
-        _logger.info(Directory.current.path);
-
-        //var file = new File(Platform.script.toFilePath());
-        _logger.info("${Platform.script}");
 
         final String content = """
                 tell application "Chromium"
@@ -173,11 +184,11 @@ class Application {
 
         final ProcessResult resultOsascript = Process.runSync(executable, [ script.path ]);
         if(resultOsascript.exitCode != 0) {
-            _logger.info("$executable faild with: ${(result.stderr as String).trim()}!");
+            _logger.severe("$executable faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("$executable failed");
             return;
         }
-        _logger.info("$executable ${script.path} successful!");
+        _logger.fine("$executable ${script.path} successful!");
     }
 
     _compileScss(final String source,final String target) {
