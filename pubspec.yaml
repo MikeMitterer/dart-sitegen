@@ -26,6 +26,7 @@ dependencies:
   markdown: any
   mustache: any
   intl: any
+  http_server: any
 
 dev_dependencies:
   unittest: any

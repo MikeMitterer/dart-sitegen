@@ -1,0 +1,6 @@
+#template_dir: ../_templates
+
+site_options:
+  name: Mike
+  site_name: HudriWudri
+  author: Mike Mitterer

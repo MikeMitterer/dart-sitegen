@@ -34,6 +34,8 @@ class Config {
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
+        _settings[Options._ARG_PORT]                = "8080";
+
         _overwriteSettingsWithConfigFile();
         _overwriteSettingsWithArgResults();
     }
@@ -64,6 +66,7 @@ class Config {
 
     Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
 
+    String get port => _settings[Options._ARG_PORT];
 
     Map<String,String> get settings {
         final Map<String,String> settings = new Map<String,String>();
@@ -84,6 +87,8 @@ class Config {
 
         settings["Config folder"]                           = configfolder;
         settings["Config file"]                             = configfile;
+
+        settings["Port"]                                    = port;
 
         if(dirstoscan.length > 0) {
             settings["Dirs to scan"]                        = dirstoscan.join(", ");
@@ -130,6 +135,9 @@ class Config {
             _settings[Options._ARG_LOGLEVEL] = _argResults[Options._ARG_LOGLEVEL];
         }
 
+        if(_argResults.wasParsed(Options._ARG_PORT)) {
+            _settings[Options._ARG_PORT] = _argResults[Options._ARG_PORT];
+        }
     }
 
     void _overwriteSettingsWithConfigFile() {

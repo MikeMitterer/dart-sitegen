@@ -19,6 +19,8 @@ import "package:markdown/markdown.dart" as md;
 import "package:mustache/mustache.dart" as mustache;
 import "package:yaml/yaml.dart" as yaml;
 
+import 'package:http_server/http_server.dart';
+
 part "src/Application.dart";
 part "src/Options.dart";
 part "src/Config.dart";

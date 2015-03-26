@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About StillShot | HudriWudri</title>
+    <!--
+    The output directory path (e.g. "../web/") will be stripped from the relative path in this tag.
+    Since the rendered output page will be in the output directory, any resource paths linking to it
+    will automatically change to reflect the assets' new relative location (e.g. "css/main.css").
+    This will work for any tags that have a 'src' or 'href' attribute (e.g. <script>, <img>, <a>, etc).
+    -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+InfoPage
+<!-- 'title' defaults to markdown filename if not defined in the file's YAML block -->
+<h1>About StillShot</h1>
+<!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
+by <span>Mike Mitterer</span>
+
+<!--
+'_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
+'date_format' variable.
+-->
+- <span>3/25/2015</span>
+<!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
+<article>
+    <p>3 <code>~</code>'s is the minimum for designating and separating a <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a> block, but they can be extended longer -- all that matters
+is that the tildes (<code>~</code>) are on their own line.
+And anything beyond that gets interpreted as <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>!
+You can even use template tags in here, for any variables you set in in the top YAML block, or in your <code>site.yaml</code> file:
+This post's title is: "About StillShot"
+This file was last modified on 3/25/2015</p>
+<p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>StillShot</strong>.
+Some vars that are always available by default:
+- <code>title</code>: post title, automatically set to name of markdown file if left blank
+- <code>_site</code>: site.yaml values
+- <code>_date</code>: post 'last modified' date
+- <code>_content</code>: post content (only accessible from templates, not markdown)</p>
+<p>And as you can see, you can also use mustache logic to iterate through yaml maps and lists:
+- <a href="https://dartlang.org">Dart</a>
+- <a href="https://pub.dartlang.org">Pub</a>
+- <a href="http://google.com">Google</a>
+- <a href="http://github.com">Github</a>
+<em> <a href="https://github.com/oblique63/StillShot">StillShot</a>
+</em> <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+<em> <a href="http://mustache.github.io/mustache.5.html">Mustache</a>
+</em> <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a>
+- foo
+- bar
+- baz</p>
+<p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.
+You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your <a href="../site.yaml">site.yaml</a> file.
+Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
+</article>
+</body>
+</html>

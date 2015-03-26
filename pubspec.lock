@@ -21,6 +21,10 @@ packages:
     description: console_log_handler
     source: hosted
     version: "0.1.4"
+  http_server:
+    description: http_server
+    source: hosted
+    version: "0.9.5+1"
   intl:
     description: intl
     source: hosted
@@ -45,6 +49,10 @@ packages:
     description: meta
     source: hosted
     version: "0.8.8"
+  mime:
+    description: mime
+    source: hosted
+    version: "0.9.3"
   mustache:
     description: mustache
     source: hosted

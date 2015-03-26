@@ -39,38 +39,49 @@ class Generator {
         for (final File file in files) {
             final String relativeFileName = file.path.replaceAll("${contentDir.path}","").replaceFirst("/","");
             final String relativePath = path.dirname(relativeFileName).replaceFirst(".","");
+            final String extension = path.extension(relativeFileName).replaceFirst(".","").toLowerCase();
+
             _logger.fine("\nFile: ${relativeFileName}, Path: $relativePath");
-
             final List<String> lines = file.readAsLinesSync();
-            Map<String,String> pageOptions = {};
+            Map<String,dynamic> pageOptions = {};
 
-            if (_hasYamlBlock(config.yamldelimeter,lines)) {
-                var yaml_block = _extractYamlBlockFrom(config.yamldelimeter,lines);
-                pageOptions.addAll(yaml.loadYaml(yaml_block.join('\n')));
+            final bool hasYamlBlock = _hasYamlBlock(config.yamldelimeter,lines,extension);
+            if (hasYamlBlock) {
+                List<String> yamlBlock = _extractYamlBlockFrom(config.yamldelimeter,lines,extension);
+                if(yamlBlock.length > 0) {
+                    pageOptions.addAll(yaml.loadYaml(yamlBlock.join('\n')));
 
-                // +1 for the YAML-Block-Delimiter ("~~~") line
-                lines.removeRange(0, yaml_block.length + 1);
+                    // +1 for the YAML-Block-Delimiter ("~~~") line
+                    lines.removeRange(0, yamlBlock.length + 1);
+                } else {
+                    lines.removeRange(0,1);
+                }
             }
 
+            pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
-
             pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
 
+            String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
                 pageOptions['_content'] = md.markdownToHtml(pageOptions['_content']);
+                outputExtension = "html";
             }
 
-            final File template = _getTemplateFor(file, pageOptions, templates, config.defaulttemplate);
-            _logger.fine("Template: ${path.basename(template.path)}");
+            String templateContent = "{{_content}}";
+            if(hasYamlBlock == true && ( pageOptions.containsKey("template") == false || pageOptions["template"] != "none")) {
+                final File template = _getTemplateFor(file, pageOptions, templates, config.defaulttemplate);
+                _logger.fine("Template: ${path.basename(template.path)}");
+                templateContent = template.readAsStringSync();
+            }
 
-            final String templateContent = template.readAsStringSync();
             final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions),config);
 
-            final String outputFilename = "${path.basenameWithoutExtension(relativeFileName)}.html";
+            final String outputFilename = "${path.basenameWithoutExtension(relativeFileName)}.${outputExtension}";
             final Directory outputPath = _createOutputPath(outputDir,relativePath);
             final File outputFile = new File("${outputPath.path}/$outputFilename");
-            outputFile.writeAsStringSync(content);
 
+            outputFile.writeAsStringSync(content);
             _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - done!");
         }
     }
@@ -115,13 +126,51 @@ class Generator {
         return markdownForSite || ( page_options.containsKey('markdown_templating') && page_options['markdown_templating'] );
     }
 
-    bool _hasYamlBlock(final String delimiter, final List<String> content) {
-        final String end_of_delimiter = delimiter.substring(delimiter.length - 2, delimiter.length - 1);
-        return content.any((line) => line.startsWith(delimiter) && line.endsWith(end_of_delimiter));
+    bool _hasYamlBlock(final String delimiter, final List<String> content,final String forExtension) {
+        Validate.notBlank(delimiter);
+        Validate.notEmpty(content);
+
+        final String startsWithString = _startStringForYamlBlock(delimiter,forExtension);
+        final String endsWithString = delimiter.substring(delimiter.length - 2, delimiter.length - 1);
+
+        bool hasYamlBlock = content.any( (line) => line.startsWith(startsWithString) && line.endsWith(endsWithString));
+        return hasYamlBlock;
     }
 
-    List<String> _extractYamlBlockFrom(final String delimiter, final List<String> content) {
-        return content.takeWhile((line) => !line.startsWith(delimiter)).toList();
+    List<String> _extractYamlBlockFrom(final String delimiter, final List<String> content,final String forExtension) {
+        Validate.notBlank(delimiter);
+        Validate.notEmpty(content);
+        Validate.notBlank(forExtension);
+
+        final String yamlStartBlock = _startStringForYamlBlock(delimiter,forExtension);
+        final List<String> lines = content.takeWhile( (line) => !line.startsWith(yamlStartBlock)).toList();
+        final List<String> yamlBlock = new List<String>();
+
+        switch(forExtension) {
+            case "dart":
+                lines.forEach((final String line) {
+                    yamlBlock.add(line.replaceFirst(new RegExp(r"// "),""));
+                });
+                break;
+
+            default:
+                yamlBlock.addAll(lines);
+                break;
+        }
+        return yamlBlock;
+    }
+
+    String _startStringForYamlBlock(final String delimiter,final String forExtension) {
+        Validate.notBlank(delimiter);
+        Validate.notBlank(forExtension);
+
+        String startsWithString = delimiter;
+        switch(forExtension) {
+            case "dart":
+                startsWithString = "//$delimiter";
+                break;
+        }
+        return startsWithString;
     }
 
     Map _fillInDefaultPageOptions(final String defaultDateFormat,final File file, Map pageOptions,final Map<String,String> siteOptions) {
@@ -142,6 +191,29 @@ class Generator {
         else {
             pageOptions['_date'] = date_format.format(file.lastModifiedSync());
         }
+
+        return pageOptions;
+    }
+
+    /**
+     * Sample: <link rel="stylesheet" href="{{_page.relative_to_root}}styles/main.css">
+     *   produces <link rel="stylesheet" href="../styles/main.css"> for about/index.html
+     */
+    Map<String,dynamic> _fillInPageNestingLevel(final String relativeFileName, Map<String,dynamic> pageOptions) {
+        Validate.notBlank(relativeFileName);
+
+        String backPath = "";
+        int nestingLevel = 0;
+        if(relativeFileName.contains("/")) {
+            nestingLevel = relativeFileName.split("/").length - 1;
+            for(int counter = 0; counter < nestingLevel; counter++) {
+                backPath = backPath + "../";
+            }
+        }
+        pageOptions["_page"] = {
+            "relative_to_root" : backPath,
+            "nesting_level" : nestingLevel
+        };
 
         return pageOptions;
     }
@@ -182,6 +254,7 @@ class Generator {
         var relative_output = path.relative(config.outputfolder, from: config.templatefolder);
 
         relative_output = "$relative_output/".replaceAll("\\", "/");
+        //_logger.info(relative_output);
 
         html = html.replaceAll('src="$relative_output', 'src="')
         .replaceAll('href="$relative_output', 'href="');
