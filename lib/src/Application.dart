@@ -1,7 +1,7 @@
-part of dartpad;
+part of sitegen;
 
 class Application {
-    final Logger _logger = new Logger("dartpad.Application");
+    final Logger _logger = new Logger("sitegen.Application");
 
     final Options options;
 
@@ -136,6 +136,14 @@ class Application {
 
     // -- private -------------------------------------------------------------
 
+    /**
+     * Weitere Infos:
+     *      https://github.com/guard/guard-livereload
+     *      https://github.com/nitoyon/livereloadx
+     *      http://goo.gl/M1L4kf
+     *
+     *      WebSocket / ChromeExtension: http://goo.gl/unsnXc
+     */
     _refreshPage(final Config config) {
 
         final ProcessResult result = Process.runSync("pwd", []);

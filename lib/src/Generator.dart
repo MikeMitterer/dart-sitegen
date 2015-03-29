@@ -1,4 +1,4 @@
-part of dartpad;
+part of sitegen;
 
 /**
  * Takes a template string (such as a Mustache template) and renders it out to an HTML string
@@ -19,7 +19,7 @@ TemplateRenderer renderTemplate = (final String templateFile,final Map options) 
 };
 
 class Generator {
-    final Logger _logger = new Logger("dartpad.Generator");
+    final Logger _logger = new Logger("sitegen.Generator");
 
     /// Render and output your static site (WARNING: overwrites existing HTML files in output directory).
     void generate(final Config config) {

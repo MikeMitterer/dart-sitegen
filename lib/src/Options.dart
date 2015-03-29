@@ -1,7 +1,7 @@
-part of dartpad;
+part of sitegen;
 
 class Options {
-    static const APPNAME                    = 'dartpad';
+    static const APPNAME                    = 'sitegen';
 
     static const _ARG_HELP                  = 'help';
     static const _ARG_LOGLEVEL              = 'loglevel';
@@ -46,7 +46,7 @@ class Options {
 
             ..addFlag(_ARG_SETTINGS,         abbr: 's', negatable: false, help: "Prints settings")
             ..addFlag(_ARG_HELP,             abbr: 'h', negatable: false, help: "Shows this message")
-            ..addFlag(_ARG_GENERATE,         abbr: 'x', negatable: false, help: "Generate site")
+            ..addFlag(_ARG_GENERATE,         abbr: 'g', negatable: false, help: "Generate site")
             ..addFlag(_ARG_TEST,             abbr: 't', negatable: false, help: "Test")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")

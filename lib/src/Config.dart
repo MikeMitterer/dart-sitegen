@@ -5,7 +5,7 @@ part of dartpad;
  * Most of these configs can be overwritten by commandline args.
  */
 class Config {
-    final Logger _logger = new Logger("dartpad.Config");
+    final Logger _logger = new Logger("sitegen.Config");
 
     static const _CONF_CONTENT_DIR        = 'content_dir';
     static const _CONF_TEMPLATE_DIR       = 'template_dir';
@@ -42,6 +42,10 @@ class Config {
 
     List<String> get dirstoscan => _argResults.rest;
 
+    String get configfolder => ".sitegen";
+
+    String get configfile => "site.yaml";
+
     String get loglevel => _settings[Options._ARG_LOGLEVEL];
 
     String get contentfolder => _settings[Config._CONF_CONTENT_DIR];
@@ -59,10 +63,6 @@ class Config {
     bool get usemarkdown => _settings[Config._CONF_USE_MARKDOWN];
 
     String get defaulttemplate => _settings[Config._CONF_DEFAULT_TEMPLATE];
-
-    String get configfolder => ".dartpad";
-
-    String get configfile => "site.yaml";
 
     Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
 

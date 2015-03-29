@@ -1,4 +1,4 @@
-import 'package:dartpad/dartpad.dart';
+import 'package:sitegen/sitegen.dart';
 
 void main(List<String> arguments) {
     final Application application = new Application();

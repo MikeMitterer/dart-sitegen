@@ -1,4 +1,4 @@
-name: dartpad
+name: sitegen
 version: 0.0.1
 
 environment:
@@ -9,7 +9,7 @@ environment:
 #   pub global activate --source path .
 #
 executables:
-  dartpad:
+  sitegen:
 
 dependencies:
   browser: any
