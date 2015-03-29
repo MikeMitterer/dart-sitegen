@@ -1,4 +1,4 @@
-part of dartpad;
+part of sitegen;
 
 /**
  * Defines default-configurations.
