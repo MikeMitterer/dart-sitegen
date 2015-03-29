@@ -4,6 +4,9 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/bin/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/simple/web/about/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/simple/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/simple/web/styles/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/sitegen" />
     </content>
     <orderEntry type="inheritedJdk" />
