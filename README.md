@@ -1,5 +1,8 @@
 # SiteGen
 
+A port of Googles Web Starter Kit (Material branch) to Dart<br>
+You can find the original version here on [GitHub][wskmaterial]
+
 A simple static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.  
 
@@ -219,7 +222,7 @@ I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I 
 If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.at/) me
 or **star** this repo here on GitHub
 
-
+[wskmaterial]: https://github.com/google/web-starter-kit/tree/material-sprint
 [dart]: https://www.dartlang.org/
 [tracker]: https://github.com/MikeMitterer/dart-sitegen/issues
 [markdown]: http://daringfireball.net/projects/markdown/syntax
