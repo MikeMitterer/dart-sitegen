@@ -165,7 +165,7 @@ Update
 Uninstall
 ```shell
     pub global deactivate sitegen    
-``    
+```    
     
 ## Usage    
 ```shell
