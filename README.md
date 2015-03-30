@@ -6,6 +6,10 @@ You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustach
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
 platforms you could try [LivePage][livepage] chrome extension for maximum productivity.  
 
+Before you read on - check out this video:
+
+[![promoimage]][video]
+
 [Here][example] you can see a typical site structure.  
 
 ```
@@ -188,7 +192,7 @@ If you are using Chromium on Mac you will get a automatic page refresh for free!
  
 Now play with sitegen and watch my screencast...
 
-## Features and bugs
+### Features and bugs
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 ### Thanks
@@ -224,3 +228,5 @@ or **star** this repo here on GitHub
 [example]: https://github.com/MikeMitterer/dart-sitegen/tree/master/examples/simple
 [yaml]: http://rhnh.net/2011/01/31/yaml-tutorial
 [stillshot]: https://pub.dartlang.org/packages/stillshot
+[promoimage]: https://github.com/MikeMitterer/dart-wsk-material/blob/master/lib/images/wsk.mikemitterer.at-720px.jpg?raw=true
+[video]: http://goo.gl/uUTg8s
