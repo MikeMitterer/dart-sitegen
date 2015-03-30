@@ -1,4 +1,3 @@
-
 # SiteGen
 
 A simple static site generator in [Dart][dart], webserver included.  
@@ -227,7 +226,7 @@ or **star** this repo here on GitHub.
 [markdown]: http://daringfireball.net/projects/markdown/syntax
 [mustache]: http://mustache.github.io/mustache.5.html
 [livepage]: https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh
-[example]: https://github.com/MikeMitterer/dart-sitegen/tree/master/examples/simple
+[example]: https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple
 [yaml]: http://rhnh.net/2011/01/31/yaml-tutorial
 [stillshot]: https://pub.dartlang.org/packages/stillshot
 [promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/lib/screenshot.jpg?raw=true
