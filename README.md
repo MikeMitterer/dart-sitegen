@@ -126,6 +126,45 @@ so you can take advantage of templating and markdown at the same time.
 Simply place all your files in your `content_dir` and **SiteGen** will generate your site accordingly.      
 If your markdown file has a .md extension it will be renamed to .html.
     
+## Templates
+As mentioned above, you can access any variables set within your markdown files from your templates using mustache. Options
+set from your `site.yaml / site_options` can be accessed through the `_site` variable, like so:
+
+    <h1>{{ _site.author}}</h1>
+
+where `author` is a property defined in your `site.yaml / site_options`. You can access these values from your markdown or html files as well.
+
+Every page and template has access to the following values:
+
+- `title`: post title, usually set inside each markdown file, but is set to name of markdown file if left blank
+- `_site`: site.yaml values
+- `_date`: the post/markdown file's _last modified_ date
+- `_content`: converted markdown content (only accessible from templates)
+- `_page.relative_to_root`: is replaced with some '../' depending on the nesting level of your page (check about/index.html)
+    
+The default template is 'default.html' but you can overwrite this behavior if you add a 'template' var to the yaml-block of your content file
+
+    template: info_page
+    
+## SASS
+If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.    
+    
+# Install
+Install
+```shell
+    pub global activate sitegen
+```
+
+Update
+```shell
+    # activate sitegen again
+    pub global activate sitegen
+```
+
+Uninstall
+```shell
+    pub global deactivate sitegen    
+```    
     
 ## Usage    
 ```shell
