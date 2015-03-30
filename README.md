@@ -1,7 +1,5 @@
-# SiteGen
 
-A port of Googles Web Starter Kit (Material branch) to Dart<br>
-You can find the original version here on [GitHub][wskmaterial]
+# SiteGen
 
 A simple static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.  
@@ -15,191 +13,7 @@ Before you read on - check out this video:
 
 [Here][example] you can see a typical site structure.  
 
-```
-├── .sitegen
-│   ├── refreshChromium-1.0.applescript
-│   └── site.yaml
-├── html
-│   ├── _content
-│   │   ├── about
-│   │   │   └── index.html
-│   │   ├── index.html
-│   │   ├── markdown.md
-│   │   ├── piratenames.json
-│   │   └── xtreme.html
-│   └── _templates
-│       ├── default.html
-│       └── info_page.html
-└── web
-    ├── about
-    │   ├── index.html
-    │   └── packages -> ../../packages
-    ├── index.html
-    ├── main.dart
-    ├── markdown.html
-    ├── packages -> ../packages
-    ├── piratenames.json
-    ├── styles
-    │   ├── main.css
-    │   ├── main.scss
-    │   └── packages -> ../../packages
-    └── xtreme.html
-```
 
-.sitegen: This is where your site.yaml lives  
-This folder is also used to store autgenerated scripts - in the case above you can see
-the script to refresh Chromium on Mac
-
-html/_content: This is where **SiteGen** will look for your files to generate the site from.
-The following file-formats are supported:
-
-- .md
-- .markdown
-- .dart
-- .js
-- .json
-- .html
-- .scss
-- .css
-                    
-html/_templates: The directory containing your HTML+Mustache templates.
-
-web: Following Dart conventions - this is your default output directory.
-
-## site.yaml
-**Optional** [YAML][yaml] file that stores your global values and config options.
-Values set here can be accessed from all templates and markdown files.
-
-```
-site_options:
-  author: Mike Mitterer
-```
-
-Can be used in you template (default.html) as
-```
-<span>{{_site.author}}</span>
-```
-
-You can also use site.yaml to overwrite your **SiteGen** default configuration.  
-Supported vars:
-
-- content_dir: html/_content 
-- template_dir: html/_templates
-- output_dir: web
-- workspace: .
-- date_format: dd.MM.yyyy
-- yaml_delimeter: ~~~
-- use_markdown: true
-- default_template: default.html
-- sasscompiler: sassc
-
-## Markdown
-**SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
-have the option to use a [YAML][yaml] block to define custom values that you can inject into your templates. Example:
-
-    title: A Blog Post
-    published: 01/01/2014
-    category: example
-    tags:
-        - StillShot
-        - Rants
-        - Etc.
-    ~~~~~~
-    {{title}}
-    Normal Markdown content here...
-
-As you can see, a line of tildes (`~`) is used to designate your YAML block. You can access/inject your values into
-your pages using [mustache template syntax][mustache]. You can do this either inside your dedicated HTML/mustache templates:
-
-    <ul>
-      {{#tags}}
-        <li>{{.}}</li>
-      {{/tags}}
-    </ul>
-
-Or, you can embed your values within the markdown file itself:
-
-    {{#tags}}
-      - __{{.}}__
-    {{/tags}}
-
-so you can take advantage of templating and markdown at the same time.
-
-Simply place all your files in your `content_dir` and **SiteGen** will generate your site accordingly.      
-If your markdown file has a .md extension it will be renamed to .html.
-    
-## Templates
-As mentioned above, you can access any variables set within your markdown files from your templates using mustache. Options
-set from your `site.yaml / site_options` can be accessed through the `_site` variable, like so:
-
-    <h1>{{ _site.author}}</h1>
-
-where `author` is a property defined in your `site.yaml / site_options`. You can access these values from your markdown or html files as well.
-
-Every page and template has access to the following values:
-
-- `title`: post title, usually set inside each markdown file, but is set to name of markdown file if left blank
-- `_site`: site.yaml values
-- `_date`: the post/markdown file's _last modified_ date
-- `_content`: converted markdown content (only accessible from templates)
-- `_page.relative_to_root`: is replaced with some '../' depending on the nesting level of your page (check about/index.html)
-    
-The default template is 'default.html' but you can overwrite this behavior if you add a 'template' var to the yaml-block of your content file
-
-    template: info_page
-    
-## SASS
-If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.    
-    
-# Install
-Install
-```shell
-    pub global activate sitegen
-```
-
-Update
-```shell
-    # activate sitegen again
-    pub global activate sitegen
-```
-
-Uninstall
-```shell
-    pub global deactivate sitegen    
-    
-## Usage    
-```shell
-    Usage: sitegen [options]
-        -s, --settings    Prints settings
-        -h, --help        Shows this message
-        -g, --generate    Generate site
-        -w, --watch       Observes SRC-dir
-            --serve       Serves your site
-            --port        Sets the port to listen on
-                          (defaults to "8000")
-    
-        -v, --loglevel    Sets the appropriate loglevel
-                          [info, debug, warning]
-    
-    Sample:
-    
-        'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
-        'Generates the static site in your 'web-folder':       'sitegen -g'    
-```
-
-Go to your project root (this is where your pubspec.yaml is) and type:
-
-    sitegen -w --serve
-        
-If you are using Chromium on Mac you will get a automatic page refresh for free!
- 
-Now play with sitegen and watch my screencast...
-
-### Features and bugs
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-### Thanks
-I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I used as basis for **SiteGen** 
 
 ### License
 
@@ -222,7 +36,6 @@ I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I 
 If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.at/) me
 or **star** this repo here on GitHub
 
-[wskmaterial]: https://github.com/google/web-starter-kit/tree/material-sprint
 [dart]: https://www.dartlang.org/
 [tracker]: https://github.com/MikeMitterer/dart-sitegen/issues
 [markdown]: http://daringfireball.net/projects/markdown/syntax
