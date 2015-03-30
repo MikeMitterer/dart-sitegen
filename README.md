@@ -91,7 +91,69 @@ Supported vars:
 - default_template: default.html
 - sasscompiler: sassc
 
+## Markdown
+**SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
+have the option to use a [YAML][yaml] block to define custom values that you can inject into your templates. Example:
 
+    title: A Blog Post
+    published: 01/01/2014
+    category: example
+    tags:
+        - StillShot
+        - Rants
+        - Etc.
+    ~~~~~~
+    {{title}}
+    Normal Markdown content here...
+
+As you can see, a line of tildes (`~`) is used to designate your YAML block. You can access/inject your values into
+your pages using [mustache template syntax][mustache]. You can do this either inside your dedicated HTML/mustache templates:
+
+    <ul>
+      {{#tags}}
+        <li>{{.}}</li>
+      {{/tags}}
+    </ul>
+
+Or, you can embed your values within the markdown file itself:
+
+    {{#tags}}
+      - __{{.}}__
+    {{/tags}}
+
+so you can take advantage of templating and markdown at the same time.
+
+Simply place all your files in your `content_dir` and **SiteGen** will generate your site accordingly.      
+If your markdown file has a .md extension it will be renamed to .html.
+    
+    
+## Usage    
+```shell
+    Usage: sitegen [options]
+        -s, --settings    Prints settings
+        -h, --help        Shows this message
+        -g, --generate    Generate site
+        -w, --watch       Observes SRC-dir
+            --serve       Serves your site
+            --port        Sets the port to listen on
+                          (defaults to "8000")
+    
+        -v, --loglevel    Sets the appropriate loglevel
+                          [info, debug, warning]
+    
+    Sample:
+    
+        'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
+        'Generates the static site in your 'web-folder':       'sitegen -g'    
+```
+
+Go to your project root (this is where your pubspec.yaml is) and type:
+
+    sitegen -w --serve
+        
+If you are using Chromium on Mac you will get a automatic page refresh for free!
+ 
+Now play with sitegen and watch my screencast...
 
 ### Features and bugs
 Please file feature requests and bugs at the [issue tracker][tracker].
