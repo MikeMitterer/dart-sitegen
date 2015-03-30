@@ -26,14 +26,14 @@ class Application {
                 return;
             }
 
-//            if (argResults.wasParsed(Options._ARG_TEST)) {
-//                _testPWD(config.outputfolder);
-//                _testPWD2();
-//
-//                return;
-//            }
-
             bool foundOptionToWorkWith = false;
+
+            if (argResults.wasParsed(Options._ARG_INIT)) {
+                foundOptionToWorkWith = true;
+                final Init init = new Init();
+                init.createDirs(config).then((_) => init.createFiles(config));
+                return;
+            }
 
             if (argResults.wasParsed(Options._ARG_GENERATE)) {
                 foundOptionToWorkWith = true;

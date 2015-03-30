@@ -24,6 +24,7 @@ import 'package:http_server/http_server.dart';
 part "src/Application.dart";
 part "src/Options.dart";
 part "src/Config.dart";
+part "src/Init.dart";
 
 part "src/Generator.dart";
 

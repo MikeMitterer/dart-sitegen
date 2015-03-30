@@ -168,27 +168,39 @@ Uninstall
     
 ## Usage    
 ```shell
-    Usage: sitegen [options]
-        -s, --settings    Prints settings
-        -h, --help        Shows this message
-        -g, --generate    Generate site
-        -w, --watch       Observes SRC-dir
-            --serve       Serves your site
-            --port        Sets the port to listen on
-                          (defaults to "8000")
-    
-        -v, --loglevel    Sets the appropriate loglevel
-                          [info, debug, warning]
-    
-    Sample:
-    
-        'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
-        'Generates the static site in your 'web-folder':       'sitegen -g'    
+Usage: sitegen [options]
+    -s, --settings    Prints settings
+    -h, --help        Shows this message
+    -g, --generate    Generate site
+    -w, --watch       Observes SRC-dir
+    -i, --init        Initializes your site
+                      (not combinable with other options)
+
+        --serve       Serves your site
+        --port        Sets the port to listen on
+                      (defaults to "8000")
+
+    -v, --loglevel    Sets the appropriate loglevel
+                      [info, debug, warning]
+
+Sample:
+
+    'Generates all basic files and folders:                'sitegen -i'
+    'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
+    'Generates the static site in your 'web-folder':       'sitegen -g' 
 ```
 
 Go to your project root (this is where your pubspec.yaml is) and type:
 
+    sitegen -i
+    
+This creates a basic file structure for you.     
+
+Now type
+
     sitegen -w --serve
+    
+This servers your files under http://localhost:8000/    
         
 If you are using Chromium on Mac you will get a automatic page refresh for free!
  

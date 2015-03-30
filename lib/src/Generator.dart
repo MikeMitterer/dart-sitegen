@@ -214,7 +214,7 @@ class Generator {
                 backPath = backPath + "../";
             }
         }
-        backPath = backPath.replaceFirst(new RegExp(r"/$"),"");
+        //backPath = backPath.replaceFirst(new RegExp(r"/$"),"");
         pageOptions["_page"] = {
             "relative_to_root" : backPath,
             "nesting_level" : nestingLevel

@@ -10,6 +10,7 @@ class Options {
     static const _ARG_SERVE                 = 'serve';
     static const _ARG_PORT                  = 'port';
     static const _ARG_WATCH                 = 'watch';
+    static const _ARG_INIT                  = 'init';
 
     static const _ARG_TEST                  = 'test';
 
@@ -31,6 +32,7 @@ class Options {
         print("");
         print("Sample:");
         print("");
+        print("    'Generates all basic files and folders:                '$APPNAME -i'");
         print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -w --serve'");
         print("    'Generates the static site in your 'web-folder':       '$APPNAME -g'");
         print("");
@@ -47,6 +49,8 @@ class Options {
             //..addFlag(_ARG_TEST,             abbr: 't', negatable: false, help: "Test")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")
+
+            ..addFlag(_ARG_INIT,             abbr: 'i', negatable: false, help: "Initializes your site\n(not combinable with other options)")
 
             ..addFlag(_ARG_SERVE,                       negatable: false, help: "Serves your site")
 
