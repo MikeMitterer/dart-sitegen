@@ -1,4 +1,4 @@
-## SiteGen
+# SiteGen
 
 A simple static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.  
