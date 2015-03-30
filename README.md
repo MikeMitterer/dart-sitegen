@@ -152,7 +152,7 @@ Install
 
 Update
 ```shell
-    # activate git-help again
+    # activate sitegen again
     pub global activate sitegen
 ```
 
@@ -187,6 +187,9 @@ Go to your project root (this is where your pubspec.yaml is) and type:
 If you are using Chromium on Mac you will get a automatic page refresh for free!
  
 Now play with sitegen and watch my screencast...
+
+## Features and bugs
+Please file feature requests and bugs at the [issue tracker][tracker].
 
 ### Thanks
 I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I used as basis for **SiteGen** 
