@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.0.5](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.4...v0.0.5) - 2015-03-30##
+
+###Feature###
+* -i creates a basic file-structure for you [35c3d4e](http://github.com/mikemitterer/dart-sitegen/commit/35c3d4e4a73a00a8c2b8a690f270963364b3a8bc)
+
 ##[v0.0.3](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.2...v0.0.3) - 2015-03-30##
 
 ###Docs###
