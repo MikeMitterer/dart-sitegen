@@ -230,6 +230,6 @@ or **star** this repo here on GitHub.
 [example]: https://github.com/MikeMitterer/dart-sitegen/tree/master/examples/simple
 [yaml]: http://rhnh.net/2011/01/31/yaml-tutorial
 [stillshot]: https://pub.dartlang.org/packages/stillshot
-[promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true
+[promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/lib/screenshot.jpg?raw=true
 [video]: http://goo.gl/uUTg8s
 

@@ -1,4 +1,8 @@
 name: sitegen
+description: Static site generator for Dart, webserver included.
+author: Mike Mitterer <office@mikemitterer.at>
+homepage: https://github.com/MikeMitterer/dart-sitegen
+
 version: 0.0.2
 
 environment:
