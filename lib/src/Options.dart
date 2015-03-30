@@ -29,13 +29,10 @@ class Options {
         });
 
         print("");
-        print("Sample: (usual workflow)");
+        print("Sample:");
         print("");
-        print("    'pub update' for every example:                      '$APPNAME -u'");
-        print("    'sassc & autoprefix for scss-Files:                  '$APPNAME -a'");
-        print("    'pub build' for every example:                       '$APPNAME -b'");
-        print("    'Copy example/<sample>/build/web to build/example/:  '$APPNAME -c'");
-        print("    'Rsyncs build/example to webserver:                  '$APPNAME -r --rsyncdest <usr>@<host>:<folder>/'");
+        print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -w --serve'");
+        print("    'Generates the static site in your 'web-folder':       '$APPNAME -g'");
         print("");
     }
 
@@ -47,7 +44,7 @@ class Options {
             ..addFlag(_ARG_SETTINGS,         abbr: 's', negatable: false, help: "Prints settings")
             ..addFlag(_ARG_HELP,             abbr: 'h', negatable: false, help: "Shows this message")
             ..addFlag(_ARG_GENERATE,         abbr: 'g', negatable: false, help: "Generate site")
-            ..addFlag(_ARG_TEST,             abbr: 't', negatable: false, help: "Test")
+            //..addFlag(_ARG_TEST,             abbr: 't', negatable: false, help: "Test")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")
 

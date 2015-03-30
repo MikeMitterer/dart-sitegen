@@ -26,12 +26,12 @@ class Application {
                 return;
             }
 
-            if (argResults.wasParsed(Options._ARG_TEST)) {
-                _testPWD(config.outputfolder);
-                _testPWD2();
-
-                return;
-            }
+//            if (argResults.wasParsed(Options._ARG_TEST)) {
+//                _testPWD(config.outputfolder);
+//                _testPWD2();
+//
+//                return;
+//            }
 
             bool foundOptionToWorkWith = false;
 
@@ -107,7 +107,6 @@ class Application {
 
         _logger.fine('Observing $folder...');
 
-        final List<StreamSubscription<FileSystemEvent>> watchers = new List();
         final File srcDir = new File(folder);
         srcDir.watch(recursive: true).listen((final FileSystemEvent event) {
             _logger.fine(event.toString());
@@ -143,6 +142,8 @@ class Application {
             final String cssFile = "${path.withoutExtension(scssFile)}.css";
 
             _logger.info("Main SCSS: $scssFile");
+            _compileScss(config.sasscompiler,scssFile, cssFile);
+
             scssFiles.forEach((final File file) {
                 _logger.info("Observing: ${file.path}");
 
@@ -150,7 +151,7 @@ class Application {
                     _logger.fine(event.toString());
                     //_logger.info("Scss: ${scssFile}, CSS: ${cssFile}");
 
-                    _compileScss(scssFile, cssFile);
+                    _compileScss(config.sasscompiler, scssFile, cssFile);
                 });
             });
 
@@ -184,37 +185,6 @@ class Application {
 
     // -- private -------------------------------------------------------------
 
-    Future _testPWD(final String folder) async {
-        ProcessResult result = await Process.run("pwd", []);
-        if (result.exitCode != 0) {
-            _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error");
-            return;
-        }
-
-        final Directory dir = new Directory(folder);
-        dir.watch(recursive: true).listen((final FileSystemEvent event) {
-            _logger.info(event.toString());
-
-            _testPWD2();
-            _compileScss("web/styles/main.scss", "web/styles/main.css");
-
-        });
-
-        _logger.info("PWD1: ${result.stdout.trim()}");
-    }
-
-    Future _testPWD2() async {
-        ProcessResult result = await Process.run("pwd", []);
-        if (result.exitCode != 0) {
-            _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error");
-            return;
-        }
-
-        _logger.info("PWD11: ${result.stdout.trim()}");
-    }
-
     /**
      * Weitere Infos:
      *      https://github.com/guard/guard-livereload
@@ -224,6 +194,12 @@ class Application {
      *      WebSocket / ChromeExtension: http://goo.gl/unsnXc
      */
     Future _refreshPage(final Config config) async {
+        Validate.notNull(config);
+
+        if(!Platform.isMacOS) {
+            _logger.info("Page refresh is only supported on Mac");
+            return;
+        }
 
         // Nur zum testen!
         final ProcessResult result = await Process.run("pwd", []);
@@ -287,28 +263,13 @@ class Application {
         return dir.existsSync();
     }
 
-    /*
-    _compileScss(final String source,final String target) {
+    Future _compileScss(final String compiler, final String source, final String target) async {
+        Validate.notBlank(compiler);
         Validate.notBlank(source);
         Validate.notBlank(target);
 
         _logger.info("Compiling $source -> $target");
-        final ProcessResult result = Process.runSync("sassc", [ source, target ]);
-        if(result.exitCode != 0) {
-            _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error");
-            return;
-        }
-        _logger.info("Done!");
-    }
-*/
-
-    Future _compileScss(final String source, final String target) async {
-        Validate.notBlank(source);
-        Validate.notBlank(target);
-
-        _logger.info("Compiling $source -> $target");
-        final ProcessResult result = await Process.run("sassc", [ source, target ]);
+        final ProcessResult result = await Process.run(compiler, [ source, target ]);
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a sassc error");

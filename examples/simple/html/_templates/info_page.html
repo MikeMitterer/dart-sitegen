@@ -2,34 +2,31 @@
 <html>
 <head>
     <title>{{title}} | {{_site.site_name}}</title>
-
-    <!--
-    The output directory path (e.g. "../web/") will be stripped from the relative path in this tag.
-    Since the rendered output page will be in the output directory, any resource paths linking to it
-    will automatically change to reflect the assets' new relative location (e.g. "css/main.css").
-
-    This will work for any tags that have a 'src' or 'href' attribute (e.g. <script>, <img>, <a>, etc).
-    -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="{{_page.relative_to_root}}/styles/main.css">
 </head>
 <body>
-InfoPage III
+<div class="menu">
+    <a href="/index.html">Home</a> |
+    <a href="/markdown.html">Markdown</a> |
+    <a href="/about/index.html">About</a>
+</div>
+NestingLevel: {{_page.nesting_level}}
 <!-- 'title' defaults to markdown filename if not defined in the file's YAML block -->
-<h1>{{title}}</h1>
+<h1>{{title}} (Template)</h1>
 
-<!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
-by <span>{{_site.author}}</span>
-
-
-<!--
-'_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
-'date_format' variable.
--->
-- <span>{{_date}}</span>
-
-<!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
 <article>
+    <!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
     {{_content}}
 </article>
+<footer>
+    <!--
+    '_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
+    'date_format' variable.
+    -->
+    <span>Last modified: {{_date}}</span>
+
+    <!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
+    by <span>{{_site.author}}</span>
+</footer>
 </body>
 </html>

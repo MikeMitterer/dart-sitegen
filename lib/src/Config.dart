@@ -16,6 +16,7 @@ class Config {
     static const _CONF_USE_MARKDOWN       = 'use_markdown';
     static const _CONF_DEFAULT_TEMPLATE   = 'default_template';
     static const _CONF_SITE_OPTIONS       = 'site_options';
+    static const _CONF_SASS_COMPILER       = 'sasscompiler';
 
     final ArgResults _argResults;
     final Map<String,dynamic> _settings = new Map<String,dynamic>();
@@ -32,6 +33,8 @@ class Config {
         _settings[Config._CONF_YAML_DELIMITER]      = '~~~';
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
+        _settings[Config._CONF_SASS_COMPILER]       = "sassc";
+
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
         _settings[Options._ARG_PORT]                = "8080";
@@ -64,6 +67,8 @@ class Config {
 
     String get defaulttemplate => _settings[Config._CONF_DEFAULT_TEMPLATE];
 
+    String get sasscompiler => _settings[Config._CONF_SASS_COMPILER];
+
     Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
 
     String get port => _settings[Options._ARG_PORT];
@@ -87,6 +92,8 @@ class Config {
 
         settings["Config folder"]                           = configfolder;
         settings["Config file"]                             = configfile;
+
+        settings["SASS compiler"]                           = sasscompiler;
 
         settings["Port"]                                    = port;
 

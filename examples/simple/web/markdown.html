@@ -1,0 +1,72 @@
+<!-- Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
+     for details. All rights reserved. Use of this source code is governed by a
+     BSD-style license that can be found in the LICENSE file.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About SiteGen | HudriWudri</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+<div class="menu">
+    <a href="/index.html">Home</a> |
+    <a href="/markdown.html">Markdown</a> |
+    <a href="/xtreme.html">XTreme simple</a> |
+    <a href="/about/index.html">About</a>
+</div>
+<!-- 'title' defaults to markdown filename if not defined in the file's YAML block -->
+<h2>About SiteGen</h2>
+<!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
+<h1>About SiteGen (Content)</h1>
+<h3>Subheadline (Content)</h3>
+<p>3 <code>~</code>'s is the minimum for designating and separating a <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a> block, but they can be extended longer -- all that matters
+is that the tildes (<code>~</code>) are on their own line.
+And anything beyond that gets interpreted as <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>!</p>
+<pre><code>[Markdown][markdown]!
+
+</code></pre>
+<p>You can even use template tags in here, for any variables you set in in the top YAML block, or in your <code>site.yaml</code> file:
+This post's title is: "About SiteGen"
+This file was last modified on 3/30/2015</p>
+<p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>SiteGen</strong>.  
+Some vars that are always available by default:</p>
+<pre><code>`title`: post title, automatically set to name of markdown file if left blank
+`_site`: site.yaml values
+`_date`: post 'last modified' date
+`_content`: post content (only accessible from templates, not markdown)
+</code></pre>
+<p>And as you can see, you can also use mustache logic to iterate through yaml maps and lists:
+Links are rendered incorrectly.  
+Bug: <a href="https://github.com/dpeek/dart-markdown/issues/35">https://github.com/dpeek/dart-markdown/issues/35</a></p>
+<pre><code>- [Dart](https://dartlang.org)
+- [Pub](https://pub.dartlang.org)
+- [Google](http://google.com)
+- [Github](http://github.com)
+
+* [SiteGen][sitegen]
+* [Markdown][markdown]
+* [Mustache][mustache]
+* [YAML][yaml]
+
+- foo
+- bar
+- baz
+</code></pre>
+<p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.
+You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your <a href="../site.yaml">site.yaml</a> file.
+Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
+<footer>
+    <!--
+    '_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
+    'date_format' variable.
+    -->
+    <span>Last modified: 3/30/2015</span>
+    <!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
+    by <span>Mike Mitterer</span>
+</footer>
+<script type="application/dart" src="/main.dart"></script>
+<script src="packages/browser/dart.js"></script>
+</body>
+</html>

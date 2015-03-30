@@ -1,30 +1,43 @@
+<!-- Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
+     for details. All rights reserved. Use of this source code is governed by a
+     BSD-style license that can be found in the LICENSE file.
+-->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>index | HudriWudri</title>
-    <!--
-    The output directory path (e.g. "../web/") will be stripped from the relative path in this tag.
-    Since the rendered output page will be in the output directory, any resource paths linking to it
-    will automatically change to reflect the assets' new relative location (e.g. "css/main.css").
-    This will work for any tags that have a 'src' or 'href' attribute (e.g. <script>, <img>, <a>, etc).
-    -->
+    <title>About | HudriWudri</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
+<div class="menu">
+    <a href="/index.html">Home</a> |
+    <a href="/markdown.html">Markdown</a> |
+    <a href="/xtreme.html">XTreme simple</a> |
+    <a href="/about/index.html">About</a>
+</div>
 <!-- 'title' defaults to markdown filename if not defined in the file's YAML block -->
-<h1>index</h1>
-NestingLevel: 1
-<!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
-by <span>Mike Mitterer</span>
-
-<!--
-'_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
-'date_format' variable.
--->
-- <span>26.03.2015</span>
+<h2>About</h2>
 <!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
-<article>
-    <span>INDEX!!!!..eeee</span>
-</article>
+<h2>Headline II</h2>
+<div class="badge">
+    <div class="greeting">
+        Arrr! Me name is
+    </div>
+    <div class="name">
+        <span id="badgeName"> </span>
+    </div>
+</div>
+<footer>
+    <!--
+    '_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
+    'date_format' variable.
+    -->
+    <span>Last modified: 30.03.2015</span>
+    <!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
+    by <span>Mike Mitterer</span>
+</footer>
+<script type="application/dart" src="../main.dart"></script>
+<script src="packages/browser/dart.js"></script>
 </body>
 </html>

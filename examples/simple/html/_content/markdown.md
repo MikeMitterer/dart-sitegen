@@ -3,7 +3,7 @@
 # This is an example of a YAML comment which will be completely ignored.
 
 # A basic variable definition
-title: About StillShot
+title: About SiteGen
 
 # A list of strings. Surrounding your strings in quotes is optional,
 # but some may require it so they  don't interfere with YAML syntax.
@@ -29,7 +29,7 @@ links:
 # You can even embed markdown in your YAML strings if you want (as long as you use the values
 # in the markdown file itself -- markdown injected into html templates will not get evaluated).
 tags:
-  - "[StillShot][stillshot]"
+  - "[SiteGen][sitegen]"
   - "[Markdown][markdown]"
   - "[Mustache][mustache]"
   - "[YAML][yaml]"
@@ -41,18 +41,19 @@ date_format: yMd
 # And here we manually define the template we want to use.
 # Note the lack of a file extension. This is to have compatibility
 # with any template file-type, though mustache embedded in plain
-# old HTML is the default. If no template is defined here, StillShot
+# old HTML is the default. If no template is defined here, SiteGen
 # will use the one listed for 'default_template' in your site.yaml
-template: info_page
+# template: info_page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Wieder ein TEST
+#{{title}} (Content)
 ###Subheadline
 
 3 `~`'s is the minimum for designating and separating a [YAML][yaml] block, but they can be extended longer -- all that matters
 is that the tildes (`~`) are on their own line.
 
 And anything beyond that gets interpreted as [Markdown][markdown]!
-
+    [Markdown][markdown]!
+    
 You can even use template tags in here, for any variables you set in in the top YAML block, or in your `site.yaml` file:
 
 This post's title is: "{{ title }}"
@@ -60,24 +61,28 @@ This post's title is: "{{ title }}"
 This file was last modified on {{ _date }}
 
 
-Note that variables beginning with an underscore designate *implicit* metadata added by __StillShot__.
+Note that variables beginning with an underscore designate *implicit* metadata added by __SiteGen__.  
 
 Some vars that are always available by default:
 
 {{#default_vars}}
-- {{.}}
+    {{.}}
 {{/default_vars}}
 
 And as you can see, you can also use mustache logic to iterate through yaml maps and lists:
+Links are rendered incorrectly.  
+Bug: [https://github.com/dpeek/dart-markdown/issues/35](https://github.com/dpeek/dart-markdown/issues/35)
 
 {{#links}}
-- [{{name}}]({{url}})
+    - [{{name}}]({{url}})
 {{/links}}
+
 {{#tags}}
-* {{.}}
+    * {{.}}
 {{/tags}}
+
 {{#authors}}
-- {{.}}
+    - {{.}}
 {{/authors}}
 
 Note how you need to use a `.` to access a list item, but can access map/dict keys directly.
@@ -88,4 +93,4 @@ Same ideas apply when writing your actual HTML templates. See [mustache's docs][
 [yaml]: http://rhnh.net/2011/01/31/yaml-tutorial
 [markdown]: http://daringfireball.net/projects/markdown/syntax
 [mustache]: http://mustache.github.io/mustache.5.html
-[stillshot]: https://github.com/oblique63/StillShot
+[sitegen]: https://github.com/MikeMitterer/dart-sitegen

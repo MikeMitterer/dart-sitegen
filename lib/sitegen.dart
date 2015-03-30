@@ -1,4 +1,4 @@
-library dartpad;
+library sitegen;
 
 import 'dart:io';
 import 'dart:async';

@@ -61,6 +61,7 @@ class Generator {
             pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
             pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
+            pageOptions['_template'] = "none";
 
             String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
@@ -71,7 +72,9 @@ class Generator {
             String templateContent = "{{_content}}";
             if(hasYamlBlock == true && ( pageOptions.containsKey("template") == false || pageOptions["template"] != "none")) {
                 final File template = _getTemplateFor(file, pageOptions, templates, config.defaulttemplate);
+                pageOptions['_template'] = template.path;
                 _logger.fine("Template: ${path.basename(template.path)}");
+
                 templateContent = template.readAsStringSync();
             }
 
@@ -111,6 +114,7 @@ class Generator {
                     file.path.endsWith(".markdown") ||
                     file.path.endsWith(".dart") ||
                     file.path.endsWith(".js") ||
+                    file.path.endsWith(".json") ||
                     file.path.endsWith(".html") ||
                     file.path.endsWith(".scss") ||
                     file.path.endsWith(".css")
@@ -196,7 +200,7 @@ class Generator {
     }
 
     /**
-     * Sample: <link rel="stylesheet" href="{{_page.relative_to_root}}styles/main.css">
+     * Sample: <link rel="stylesheet" href="{{_page.relative_to_root}}/styles/main.css">
      *   produces <link rel="stylesheet" href="../styles/main.css"> for about/index.html
      */
     Map<String,dynamic> _fillInPageNestingLevel(final String relativeFileName, Map<String,dynamic> pageOptions) {
@@ -210,6 +214,7 @@ class Generator {
                 backPath = backPath + "../";
             }
         }
+        backPath = backPath.replaceFirst(new RegExp(r"/$"),"");
         pageOptions["_page"] = {
             "relative_to_root" : backPath,
             "nesting_level" : nestingLevel
