@@ -44,11 +44,11 @@ Before you read on - check out this video:
     └── xtreme.html
 ```
 
-.sitegen: This is where your site.yaml lives  
+**.sitegen**: This is where your site.yaml lives  
 This folder is also used to store autgenerated scripts - in the case above you can see
-the script to refresh Chromium on Mac
+the script to refresh Chromium on Mac.
 
-html/_content: This is where **SiteGen** will look for your files to generate the site from.
+**html/_content**: This is where **SiteGen** will look for your files to generate the site from.
 The following file-formats are supported:
 
 - .md
@@ -60,9 +60,9 @@ The following file-formats are supported:
 - .scss
 - .css
                     
-html/_templates: The directory containing your HTML+Mustache templates.
+**html/_templates**: The directory containing your HTML+Mustache templates.
 
-web: Following Dart conventions - this is your default output directory.
+**web**: Following Dart conventions - this is your default output directory.
 
 ## site.yaml
 **Optional** [YAML][yaml] file that stores your global values and config options.
@@ -73,7 +73,7 @@ site_options:
   author: Mike Mitterer
 ```
 
-Can be used in you template (default.html) as
+Can be used in your template (default.html) as
 ```
 <span>{{_site.author}}</span>
 ```
@@ -132,17 +132,18 @@ set from your `site.yaml / site_options` can be accessed through the `_site` var
 
     <h1>{{ _site.author}}</h1>
 
-where `author` is a property defined in your `site.yaml / site_options`. You can access these values from your markdown or html files as well.
+where `author` is a property defined in your `site.yaml / site_options`. 
+You can access these values from your markdown or from your html files.
 
 Every page and template has access to the following values:
 
-- `title`: post title, usually set inside each markdown file, but is set to name of markdown file if left blank
+- `title`: title, usually set inside each markdown file, but is set to the name of markdown file if left blank
 - `_site`: site.yaml values
 - `_date`: the post/markdown file's _last modified_ date
 - `_content`: converted markdown content (only accessible from templates)
-- `_page.relative_to_root`: is replaced with some '../' depending on the nesting level of your page (check about/index.html)
+- `_page.relative_to_root`: will be replaced with some '../' depending on the nesting level of your page (check about/index.html)
     
-The default template is 'default.html' but you can overwrite this behavior if you add a 'template' var to the yaml-block of your content file
+The default template is 'default.html' but you can overwrite this behavior if you add a 'template' var to the yaml-block of your content file.
 
     template: info_page
     
@@ -164,7 +165,7 @@ Update
 Uninstall
 ```shell
     pub global deactivate sitegen    
-```    
+``    
     
 ## Usage    
 ```shell
@@ -198,7 +199,7 @@ Now play with sitegen and watch my screencast...
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 ### Thanks
-I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I used as basis for **SiteGen** 
+I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I used as basis for **SiteGen**. 
 
 ### License
 
@@ -219,7 +220,7 @@ I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I 
 
 
 If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.at/) me
-or **star** this repo here on GitHub
+or **star** this repo here on GitHub.
 
 [dart]: https://www.dartlang.org/
 [tracker]: https://github.com/MikeMitterer/dart-sitegen/issues
