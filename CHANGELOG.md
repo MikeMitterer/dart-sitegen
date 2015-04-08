@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.0.6](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.5...v0.0.6) - 2015-04-08##
+
+###Feature###
+* Autoprefixer added [62c6541](http://github.com/mikemitterer/dart-sitegen/commit/62c654162a788c2d937677a776e5606f65f5ab2b)
+
 ##[v0.0.5](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.4...v0.0.5) - 2015-03-30##
 
 ###Feature###
