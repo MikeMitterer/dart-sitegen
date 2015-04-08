@@ -143,6 +143,7 @@ class Application {
 
             _logger.info("Main SCSS: $scssFile");
             _compileScss(config.sasscompiler,scssFile, cssFile);
+            _autoPrefixer("autoprefixer",cssFile);
 
             scssFiles.forEach((final File file) {
                 _logger.info("Observing: ${file.path}");
@@ -152,6 +153,7 @@ class Application {
                     //_logger.info("Scss: ${scssFile}, CSS: ${cssFile}");
 
                     _compileScss(config.sasscompiler, scssFile, cssFile);
+                    _autoPrefixer("autoprefixer",cssFile);
                 });
             });
 
@@ -273,6 +275,20 @@ class Application {
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a sassc error");
+            return;
+        }
+        _logger.info("Done!");
+    }
+
+    Future _autoPrefixer(final String prefixer,final String cssFile) async {
+        Validate.notBlank(prefixer);
+        Validate.notBlank(cssFile);
+
+        _logger.info("Autoprefixing $cssFile");
+        final ProcessResult result = await Process.run(prefixer, [ cssFile ]);
+        if (result.exitCode != 0) {
+            _logger.info("prefixer faild with: ${(result.stderr as String).trim()}!");
+            _vickiSay("got a prefixer error");
             return;
         }
         _logger.info("Done!");
