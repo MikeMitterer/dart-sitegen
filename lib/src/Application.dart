@@ -265,13 +265,13 @@ class Application {
         return dir.existsSync();
     }
 
-    Future _compileScss(final String compiler, final String source, final String target) async {
+    void _compileScss(final String compiler, final String source, final String target) {
         Validate.notBlank(compiler);
         Validate.notBlank(source);
         Validate.notBlank(target);
 
         _logger.info("Compiling $source -> $target");
-        final ProcessResult result = await Process.run(compiler, [ source, target ]);
+        final ProcessResult result = Process.runSync(compiler, [ source, target ]);
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a sassc error");
@@ -280,12 +280,12 @@ class Application {
         _logger.info("Done!");
     }
 
-    Future _autoPrefixer(final String prefixer,final String cssFile) async {
+    void _autoPrefixer(final String prefixer,final String cssFile) {
         Validate.notBlank(prefixer);
         Validate.notBlank(cssFile);
 
         _logger.info("Autoprefixing $cssFile");
-        final ProcessResult result = await Process.run(prefixer, [ cssFile ]);
+        final ProcessResult result = Process.runSync(prefixer, [ cssFile ]);
         if (result.exitCode != 0) {
             _logger.info("prefixer faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a prefixer error");
