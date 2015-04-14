@@ -1,6 +1,14 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.1.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.6...v0.1.0) - 2015-04-14##
+
+###Feature###
+* data-files (yaml + json) can be used [8beec7a](http://github.com/mikemitterer/dart-sitegen/commit/8beec7a4828cfcbe9a6c1f15214d5bc1bcc7d831)
+
+###Fixes###
+* sass + Autoprefixer are working for larger files too [7e26392](http://github.com/mikemitterer/dart-sitegen/commit/7e2639215646781660db3b104fd2637f6a0eb225)
+
 ##[v0.0.6](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.5...v0.0.6) - 2015-04-08##
 
 ###Feature###
