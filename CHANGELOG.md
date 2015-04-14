@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.1.2](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.1...v0.1.2) - 2015-04-14##
+
+###Fixes###
+* data-dir was not watch-enabled [b52798b](http://github.com/mikemitterer/dart-sitegen/commit/b52798b1e40a70f7c5b4071f966875a192fded79)
+
 ##[v0.1.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.0...v0.1.1) - 2015-04-14##
 
 ###Fixes###
