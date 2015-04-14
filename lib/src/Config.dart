@@ -10,6 +10,7 @@ class Config {
     static const _CONF_CONTENT_DIR        = 'content_dir';
     static const _CONF_TEMPLATE_DIR       = 'template_dir';
     static const _CONF_OUTPUT_DIR         = 'output_dir';
+    static const _CONF_DATA_DIR           = 'data_dir';
     static const _CONF_WORKSPACE_DIR      = 'workspace';
     static const _CONF_DATE_FORMAT        = 'date_format';
     static const _CONF_YAML_DELIMITER     = 'yaml_delimeter';
@@ -27,6 +28,7 @@ class Config {
 
         _settings[Config._CONF_CONTENT_DIR]         = 'html/_content';
         _settings[Config._CONF_TEMPLATE_DIR]        = 'html/_templates';
+        _settings[Config._CONF_DATA_DIR]            = 'html/_data';
         _settings[Config._CONF_OUTPUT_DIR]          = 'web';
         _settings[Config._CONF_WORKSPACE_DIR]       = '.';
         _settings[Config._CONF_DATE_FORMAT]         = 'dd.MM.yyyy';
@@ -57,6 +59,8 @@ class Config {
 
     String get outputfolder => _settings[Config._CONF_OUTPUT_DIR];
 
+    String get datafolder => _settings[Config._CONF_DATA_DIR];
+
     String get workspace => _settings[Config._CONF_WORKSPACE_DIR];
 
     String get dateformat => _settings[Config._CONF_DATE_FORMAT];
@@ -80,6 +84,8 @@ class Config {
 
         settings["Content folder"]                          = contentfolder;
         settings["Template folder"]                         = templatefolder;
+        settings["Data folder"]                             = datafolder;
+
         settings["Default template"]                        = defaulttemplate;
         settings["Output folder"]                           = outputfolder;
         settings["Workspace"]                               = workspace;

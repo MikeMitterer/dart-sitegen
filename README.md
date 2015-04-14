@@ -24,22 +24,30 @@ Before you read on - check out this video:
 │   │   ├── markdown.md
 │   │   ├── piratenames.json
 │   │   └── xtreme.html
-│   └── _templates
+│   │
+│   ├── _data
+│   │   ├── xmen.yaml
+│   │   └── families.json
+│   │
+│   └── _templates
 │       ├── default.html
 │       └── info_page.html
 └── web
     ├── about
     │   ├── index.html
     │   └── packages -> ../../packages
+    │
     ├── index.html
     ├── main.dart
     ├── markdown.html
     ├── packages -> ../packages
     ├── piratenames.json
+    │
     ├── styles
     │   ├── main.css
     │   ├── main.scss
     │   └── packages -> ../../packages
+    │
     └── xtreme.html
 ```
 
@@ -58,6 +66,26 @@ The following file-formats are supported:
 - .html
 - .scss
 - .css
+
+**html/_data**: [optional] This is the place where you can store your data-files.  
+The following file-formats are supported:
+
+- .yaml
+- .json
+
+**SiteGen** injects your data into a global _data variable.
+Here is a sample how to use such data:
+  
+```html
+<ul>
+    {{#_data.xmen}}
+    <li>{{.}}</li>
+    {{/_data.xmen}}
+</ul>
+```
+
+**SiteGen**  
+  
                     
 **html/_templates**: The directory containing your HTML+Mustache templates.
 

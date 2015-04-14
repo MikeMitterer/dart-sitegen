@@ -26,6 +26,7 @@ class Generator {
         final Directory contentDir = new Directory(path.absolute(config.contentfolder));
         final Directory templateDir = new Directory(path.absolute(config.templatefolder));
         final Directory outputDir = new Directory(path.absolute( config.outputfolder));
+        final Directory dataDir = new Directory(path.absolute( config.datafolder));
 
         Validate.isTrue(contentDir.existsSync(),"ContentDir ${contentDir.path} must exist!");
         Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
@@ -34,6 +35,9 @@ class Generator {
         // TODO: support directory hierarchies for markdown, templates and output
         final List<File> files = _listContentFilesIn(contentDir);
         final List<File> templates = _listTemplatesIn(templateDir);
+        final List<File> dataFiles = dataDir.existsSync() ? _listDataFilesIn(dataDir) : new List<File>();
+
+        final Map dataMap = _getDataMap(dataFiles);
 
         _logger.info("Generating .html files...");
         for (final File file in files) {
@@ -60,8 +64,11 @@ class Generator {
 
             pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
+            pageOptions['_data'] = dataMap;
             pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
             pageOptions['_template'] = "none";
+
+            _logger.info(pageOptions);
 
             String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
@@ -124,6 +131,16 @@ class Generator {
 
     List<File> _listTemplatesIn(final Directory templateDir) {
         return templateDir.listSync().where((file) => file is File).toList();
+    }
+
+    List<File> _listDataFilesIn(final Directory contentDir) {
+        return contentDir.listSync(recursive: true)
+        .where((file) => file is File && (
+
+            file.path.endsWith('.yaml') ||
+            file.path.endsWith(".json")
+
+        )).toList();
     }
 
     bool _isMarkdownSupported(final bool markdownForSite, final Map page_options) {
@@ -197,6 +214,29 @@ class Generator {
         }
 
         return pageOptions;
+    }
+
+    Map _getDataMap(final List<File> dataFiles) {
+        final Map<String,dynamic> dataMap = new Map<String,dynamic>();
+
+        dataFiles.forEach((final File file) {
+            if(file.existsSync()) {
+                var data;
+                if(path.extension(file.path) == ".yaml") {
+
+                    data = yaml.loadYaml(file.readAsStringSync());
+
+                } else {
+
+                    data = JSON.decode(file.readAsStringSync());
+                }
+
+                final String filename = path.basenameWithoutExtension(file.path).toLowerCase();
+                dataMap[filename] = data;
+            }
+        });
+
+        return dataMap;
     }
 
     /**

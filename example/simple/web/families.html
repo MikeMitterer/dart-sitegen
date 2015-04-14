@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>About | HudriWudri</title>
+    <title>Families | HudriWudri</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="..//styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
 <div class="menu">
@@ -17,28 +17,34 @@
     <a href="/about/index.html">About</a>
 </div>
 <!-- 'title' defaults to markdown filename if not defined in the file's YAML block -->
-<h2>About</h2>
+<h2>Families</h2>
 <!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
-<h2>Headline II</h2>
-<div class="badge">
-    <div class="greeting">
-        Arrr! Me name is
-    </div>
-    <div class="name">
-        <span id="badgeName"> </span>
-    </div>
-</div>
+<ul>
+    <li>Jones
+        <ul>
+            <li>Jim</li>
+            <li>John</li>
+            <li>Jill</li>
+        </ul>
+    </li>
+    <li>Smith
+        <ul>
+            <li>Steve</li>
+            <li>Sally</li>
+        </ul>
+    </li>
+</ul>
 <footer>
     <!--
     '_date' stores the markdown page's last modified date. The date formatting can be set in 'site.yaml' via the
     'date_format' variable.
     -->
-    <span>Last modified: 30.03.2015</span>
+    <span>Last modified: 14.04.2015</span>
     <!-- Values set in 'site.yaml' can be accessed as properties in the '_site' variable -->
     by <span>Mike Mitterer</span>
     Template: /Volumes/Daten/DevLocal/DevDart/SiteGen/example/simple/html/_templates/default.html
 </footer>
-<script type="application/dart" src="..//main.dart"></script>
+<script type="application/dart" src="/main.dart"></script>
 <script src="packages/browser/dart.js"></script>
 </body>
 </html>
