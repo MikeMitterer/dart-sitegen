@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.1.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.0...v0.1.1) - 2015-04-14##
+
+###Fixes###
+* Logoutput was on [da1bb4e](http://github.com/mikemitterer/dart-sitegen/commit/da1bb4e31e15225ed9ed1ea60e8d8377e776c5fd)
+
 ##[v0.1.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.6...v0.1.0) - 2015-04-14##
 
 ###Feature###
