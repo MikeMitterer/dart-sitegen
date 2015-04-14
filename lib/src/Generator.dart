@@ -68,8 +68,6 @@ class Generator {
             pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
             pageOptions['_template'] = "none";
 
-            _logger.info(pageOptions);
-
             String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
                 pageOptions['_content'] = md.markdownToHtml(pageOptions['_content']);
