@@ -45,6 +45,10 @@ class Application {
                 if (_isFolderAvailable(config.contentfolder) && _isFolderAvailable(config.templatefolder)) {
                     watch(config.contentfolder, config);
                     watch(config.templatefolder, config);
+
+                    if(_isFolderAvailable(config.datafolder)) {
+                        watch(config.datafolder, config);
+                    }
                     new Generator().generate(config);
                 }
                 watchScss(config.outputfolder, config);
