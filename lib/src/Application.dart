@@ -112,7 +112,7 @@ class Application {
         _logger.fine('Observing $folder...');
 
         final File srcDir = new File(folder);
-        srcDir.watch(recursive: true).listen((final FileSystemEvent event) {
+        srcDir.watch(recursive: true).where((final file) => (!file.path.contains("packages"))).listen((final FileSystemEvent event) {
             _logger.fine(event.toString());
             new Generator().generate(config);
         });

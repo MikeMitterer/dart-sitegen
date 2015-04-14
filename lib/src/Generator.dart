@@ -124,11 +124,11 @@ class Generator {
                     file.path.endsWith(".scss") ||
                     file.path.endsWith(".css")
 
-                    )).toList();
+                    ) && !file.path.contains("packages") ).toList();
     }
 
     List<File> _listTemplatesIn(final Directory templateDir) {
-        return templateDir.listSync().where((file) => file is File).toList();
+        return templateDir.listSync().where((file) => file is File && !file.path.contains("packages")).toList();
     }
 
     List<File> _listDataFilesIn(final Directory contentDir) {
@@ -138,7 +138,7 @@ class Generator {
             file.path.endsWith('.yaml') ||
             file.path.endsWith(".json")
 
-        )).toList();
+        ) && !file.path.contains("packages")).toList();
     }
 
     bool _isMarkdownSupported(final bool markdownForSite, final Map page_options) {
