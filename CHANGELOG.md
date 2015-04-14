@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.1.3](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.2...v0.1.3) - 2015-04-14##
+
+###Fixes###
+* Packages are now excluded from watch-dirs [d1412fe](http://github.com/mikemitterer/dart-sitegen/commit/d1412fe34a80d0a8e22c289c13929427dba05119)
+
 ##[v0.1.2](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.1...v0.1.2) - 2015-04-14##
 
 ###Fixes###
