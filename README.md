@@ -83,9 +83,6 @@ Here is a sample how to use such data:
     {{/_data.xmen}}
 </ul>
 ```
-
-**SiteGen**  
-  
                     
 **html/_templates**: The directory containing your HTML+Mustache templates.
 
