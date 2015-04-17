@@ -1,5 +1,6 @@
 part of sitegen;
 
+/// Commandline options
 class Options {
     static const APPNAME                    = 'sitegen';
 
@@ -12,7 +13,8 @@ class Options {
     static const _ARG_WATCH                 = 'watch';
     static const _ARG_INIT                  = 'init';
 
-    static const _ARG_TEST                  = 'test';
+    static const _ARG_USE_SASS              = 'usesass';
+    static const _ARG_USE_AUTOPREFIXER      = 'useapfx';
 
     final ArgParser _parser;
 
@@ -25,7 +27,7 @@ class Options {
 
     void showUsage() {
         print("Usage: $APPNAME [options]");
-        _parser.getUsage().split("\n").forEach((final String line) {
+        _parser.usage.split("\n").forEach((final String line) {
             print("    $line");
         });
 
@@ -44,15 +46,20 @@ class Options {
         final ArgParser parser = new ArgParser()
 
             ..addFlag(_ARG_SETTINGS,         abbr: 's', negatable: false, help: "Prints settings")
+
             ..addFlag(_ARG_HELP,             abbr: 'h', negatable: false, help: "Shows this message")
+
             ..addFlag(_ARG_GENERATE,         abbr: 'g', negatable: false, help: "Generate site")
-            //..addFlag(_ARG_TEST,             abbr: 't', negatable: false, help: "Test")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")
 
             ..addFlag(_ARG_INIT,             abbr: 'i', negatable: false, help: "Initializes your site\n(not combinable with other options)")
 
             ..addFlag(_ARG_SERVE,                       negatable: false, help: "Serves your site")
+
+            ..addFlag(_ARG_USE_SASS,                    negatable: true, help: "Enables / disables SASS to CSS compiler", defaultsTo: true)
+
+            ..addFlag(_ARG_USE_AUTOPREFIXER,            negatable: true, help: "Enables / disables Autoprefixer", defaultsTo: true)
 
             ..addOption(_ARG_PORT,                      help: "Sets the port to listen on", defaultsTo: "8000")
 

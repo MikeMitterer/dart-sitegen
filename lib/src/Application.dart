@@ -3,8 +3,16 @@ part of sitegen;
 class Application {
     final Logger _logger = new Logger("sitegen.Application");
 
+    /// Commandline options
     final Options options;
+
+    /// {timerForPageRefresh} waits 500ms before refreshing the page
+    /// If there are more PageRefresh-Requests withing 500ms only the last refresh will be made
     Timer timerForPageRefresh = null;
+
+    /// {timerWatchCss} waits 500ms before it calls it's watch-functions.
+    /// If there are more watch-events within 500ms only the last event counts
+    Timer timerWatchCss = null;
 
     Application() : options = new Options();
 
@@ -131,6 +139,7 @@ class Application {
             return;
         }
 
+        // mainScssFile is the one not starting with a _ (underscore)
         File _mainScssFile(final List<File> scssFiles) {
             final File mainScss = scssFiles.firstWhere((final File file) {
                 final String pureFilename = path.basename(file.path);
@@ -146,8 +155,8 @@ class Application {
             final String cssFile = "${path.withoutExtension(scssFile)}.css";
 
             _logger.info("Main SCSS: $scssFile");
-            _compileScss(config.sasscompiler,scssFile, cssFile);
-            _autoPrefixer("autoprefixer",cssFile);
+            _compileScss(scssFile, cssFile,config);
+            _autoPrefixer("autoprefixer",cssFile,config);
 
             scssFiles.forEach((final File file) {
                 _logger.info("Observing: ${file.path}");
@@ -156,8 +165,15 @@ class Application {
                     _logger.fine(event.toString());
                     //_logger.info("Scss: ${scssFile}, CSS: ${cssFile}");
 
-                    _compileScss(config.sasscompiler, scssFile, cssFile);
-                    _autoPrefixer("autoprefixer",cssFile);
+                    if(timerWatchCss == null) {
+                        timerWatchCss = new Timer(new Duration(milliseconds: 500), () {
+
+                            _compileScss(scssFile, cssFile,config);
+                            _autoPrefixer("autoprefixer",cssFile,config);
+                            timerWatchCss = null;
+                        });
+                    }
+
                 });
             });
 
@@ -269,10 +285,17 @@ class Application {
         return dir.existsSync();
     }
 
-    void _compileScss(final String compiler, final String source, final String target) {
-        Validate.notBlank(compiler);
+    void _compileScss(final String source, final String target, final Config config) {
         Validate.notBlank(source);
         Validate.notBlank(target);
+        Validate.notNull(config);
+
+        if(!config.usesass) {
+            _logger.info("Sass was disabled - so your SCSS won't be compiled to CSS!");
+            return;
+        }
+
+        final String compiler = config.sasscompiler;
 
         _logger.info("Compiling $source -> $target");
         final ProcessResult result = Process.runSync(compiler, [ source, target ]);
@@ -284,9 +307,15 @@ class Application {
         _logger.info("Done!");
     }
 
-    void _autoPrefixer(final String prefixer,final String cssFile) {
+    void _autoPrefixer(final String prefixer,final String cssFile, final Config config) {
         Validate.notBlank(prefixer);
         Validate.notBlank(cssFile);
+        Validate.notNull(config);
+
+        if(!config.useautoprefixer) {
+            _logger.info("Autoprefixing was disabled - so your CSS won't be prefixed!");
+            return;
+        }
 
         _logger.info("Autoprefixing $cssFile");
         final ProcessResult result = Process.runSync(prefixer, [ cssFile ]);

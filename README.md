@@ -15,7 +15,7 @@ Before you read on - check out this video:
 ```
 ├── .sitegen
 │   ├── refreshChromium-1.0.applescript
-│   └── site.yaml
+│   └── site.yaml (Optional!)
 ├── html
 │   ├── _content
 │   │   ├── about
@@ -51,7 +51,7 @@ Before you read on - check out this video:
     └── xtreme.html
 ```
 
-**.sitegen**: This is where your site.yaml lives  
+**.sitegen**: This is where your (optional) site.yaml lives  
 This folder is also used to store autgenerated scripts - in the case above you can see
 the script to refresh Chromium on Mac.
 
@@ -114,6 +114,8 @@ Supported vars:
 - use_markdown: true
 - default_template: default.html
 - sasscompiler: sassc
+- usesass: true
+- useapfx: true
 
 ## Markdown
 **SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
@@ -172,7 +174,17 @@ The default template is 'default.html' but you can overwrite this behavior if yo
     template: info_page
     
 ## SASS
-If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.    
+If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.      
+Install instruction for SASS can be found [here][installsass]  
+In short it's `gem install sass` and `gem install sassc`  
+
+You can turn off SASS either with `--no-usesass` or with the appropriate setting in site.yaml 
+
+## Autoprefixer
+After compiling .SCSS to .CSS SiteGen calls autoprefixer <yourcss>  
+Install autoprefixer with `npm install --global autoprefixer`
+
+You can turn off Autoprefixer either with `--no-useapfx` or with the appropriate setting in site.yaml 
     
 # Install
 Install
@@ -188,31 +200,37 @@ Update
 
 Uninstall
 ```shell
-    pub global deactivate sitegen    
+    pub global deactivate sitegen   
 ```    
     
 ## Usage    
 ```shell
 Usage: sitegen [options]
-    -s, --settings    Prints settings
-    -h, --help        Shows this message
-    -g, --generate    Generate site
-    -w, --watch       Observes SRC-dir
-    -i, --init        Initializes your site
-                      (not combinable with other options)
+    -s, --settings        Prints settings
+    -h, --help            Shows this message
+    -g, --generate        Generate site
+    -w, --watch           Observes SRC-dir
+    -i, --init            Initializes your site
+                          (not combinable with other options)
 
-        --serve       Serves your site
-        --port        Sets the port to listen on
-                      (defaults to "8000")
+        --serve           Serves your site
+        --[no-]usesass    Enables / disables SASS to CSS compiler
+                          (defaults to on)
 
-    -v, --loglevel    Sets the appropriate loglevel
-                      [info, debug, warning]
+        --[no-]useapfx    Enables / disables Autoprefixer
+                          (defaults to on)
+
+        --port            Sets the port to listen on
+                          (defaults to "8000")
+
+    -v, --loglevel        Sets the appropriate loglevel
+                          [info, debug, warning]
 
 Sample:
 
     'Generates all basic files and folders:                'sitegen -i'
     'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
-    'Generates the static site in your 'web-folder':       'sitegen -g' 
+    'Generates the static site in your 'web-folder':       'sitegen -g'
 ```
 
 Go to your project root (this is where your pubspec.yaml is) and type:
@@ -268,4 +286,5 @@ or **star** this repo here on GitHub.
 [stillshot]: https://pub.dartlang.org/packages/stillshot
 [promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true
 [video]: http://goo.gl/uUTg8s
+[installsass]: http://sass-lang.com/install
 

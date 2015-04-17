@@ -17,7 +17,9 @@ class Config {
     static const _CONF_USE_MARKDOWN       = 'use_markdown';
     static const _CONF_DEFAULT_TEMPLATE   = 'default_template';
     static const _CONF_SITE_OPTIONS       = 'site_options';
-    static const _CONF_SASS_COMPILER       = 'sasscompiler';
+    static const _CONF_SASS_COMPILER      = 'sasscompiler';
+    static const _CONF_USE_SASS           = 'usesass';
+    static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
 
     final ArgResults _argResults;
     final Map<String,dynamic> _settings = new Map<String,dynamic>();
@@ -40,6 +42,11 @@ class Config {
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
         _settings[Options._ARG_PORT]                = "8080";
+
+        _settings[Config._CONF_USE_SASS]            = true;
+        _settings[Config._CONF_USE_AUTOPREFIXER]    = true;
+
+
 
         _overwriteSettingsWithConfigFile();
         _overwriteSettingsWithArgResults();
@@ -77,6 +84,11 @@ class Config {
 
     String get port => _settings[Options._ARG_PORT];
 
+    bool get usesass => _settings[Config._CONF_USE_SASS];
+
+    bool get useautoprefixer => _settings[Config._CONF_USE_AUTOPREFIXER];
+
+
     Map<String,String> get settings {
         final Map<String,String> settings = new Map<String,String>();
 
@@ -92,7 +104,10 @@ class Config {
 
         settings["Dateformat"]                              = dateformat;
         settings["YAML-Delimeter"]                          = yamldelimeter;
+
         settings["Use markdown"]                            = usemarkdown ? "yes" : "no";
+        settings["Use SASS"]                                = usesass ? "yes" : "no";
+        settings["Use Autoprefixer"]                        = useautoprefixer ? "yes" : "no";
 
         settings["Site options"]                            = siteoptions.toString();
 
@@ -151,6 +166,15 @@ class Config {
         if(_argResults.wasParsed(Options._ARG_PORT)) {
             _settings[Options._ARG_PORT] = _argResults[Options._ARG_PORT];
         }
+
+        if(_argResults.wasParsed(Options._ARG_USE_SASS)) {
+            _settings[Config._CONF_USE_SASS] = _argResults[Options._ARG_USE_SASS];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_USE_AUTOPREFIXER)) {
+            _settings[Config._CONF_USE_AUTOPREFIXER] = _argResults[Options._ARG_USE_AUTOPREFIXER];
+        }
+
     }
 
     void _overwriteSettingsWithConfigFile() {
