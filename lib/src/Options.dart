@@ -11,6 +11,7 @@ class Options {
     static const _ARG_SERVE                 = 'serve';
     static const _ARG_PORT                  = 'port';
     static const _ARG_WATCH                 = 'watch';
+    static const _ARG_WATCH_AND_SERVE       = 'watchandserve';
     static const _ARG_INIT                  = 'init';
 
     static const _ARG_USE_SASS              = 'usesass';
@@ -52,6 +53,8 @@ class Options {
             ..addFlag(_ARG_GENERATE,         abbr: 'g', negatable: false, help: "Generate site")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")
+
+            ..addFlag(_ARG_WATCH_AND_SERVE,  abbr: 'x', negatable: false, help: "Shortcut to watch and serve")
 
             ..addFlag(_ARG_INIT,             abbr: 'i', negatable: false, help: "Initializes your site\n(not combinable with other options)")
 

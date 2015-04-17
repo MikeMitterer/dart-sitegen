@@ -48,7 +48,7 @@ class Application {
                 new Generator().generate(config);
             }
 
-            if (argResults.wasParsed(Options._ARG_WATCH)) {
+            if (argResults.wasParsed(Options._ARG_WATCH) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
                 foundOptionToWorkWith = true;
                 if (_isFolderAvailable(config.contentfolder) && _isFolderAvailable(config.templatefolder)) {
                     watch(config.contentfolder, config);
@@ -63,7 +63,7 @@ class Application {
                 watchToRefresh(config.outputfolder, config);
             }
 
-            if (argResults.wasParsed(Options._ARG_SERVE)) {
+            if (argResults.wasParsed(Options._ARG_SERVE) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
                 foundOptionToWorkWith = true;
                 final String port = argResults[Options._ARG_PORT];
                 serve(config.outputfolder, port);
