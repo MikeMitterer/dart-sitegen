@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.2.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.2.0...v0.2.1) - 2015-04-17##
+
+###Feature###
+* Shortcut for watch + serve added [7be5a76](http://github.com/mikemitterer/dart-sitegen/commit/7be5a76be1607a0c218c34d49ebf2e60c0a3781a)
+
 ##[v0.2.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.3...v0.2.0) - 2015-04-17##
 
 ###Feature###
