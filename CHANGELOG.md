@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.2.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.3...v0.2.0) - 2015-04-17##
+
+###Feature###
+* SASS and Autoprefixer can be turned off [86c2ea6](http://github.com/mikemitterer/dart-sitegen/commit/86c2ea67b6193e90590024fe4eaae08830283394)
+
 ##[v0.1.3](http://github.com/mikemitterer/dart-sitegen/compare/v0.1.2...v0.1.3) - 2015-04-14##
 
 ###Fixes###
