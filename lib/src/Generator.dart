@@ -4,7 +4,10 @@ part of sitegen;
  * Takes a template string (such as a Mustache template) and renders it out to an HTML string
  * using the given input values/options.
  */
-typedef String TemplateRenderer(final String template,final Map options);
+typedef String TemplateRenderer(final String template,final Map options, final PartialsResolver resolver);
+
+/// Resolved partial-names into mustache.Templates
+typedef mustache.Template PartialsResolver(final String name);
 
 /**
  * Can be set to define a custom [rendering function](TemplateRenderer) to handle your template files
@@ -12,8 +15,8 @@ typedef String TemplateRenderer(final String template,final Map options);
  *
  * Uses [Mustache templates](https://pub.dartlang.org/packages/mustache) by default.
  */
-TemplateRenderer renderTemplate = (final String templateFile,final Map options) {
-    final mustache.Template template = new mustache.Template(templateFile,htmlEscapeValues: false);
+TemplateRenderer renderTemplate = (final String source,final Map options, final PartialsResolver resolver) {
+    final mustache.Template template = new mustache.Template(source,htmlEscapeValues: false, partialResolver: resolver);
 
     return template.renderString(options);
 };
@@ -27,6 +30,7 @@ class Generator {
         final Directory templateDir = new Directory(path.absolute(config.templatefolder));
         final Directory outputDir = new Directory(path.absolute( config.outputfolder));
         final Directory dataDir = new Directory(path.absolute( config.datafolder));
+        final Directory partialsDir = new Directory(path.absolute( config.partialsfolder));
 
         Validate.isTrue(contentDir.existsSync(),"ContentDir ${contentDir.path} must exist!");
         Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
@@ -54,6 +58,7 @@ class Generator {
                 List<String> yamlBlock = _extractYamlBlockFrom(config.yamldelimeter,lines,extension);
                 if(yamlBlock.length > 0) {
                     pageOptions.addAll(yaml.loadYaml(yamlBlock.join('\n')));
+                    _resolvePartialsInYamlBlock(partialsDir,pageOptions,config.usemarkdown);
 
                     // +1 for the YAML-Block-Delimiter ("~~~") line
                     lines.removeRange(0, yamlBlock.length + 1);
@@ -65,7 +70,9 @@ class Generator {
             pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
             pageOptions['_data'] = dataMap;
-            pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions);
+            pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
+                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
+
             pageOptions['_template'] = "none";
 
             String outputExtension = extension;
@@ -83,7 +90,8 @@ class Generator {
                 templateContent = template.readAsStringSync();
             }
 
-            final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions),config);
+            final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions,
+                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)),config);
 
             final String outputFilename = "${path.basenameWithoutExtension(relativeFileName)}.${outputExtension}";
             final Directory outputPath = _createOutputPath(outputDir,relativePath);
@@ -94,7 +102,59 @@ class Generator {
         }
     }
 
+
     // -- private -------------------------------------------------------------
+
+    /**
+     * If there is a reference to a partial in the yaml block the contents of the partial becomes the the
+     * contents of the page-var.
+     *
+     * Example: yaml-block in file
+     *  ...
+     *  dart: ->usage.badge.dart
+     *  ~~~
+     *
+     *  dart is the page-var.
+     *  usage.badge.dart is the partial.
+     */
+    void _resolvePartialsInYamlBlock(final Directory partialsDir,final Map<String, dynamic> pageOptions,bool useMarkdown) {
+        pageOptions.keys.forEach((final String key) {
+            if(pageOptions[key] is String && (pageOptions[key] as String).contains("->")) {
+                final String partial = (pageOptions[key] as String).replaceAll(new RegExp(r"[^>]*>"),"");
+                pageOptions[key] = renderTemplate("{{>${partial}}}", pageOptions,
+                _partialsResolver(partialsDir,isMarkdownSupported: useMarkdown));
+            }
+        });
+    }
+
+    /**
+     * Returns a partials-Resolver. The partials-Resolver gets a dot separated name. This name is translated
+     * into a filename / directory in _partials.
+     * Example:
+     *  Name: category.house -> category/house.[html | md]
+     */
+    Function _partialsResolver(final Directory partialsDir,{ final bool isMarkdownSupported: true}) {
+        Validate.notNull(partialsDir);
+
+        mustache.Template resolver(final String name) {
+            final File partialHtml = new File("${partialsDir.path}/${name.replaceAll(".","/")}.html");
+            final File partialMd = new File("${partialsDir.path}/${name.replaceAll(".","/")}.md");
+
+            String content = "Partial with name {{$name}} is not available";
+            if(partialHtml.existsSync()) {
+                content = partialHtml.readAsStringSync();
+            } else if(partialMd.existsSync()) {
+                content = partialMd.readAsStringSync();
+                if(isMarkdownSupported) {
+                    content = md.markdownToHtml(content);
+                }
+            }
+
+            return new mustache.Template(content,name: "{{$name}}");
+        }
+
+        return resolver;
+    }
 
     Directory _createOutputPath(final Directory outputDir, final String relativePath) {
         Validate.notNull(outputDir);

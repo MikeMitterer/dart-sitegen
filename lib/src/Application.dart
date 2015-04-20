@@ -57,6 +57,11 @@ class Application {
                     if(_isFolderAvailable(config.datafolder)) {
                         watch(config.datafolder, config);
                     }
+
+                    if(_isFolderAvailable(config.partialsfolder)) {
+                        watch(config.partialsfolder, config);
+                    }
+
                     new Generator().generate(config);
                 }
                 watchScss(config.outputfolder, config);
@@ -233,7 +238,7 @@ class Application {
         _logger.fine(result.stdout.trim());
 
         final String content = """
-                tell application "Chromium"
+                tell application "${config.browser}"
                     set windowList to every window
                     repeat with aWindow in windowList
                         set tabList to every tab of aWindow
@@ -248,7 +253,7 @@ class Application {
 
         final String version = "1.0";
         final String executable = "osascript";
-        final String scriptName = "refreshChromium";
+        final String scriptName = "refresh${config.browser}";
         final String scriptExtension = "applescript";
 
         final Directory contenfolder = new Directory(config.configfolder);

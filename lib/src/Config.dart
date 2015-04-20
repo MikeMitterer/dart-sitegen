@@ -11,6 +11,7 @@ class Config {
     static const _CONF_TEMPLATE_DIR       = 'template_dir';
     static const _CONF_OUTPUT_DIR         = 'output_dir';
     static const _CONF_DATA_DIR           = 'data_dir';
+    static const _CONF_PARTIALS_DIR       = 'partials_dir';
     static const _CONF_WORKSPACE_DIR      = 'workspace';
     static const _CONF_DATE_FORMAT        = 'date_format';
     static const _CONF_YAML_DELIMITER     = 'yaml_delimeter';
@@ -20,6 +21,7 @@ class Config {
     static const _CONF_SASS_COMPILER      = 'sasscompiler';
     static const _CONF_USE_SASS           = 'usesass';
     static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
+    static const _CONF_BROWSER            = 'browser';
 
     final ArgResults _argResults;
     final Map<String,dynamic> _settings = new Map<String,dynamic>();
@@ -31,6 +33,7 @@ class Config {
         _settings[Config._CONF_CONTENT_DIR]         = 'html/_content';
         _settings[Config._CONF_TEMPLATE_DIR]        = 'html/_templates';
         _settings[Config._CONF_DATA_DIR]            = 'html/_data';
+        _settings[Config._CONF_PARTIALS_DIR]        = 'html/_partials';
         _settings[Config._CONF_OUTPUT_DIR]          = 'web';
         _settings[Config._CONF_WORKSPACE_DIR]       = '.';
         _settings[Config._CONF_DATE_FORMAT]         = 'dd.MM.yyyy';
@@ -38,6 +41,7 @@ class Config {
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
         _settings[Config._CONF_SASS_COMPILER]       = "sassc";
+        _settings[Config._CONF_BROWSER]             = "Chromium";
 
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
@@ -68,6 +72,8 @@ class Config {
 
     String get datafolder => _settings[Config._CONF_DATA_DIR];
 
+    String get partialsfolder => _settings[Config._CONF_PARTIALS_DIR];
+
     String get workspace => _settings[Config._CONF_WORKSPACE_DIR];
 
     String get dateformat => _settings[Config._CONF_DATE_FORMAT];
@@ -88,6 +94,7 @@ class Config {
 
     bool get useautoprefixer => _settings[Config._CONF_USE_AUTOPREFIXER];
 
+    String get browser =>  _settings[Config._CONF_BROWSER];
 
     Map<String,String> get settings {
         final Map<String,String> settings = new Map<String,String>();
@@ -97,6 +104,7 @@ class Config {
         settings["Content folder"]                          = contentfolder;
         settings["Template folder"]                         = templatefolder;
         settings["Data folder"]                             = datafolder;
+        settings["Partials folder"]                         = partialsfolder;
 
         settings["Default template"]                        = defaulttemplate;
         settings["Output folder"]                           = outputfolder;
@@ -115,6 +123,7 @@ class Config {
         settings["Config file"]                             = configfile;
 
         settings["SASS compiler"]                           = sasscompiler;
+        settings["Browser"]                                 = browser;
 
         settings["Port"]                                    = port;
 

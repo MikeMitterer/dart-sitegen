@@ -1,6 +1,5 @@
 # SiteGen
-
-A simple static site generator in [Dart][dart], webserver included.  
+Now with partials-support. A static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.  
 
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
@@ -107,6 +106,7 @@ Supported vars:
 
 - content_dir: html/_content 
 - template_dir: html/_templates
+- partials_dir: html/_partials
 - output_dir: web
 - workspace: .
 - date_format: dd.MM.yyyy
@@ -115,7 +115,8 @@ Supported vars:
 - default_template: default.html
 - sasscompiler: sassc
 - usesass: true
-- useapfx: true
+- autoprefixer: true
+- browser: Chromium
 
 ## Markdown
 **SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
@@ -173,6 +174,22 @@ The default template is 'default.html' but you can overwrite this behavior if yo
 
     template: info_page
     
+    
+## Partials 
+**Optional**  
+Files / Directories in your _partials-Folder will be translated into partials-names.  
+For example: _partials/category/house.md translates into {{>category.house}}  
+A partial can be either a .md or a .html file
+
+You can also use partials in the files yaml block:
+```yaml
+template: default.html    
+dart: ->usage.badge.dart  
+~~~  
+```
+
+
+    
 ## SASS
 If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.      
 Install instruction for SASS can be found [here][installsass]  
@@ -206,25 +223,26 @@ Uninstall
 ## Usage    
 ```shell
 Usage: sitegen [options]
-    -s, --settings        Prints settings
-    -h, --help            Shows this message
-    -g, --generate        Generate site
-    -w, --watch           Observes SRC-dir
-    -i, --init            Initializes your site
-                          (not combinable with other options)
+    -s, --settings         Prints settings
+    -h, --help             Shows this message
+    -g, --generate         Generate site
+    -w, --watch            Observes SRC-dir
+    -x, --watchandserve    Shortcut to watch and serve
+    -i, --init             Initializes your site
+                           (not combinable with other options)
 
-        --serve           Serves your site
-        --[no-]usesass    Enables / disables SASS to CSS compiler
-                          (defaults to on)
+        --serve            Serves your site
+        --[no-]usesass     Enables / disables SASS to CSS compiler
+                           (defaults to on)
 
-        --[no-]useapfx    Enables / disables Autoprefixer
-                          (defaults to on)
+        --[no-]useapfx     Enables / disables Autoprefixer
+                           (defaults to on)
 
-        --port            Sets the port to listen on
-                          (defaults to "8000")
+        --port             Sets the port to listen on
+                           (defaults to "8000")
 
-    -v, --loglevel        Sets the appropriate loglevel
-                          [info, debug, warning]
+    -v, --loglevel         Sets the appropriate loglevel
+                           [info, debug, warning]
 
 Sample:
 
@@ -248,6 +266,8 @@ This servers your files under http://localhost:8000/
 If you are using Chromium on Mac you will get a automatic page refresh for free!
  
 Now play with sitegen and watch my screencast...
+
+Check out the [sample!][sample]
 
 ### Features and bugs
 Please file feature requests and bugs at the [issue tracker][tracker].
@@ -287,4 +307,5 @@ or **star** this repo here on GitHub.
 [promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true
 [video]: http://goo.gl/uUTg8s
 [installsass]: http://sass-lang.com/install
+[sample]: https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple
 

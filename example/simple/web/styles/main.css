@@ -1,5 +1,5 @@
 body {
-  background-color: whitesmoke;
+  background-color: #F8F8F8;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: normal;
@@ -50,6 +50,4 @@ h1, p {
       margin-left: 0; } }
 
 footer {
-  padding-top: 24px;
-  font-weight: bold;
   clear: both; }
