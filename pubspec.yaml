@@ -3,7 +3,7 @@ description: Static site generator for Dart, webserver included.
 author: Mike Mitterer <office@mikemitterer.at>
 homepage: https://github.com/MikeMitterer/dart-sitegen
 
-version: 0.2.1
+version: 0.3.0
 
 environment:
   sdk: '>=1.0.0 <2.0.0'
