@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.3.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.0...v0.3.1) - 2015-04-21##
+
+###Feature###
+* SiteGen waits until all files and folders are updated until it starts to regenerate it's files [404f9f1](http://github.com/mikemitterer/dart-sitegen/commit/404f9f1ba53136f2779003b95ae8b79452bd2c38)
+
 ##[v0.3.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.2.1...v0.3.0) - 2015-04-20##
 
 ###Feature###
