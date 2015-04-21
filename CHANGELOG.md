@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.3.2](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.1...v0.3.2) - 2015-04-21##
+
+###Fixes###
+* watched folder checked the wrong Timer [267f4f9](http://github.com/mikemitterer/dart-sitegen/commit/267f4f91d160542a1bb535b49a527a3bb9d20868)
+
 ##[v0.3.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.0...v0.3.1) - 2015-04-21##
 
 ###Feature###
