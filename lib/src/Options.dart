@@ -8,6 +8,7 @@ class Options {
     static const _ARG_LOGLEVEL              = 'loglevel';
     static const _ARG_SETTINGS              = 'settings';
     static const _ARG_GENERATE              = 'generate';
+    static const _ARG_GENERATE_CSS          = 'generatecss';
     static const _ARG_SERVE                 = 'serve';
     static const _ARG_PORT                  = 'port';
     static const _ARG_WATCH                 = 'watch';
@@ -51,6 +52,8 @@ class Options {
             ..addFlag(_ARG_HELP,             abbr: 'h', negatable: false, help: "Shows this message")
 
             ..addFlag(_ARG_GENERATE,         abbr: 'g', negatable: false, help: "Generate site")
+
+            ..addFlag(_ARG_GENERATE_CSS,     abbr: 'c', negatable: false, help: "Generate CSS (compile SCSS2CSS)")
 
             ..addFlag(_ARG_WATCH,            abbr: 'w', negatable: false, help: "Observes SRC-dir")
 

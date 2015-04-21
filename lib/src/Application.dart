@@ -46,9 +46,15 @@ class Application {
                 return;
             }
 
+
             if (argResults.wasParsed(Options._ARG_GENERATE)) {
                 foundOptionToWorkWith = true;
                 new Generator().generate(config);
+            }
+
+            if (argResults.wasParsed(Options._ARG_GENERATE_CSS)) {
+                foundOptionToWorkWith = true;
+                _compileSCSSFile(config.outputfolder, config);
             }
 
             if (argResults.wasParsed(Options._ARG_WATCH) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
@@ -152,24 +158,9 @@ class Application {
             return;
         }
 
-        // mainScssFile is the one not starting with a _ (underscore)
-        File _mainScssFile(final List<File> scssFiles) {
-            final File mainScss = scssFiles.firstWhere((final File file) {
-                final String pureFilename = path.basename(file.path);
-                return pureFilename.startsWith(new RegExp(r"[a-z]", caseSensitive: false));
-            });
-            return mainScss;
-        }
+        _compileSCSSFile(folder,config);
 
         try {
-            final File mainScss = _mainScssFile(scssFiles);
-
-            final String scssFile = mainScss.path;
-            final String cssFile = "${path.withoutExtension(scssFile)}.css";
-
-            _logger.info("Main SCSS: $scssFile");
-            _compileScss(scssFile, cssFile,config);
-            _autoPrefixer("autoprefixer",cssFile,config);
 
             scssFiles.forEach((final File file) {
                 _logger.info("Observing: ${file.path}");
@@ -181,8 +172,7 @@ class Application {
                     if(timerWatchCss == null) {
                         timerWatchCss = new Timer(new Duration(milliseconds: 500), () {
 
-                            _compileScss(scssFile, cssFile,config);
-                            _autoPrefixer("autoprefixer",cssFile,config);
+                            _compileSCSSFile(folder,config);
                             timerWatchCss = null;
                         });
                     }
@@ -219,6 +209,38 @@ class Application {
     }
 
     // -- private -------------------------------------------------------------
+
+    void _compileSCSSFile(final String folder, final Config config) {
+        Validate.notBlank(folder);
+        Validate.notNull(config);
+
+        _logger.fine('Observing $folder (SCSS)... ');
+        final Directory dir = new Directory(folder);
+        final List<File> scssFiles = _listSCSSFilesIn(dir);
+
+        if (scssFiles.length == 0) {
+            _logger.info("No SCSS files found");
+            return;
+        }
+
+        // mainScssFile is the one not starting with a _ (underscore)
+        File _mainScssFile(final List<File> scssFiles) {
+            final File mainScss = scssFiles.firstWhere((final File file) {
+                final String pureFilename = path.basename(file.path);
+                return pureFilename.startsWith(new RegExp(r"[a-z]", caseSensitive: false));
+            });
+            return mainScss;
+        }
+
+        final File mainScss = _mainScssFile(scssFiles);
+
+        final String scssFile = mainScss.path;
+        final String cssFile = "${path.withoutExtension(scssFile)}.css";
+
+        _logger.info("Main SCSS: $scssFile");
+        _compileScss(scssFile, cssFile,config);
+        _autoPrefixer("autoprefixer",cssFile,config);
+    }
 
     /**
      * Weitere Infos:
