@@ -193,7 +193,7 @@ class Config {
         }
         final yaml.YamlMap map = yaml.loadYaml(file.readAsStringSync());
         _settings.keys.forEach((final String key) {
-            if(map.containsKey(key)) {
+            if(map != null && map.containsKey(key)) {
                 _settings[key] = map[key];
                 //print("Found $key in $configfile: ${map[key]}");
             }
