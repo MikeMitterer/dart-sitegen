@@ -9,6 +9,8 @@
       <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_content/about/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_content/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_data/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_partials/category/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_partials/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/html/_templates/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/html/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/web/about/packages" />

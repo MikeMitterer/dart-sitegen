@@ -14,6 +14,9 @@ class Application {
     /// If there are more watch-events within 500ms only the last event counts
     Timer timerWatchCss = null;
 
+    /// {timerWatch} waits 500ms until all watched folders and files updated
+    Timer timerWatch = null;
+
     Application() : options = new Options();
 
     void run(List<String> args) {
@@ -127,7 +130,12 @@ class Application {
         final File srcDir = new File(folder);
         srcDir.watch(recursive: true).where((final file) => (!file.path.contains("packages"))).listen((final FileSystemEvent event) {
             _logger.fine(event.toString());
-            new Generator().generate(config);
+            if(timerWatch == null) {
+                timerWatch = new Timer(new Duration(milliseconds: 1000), () {
+                    new Generator().generate(config);
+                    timerWatchCss = null;
+                });
+            }
         });
     }
 
