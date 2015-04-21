@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.3.3](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.2...v0.3.3) - 2015-04-21##
+
+###Fixes###
+* Empty site.yaml crashes SiteGen [91ac1d3](http://github.com/mikemitterer/dart-sitegen/commit/91ac1d37a9c6400c23d0e89631075b9ecdb0bd93)
+
 ##[v0.3.2](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.1...v0.3.2) - 2015-04-21##
 
 ###Fixes###
