@@ -125,7 +125,7 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.fine('Observing $folder...');
+        _logger.info('Observing $folder...');
 
         final File srcDir = new File(folder);
         srcDir.watch(recursive: true).where((final file) => (!file.path.contains("packages"))).listen((final FileSystemEvent event) {
@@ -133,7 +133,7 @@ class Application {
             if(timerWatch == null) {
                 timerWatch = new Timer(new Duration(milliseconds: 1000), () {
                     new Generator().generate(config);
-                    timerWatchCss = null;
+                    timerWatch = null;
                 });
             }
         });
