@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v0.4.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.4.0...v0.4.1) - 2015-04-23##
+
+###Feature###
+* Accepting images in content-dir [a9c0910](http://github.com/mikemitterer/dart-sitegen/commit/a9c0910f2242adb417fdb6faf6152bc2082c5489)
+
 ##[v0.3.3](http://github.com/mikemitterer/dart-sitegen/compare/v0.3.2...v0.3.3) - 2015-04-21##
 
 ###Fixes###
