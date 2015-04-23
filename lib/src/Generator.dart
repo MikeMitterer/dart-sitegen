@@ -36,8 +36,8 @@ class Generator {
         Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
         Validate.isTrue(outputDir.existsSync(),"OutputDir ${outputDir.path} must exist!");
 
-        // TODO: support directory hierarchies for markdown, templates and output
         final List<File> files = _listContentFilesIn(contentDir);
+        final List<File> images = _listImagesFilesIn(contentDir);
         final List<File> templates = _listTemplatesIn(templateDir);
         final List<File> dataFiles = dataDir.existsSync() ? _listDataFilesIn(dataDir) : new List<File>();
 
@@ -99,6 +99,17 @@ class Generator {
 
             outputFile.writeAsStringSync(content);
             _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - done!");
+        }
+
+        for(final File image in images) {
+            final String relativeFileName = image.path.replaceAll("${contentDir.path}","").replaceFirst("/","");
+            final String relativePath = path.dirname(relativeFileName).replaceFirst(".","");
+
+            final Directory outputPath = _createOutputPath(outputDir,relativePath);
+            final File outputFile = new File("${outputPath.path}/${path.basename(relativeFileName)}");
+            image.copySync(outputFile.path);
+
+            _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - copied!");
         }
     }
 
@@ -185,6 +196,17 @@ class Generator {
                     file.path.endsWith(".css")
 
                     ) && !file.path.contains("packages") ).toList();
+    }
+
+    List<File> _listImagesFilesIn(final Directory contentDir) {
+        return contentDir.listSync(recursive: true)
+        .where((file) => file is File && (
+
+            file.path.endsWith('.png') ||
+            file.path.endsWith(".jpg") ||
+            file.path.endsWith(".gif")
+
+        ) && !file.path.contains("packages") ).toList();
     }
 
     List<File> _listTemplatesIn(final Directory templateDir) {
