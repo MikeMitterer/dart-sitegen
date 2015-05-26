@@ -71,6 +71,10 @@ class Application {
                         watch(config.partialsfolder, config);
                     }
 
+                    if(_isFolderAvailable(config.assetsfolder)) {
+                        watch(config.assetsfolder, config);
+                    }
+
                     new Generator().generate(config);
                 }
                 watchScss(config.outputfolder, config);
@@ -133,9 +137,10 @@ class Application {
 
         _logger.info('Observing $folder...');
 
-        final File srcDir = new File(folder);
+        final Directory srcDir = new Directory(folder);
+
         srcDir.watch(recursive: true).where((final file) => (!file.path.contains("packages"))).listen((final FileSystemEvent event) {
-            _logger.fine(event.toString());
+            _logger.info(event.toString());
             if(timerWatch == null) {
                 timerWatch = new Timer(new Duration(milliseconds: 1000), () {
                     new Generator().generate(config);

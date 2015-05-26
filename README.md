@@ -14,23 +14,28 @@ Before you read on - check out this video:
 ```
 ├── .sitegen
 │   ├── refreshChromium-1.0.applescript
+│   ├── html
+│   │   ├── _assets
+│   │   │   └── demo.scss
+│   │   │
+│   │   ├── _content
+│   │   │   ├── about
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── markdown.md
+│   │   │   ├── piratenames.json
+│   │   │   └── xtreme.html
+│   │   │
+│   │   ├── _data
+│   │   │   ├── xmen.yaml
+│   │   │   └── families.json
+│   │   │
+│   │   └── _templates
+│   │       ├── default.html
+│   │       └── info_page.html
+│   │   
 │   └── site.yaml (Optional!)
-├── html
-│   ├── _content
-│   │   ├── about
-│   │   │   └── index.html
-│   │   ├── index.html
-│   │   ├── markdown.md
-│   │   ├── piratenames.json
-│   │   └── xtreme.html
-│   │
-│   ├── _data
-│   │   ├── xmen.yaml
-│   │   └── families.json
-│   │
-│   └── _templates
-│       ├── default.html
-│       └── info_page.html
+│
 └── web
     ├── about
     │   ├── index.html
@@ -54,7 +59,7 @@ Before you read on - check out this video:
 This folder is also used to store autgenerated scripts - in the case above you can see
 the script to refresh Chromium on Mac.
 
-**html/_content**: This is where **SiteGen** will look for your files to generate the site from.
+**.sitegen/html/_content**: This is where **SiteGen** will look for your files to generate the site from.
 The following file-formats are supported:
 
 - .md
@@ -66,7 +71,7 @@ The following file-formats are supported:
 - .scss
 - .css
 
-**html/_data**: [optional] This is the place where you can store your data-files.  
+**.sitegen/html/_data**: [optional] This is the place where you can store your data-files.  
 The following file-formats are supported:
 
 - .yaml
@@ -82,8 +87,11 @@ Here is a sample how to use such data:
     {{/_data.xmen}}
 </ul>
 ```
-                    
-**html/_templates**: The directory containing your HTML+Mustache templates.
+
+**.sitegen/html/_assets**: [optional] Additional assets that you don't want to have in _content. For example .scss 
+or .jpg files.
+
+**.sitegen/html/_templates**: The directory containing your HTML+Mustache templates.
 
 **web**: Following Dart conventions - this is your default output directory.
 
@@ -104,9 +112,11 @@ Can be used in your template (default.html) as
 You can also use site.yaml to overwrite your **SiteGen** default configuration.  
 Supported vars:
 
-- content_dir: html/_content 
-- template_dir: html/_templates
-- partials_dir: html/_partials
+- content_dir: .sitegen/html/_content 
+- template_dir: .sitegen/html/_templates
+- data_dir: .sitegen/html/_data
+- partials_dir: .sitegen/html/_partials
+- assets_dir: .sitegen/html/_assets
 - output_dir: web
 - workspace: .
 - date_format: dd.MM.yyyy

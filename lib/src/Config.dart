@@ -7,11 +7,14 @@ part of sitegen;
 class Config {
     final Logger _logger = new Logger("sitegen.Config");
 
+    static const String _CONFIG_FOLDER     = ".sitegen";
+
     static const _CONF_CONTENT_DIR        = 'content_dir';
     static const _CONF_TEMPLATE_DIR       = 'template_dir';
     static const _CONF_OUTPUT_DIR         = 'output_dir';
     static const _CONF_DATA_DIR           = 'data_dir';
     static const _CONF_PARTIALS_DIR       = 'partials_dir';
+    static const _CONF_ASSETS_DIR         = 'assets_dir';
     static const _CONF_WORKSPACE_DIR      = 'workspace';
     static const _CONF_DATE_FORMAT        = 'date_format';
     static const _CONF_YAML_DELIMITER     = 'yaml_delimeter';
@@ -30,10 +33,12 @@ class Config {
 
         _settings[Options._ARG_LOGLEVEL]            = 'info';
 
-        _settings[Config._CONF_CONTENT_DIR]         = 'html/_content';
-        _settings[Config._CONF_TEMPLATE_DIR]        = 'html/_templates';
-        _settings[Config._CONF_DATA_DIR]            = 'html/_data';
-        _settings[Config._CONF_PARTIALS_DIR]        = 'html/_partials';
+        _settings[Config._CONF_CONTENT_DIR]         = '${_CONFIG_FOLDER}/html/_content';
+        _settings[Config._CONF_TEMPLATE_DIR]        = '${_CONFIG_FOLDER}/html/_templates';
+        _settings[Config._CONF_DATA_DIR]            = '${_CONFIG_FOLDER}/html/_data';
+        _settings[Config._CONF_PARTIALS_DIR]        = '${_CONFIG_FOLDER}/html/_partials';
+        _settings[Config._CONF_ASSETS_DIR]          = '${_CONFIG_FOLDER}/html/_assets';
+
         _settings[Config._CONF_OUTPUT_DIR]          = 'web';
         _settings[Config._CONF_WORKSPACE_DIR]       = '.';
         _settings[Config._CONF_DATE_FORMAT]         = 'dd.MM.yyyy';
@@ -58,7 +63,7 @@ class Config {
 
     List<String> get dirstoscan => _argResults.rest;
 
-    String get configfolder => ".sitegen";
+    String get configfolder => _CONFIG_FOLDER;
 
     String get configfile => "site.yaml";
 
@@ -73,6 +78,8 @@ class Config {
     String get datafolder => _settings[Config._CONF_DATA_DIR];
 
     String get partialsfolder => _settings[Config._CONF_PARTIALS_DIR];
+
+    String get assetsfolder => _settings[Config._CONF_ASSETS_DIR];
 
     String get workspace => _settings[Config._CONF_WORKSPACE_DIR];
 
@@ -105,6 +112,7 @@ class Config {
         settings["Template folder"]                         = templatefolder;
         settings["Data folder"]                             = datafolder;
         settings["Partials folder"]                         = partialsfolder;
+        settings["Assets folder"]                           = assetsfolder;
 
         settings["Default template"]                        = defaulttemplate;
         settings["Output folder"]                           = outputfolder;

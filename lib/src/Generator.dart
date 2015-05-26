@@ -31,6 +31,7 @@ class Generator {
         final Directory outputDir = new Directory(path.absolute( config.outputfolder));
         final Directory dataDir = new Directory(path.absolute( config.datafolder));
         final Directory partialsDir = new Directory(path.absolute( config.partialsfolder));
+        final Directory assetsDir = new Directory(path.absolute( config.assetsfolder));
 
         Validate.isTrue(contentDir.existsSync(),"ContentDir ${contentDir.path} must exist!");
         Validate.isTrue(templateDir.existsSync(),"Templatefolder ${templateDir.path} must exist!");
@@ -38,6 +39,7 @@ class Generator {
 
         final List<File> files = _listContentFilesIn(contentDir);
         final List<File> images = _listImagesFilesIn(contentDir);
+        final List<File> assets = _listAssetsFilesIn(assetsDir);
         final List<File> templates = _listTemplatesIn(templateDir);
         final List<File> dataFiles = dataDir.existsSync() ? _listDataFilesIn(dataDir) : new List<File>();
 
@@ -111,6 +113,18 @@ class Generator {
 
             _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - copied!");
         }
+
+        for(final File asset in assets) {
+            final String relativeFileName = asset.path.replaceAll("${assetsDir.path}","").replaceFirst("/","");
+            final String relativePath = path.dirname(relativeFileName).replaceFirst(".","");
+
+            final Directory outputPath = _createOutputPath(outputDir,relativePath);
+            final File outputFile = new File("${outputPath.path}/${path.basename(relativeFileName)}");
+            asset.copySync(outputFile.path);
+
+            _logger.info("   ${outputFile.path.replaceFirst(outputDir.path,"")} - copied!");
+        }
+
     }
 
 
@@ -183,6 +197,10 @@ class Generator {
     }
 
     List<File> _listContentFilesIn(final Directory contentDir) {
+        if(!contentDir.existsSync()) {
+            return new List<File>();
+        }
+
         return contentDir.listSync(recursive: true)
             .where((file) => file is File && (
 
@@ -193,7 +211,8 @@ class Generator {
                     file.path.endsWith(".json") ||
                     file.path.endsWith(".html") ||
                     file.path.endsWith(".scss") ||
-                    file.path.endsWith(".css")
+                    file.path.endsWith(".css") ||
+                    file.path.endsWith(".svg")
 
                     ) && !file.path.contains("packages") ).toList();
     }
@@ -208,6 +227,24 @@ class Generator {
 
         ) && !file.path.contains("packages") ).toList();
     }
+
+    List<File> _listAssetsFilesIn(final Directory contentDir) {
+        if(!contentDir.existsSync()) {
+            return new List<File>();
+        }
+
+        return contentDir.listSync(recursive: true)
+        .where((file) => file is File && (
+
+            file.path.endsWith(".png") ||
+            file.path.endsWith(".jpg") ||
+            file.path.endsWith(".scss") ||
+            file.path.endsWith(".css") ||
+            file.path.endsWith(".svg")
+
+        ) && !file.path.contains("packages") ).toList();
+    }
+
 
     List<File> _listTemplatesIn(final Directory templateDir) {
         return templateDir.listSync().where((file) => file is File && !file.path.contains("packages")).toList();
