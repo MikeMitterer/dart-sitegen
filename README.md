@@ -1,6 +1,9 @@
 # SiteGen
-Now with partials-support. A static site generator in [Dart][dart], webserver included.  
-You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.  
+Now with extra assets-folder and partials-support. A static site generator in [Dart][dart], webserver included.  
+You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.
+  
+### Breaking change in v1.0.0
+html-Folder moved into .sitegen!!!!!   
 
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
 platforms you could try [LivePage][livepage] chrome extension for maximum productivity.  
