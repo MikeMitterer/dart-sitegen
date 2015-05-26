@@ -1,6 +1,16 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[Unreleased](http://github.com/mikemitterer/dart-sitegen/compare/v1.0.0...HEAD)##
+
+###Chore###
+* Breaking change - html-folder moved into .sitegen [935b607](http://github.com/mikemitterer/dart-sitegen/commit/935b607fcd3e0af8fc35b9aa4760564b690e87b4)
+
+##[v1.0.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.4.1...v1.0.0) - 2015-05-26##
+
+###Feature###
+* Extra Assets-Dir can be defined [f919fa9](http://github.com/mikemitterer/dart-sitegen/commit/f919fa9d8179d285cc87a9724103f8a4e3b362d6)
+
 ##[v0.4.1](http://github.com/mikemitterer/dart-sitegen/compare/v0.4.0...v0.4.1) - 2015-04-23##
 
 ###Feature###
