@@ -1,10 +1,13 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
-##[Unreleased](http://github.com/mikemitterer/dart-sitegen/compare/v1.0.0...HEAD)##
+##[v1.0.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.0.0...v1.0.1) - 2015-05-29##
 
 ###Chore###
 * Breaking change - html-folder moved into .sitegen [935b607](http://github.com/mikemitterer/dart-sitegen/commit/935b607fcd3e0af8fc35b9aa4760564b690e87b4)
+
+###Feature###
+* You can now specify where your doc-root is (was by default web) [a7cae49](http://github.com/mikemitterer/dart-sitegen/commit/a7cae490af8878e35bffdd7a1ad9de65fe87ed57)
 
 ##[v1.0.0](http://github.com/mikemitterer/dart-sitegen/compare/v0.4.1...v1.0.0) - 2015-05-26##
 
