@@ -14,6 +14,7 @@ class Options {
     static const _ARG_WATCH                 = 'watch';
     static const _ARG_WATCH_AND_SERVE       = 'watchandserve';
     static const _ARG_INIT                  = 'init';
+    static const _ARG_DOCROOT               = 'docroot';
 
     static const _ARG_USE_SASS              = 'usesass';
     static const _ARG_USE_AUTOPREFIXER      = 'useapfx';
@@ -38,6 +39,7 @@ class Options {
         print("");
         print("    'Generates all basic files and folders:                '$APPNAME -i'");
         print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -w --serve'");
+        print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -x'");
         print("    'Generates the static site in your 'web-folder':       '$APPNAME -g'");
         print("");
     }
@@ -68,6 +70,8 @@ class Options {
             ..addFlag(_ARG_USE_AUTOPREFIXER,            negatable: true, help: "Enables / disables Autoprefixer", defaultsTo: true)
 
             ..addOption(_ARG_PORT,                      help: "Sets the port to listen on", defaultsTo: "8000")
+
+            ..addOption(_ARG_DOCROOT,                   help: "Document root", defaultsTo: "web")
 
             ..addOption(_ARG_LOGLEVEL,       abbr: 'v', help: "Sets the appropriate loglevel", allowed: ['info', 'debug', 'warning'])
         ;

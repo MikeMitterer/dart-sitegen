@@ -84,7 +84,7 @@ class Application {
             if (argResults.wasParsed(Options._ARG_SERVE) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
                 foundOptionToWorkWith = true;
                 final String port = argResults[Options._ARG_PORT];
-                serve(config.outputfolder, port);
+                serve(config.docroot, port);
             }
 
             if (!foundOptionToWorkWith) {

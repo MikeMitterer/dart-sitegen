@@ -52,6 +52,8 @@ class Config {
 
         _settings[Options._ARG_PORT]                = "8080";
 
+        _settings[Options._ARG_DOCROOT]             = _settings[Config._CONF_OUTPUT_DIR]; // web
+
         _settings[Config._CONF_USE_SASS]            = true;
         _settings[Config._CONF_USE_AUTOPREFIXER]    = true;
 
@@ -97,6 +99,8 @@ class Config {
 
     String get port => _settings[Options._ARG_PORT];
 
+    String get docroot => _settings[Options._ARG_DOCROOT];
+
     bool get usesass => _settings[Config._CONF_USE_SASS];
 
     bool get useautoprefixer => _settings[Config._CONF_USE_AUTOPREFIXER];
@@ -134,6 +138,7 @@ class Config {
         settings["Browser"]                                 = browser;
 
         settings["Port"]                                    = port;
+        settings["Document root"]                           = docroot;
 
         if(dirstoscan.length > 0) {
             settings["Dirs to scan"]                        = dirstoscan.join(", ");
@@ -182,6 +187,10 @@ class Config {
 
         if(_argResults.wasParsed(Options._ARG_PORT)) {
             _settings[Options._ARG_PORT] = _argResults[Options._ARG_PORT];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_DOCROOT)) {
+            _settings[Options._ARG_DOCROOT] = _argResults[Options._ARG_DOCROOT];
         }
 
         if(_argResults.wasParsed(Options._ARG_USE_SASS)) {
