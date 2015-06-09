@@ -285,6 +285,11 @@ Now play with sitegen and watch my screencast...
 
 Check out the [sample!][sample]
 
+## Hints
+- Just serve a local dir on port 8080 without generating something:  
+    `sitegen --serve --docroot .`
+ 
+
 ### Features and bugs
 Please file feature requests and bugs at the [issue tracker][tracker].
 
