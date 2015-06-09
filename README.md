@@ -1,5 +1,7 @@
 # SiteGen
-Now with extra assets-folder and partials-support. A static site generator in [Dart][dart], webserver included.  
+Now with Speech output on OSX, disabled for all other OSs.
+
+With extra assets-folder and partials-support. A static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.
   
 ### Breaking change in v1.0.0
