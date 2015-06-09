@@ -4,11 +4,15 @@ packages:
   analyzer:
     description: analyzer
     source: hosted
-    version: "0.9.1"
+    version: "0.25.0+1"
   args:
     description: args
     source: hosted
-    version: "0.13.0"
+    version: "0.13.2"
+  barback:
+    description: barback
+    source: hosted
+    version: "0.15.2+4"
   browser:
     description: browser
     source: hosted
@@ -16,11 +20,35 @@ packages:
   collection:
     description: collection
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   console_log_handler:
     description: console_log_handler
     source: hosted
     version: "0.1.4"
+  crypto:
+    description: crypto
+    source: hosted
+    version: "0.9.0"
+  file_utils:
+    description: file_utils
+    source: hosted
+    version: "0.0.23"
+  glob:
+    description: glob
+    source: hosted
+    version: "1.0.4"
+  globbing:
+    description: globbing
+    source: hosted
+    version: "0.1.20"
+  http_multi_server:
+    description: http_multi_server
+    source: hosted
+    version: "1.3.2"
+  http_parser:
+    description: http_parser
+    source: hosted
+    version: "0.0.2+6"
   http_server:
     description: http_server
     source: hosted
@@ -28,11 +56,11 @@ packages:
   intl:
     description: intl
     source: hosted
-    version: "0.8.10+4"
+    version: "0.12.4"
   logging:
     description: logging
     source: hosted
-    version: "0.9.3"
+    version: "0.11.1"
   logging_handlers:
     description: logging_handlers
     source: hosted
@@ -44,11 +72,7 @@ packages:
   matcher:
     description: matcher
     source: hosted
-    version: "0.11.4+4"
-  meta:
-    description: meta
-    source: hosted
-    version: "0.8.8"
+    version: "0.12.0+1"
   mime:
     description: mime
     source: hosted
@@ -56,31 +80,75 @@ packages:
   mustache:
     description: mustache
     source: hosted
-    version: "0.2.1"
+    version: "0.2.3"
   path:
     description: path
     source: hosted
-    version: "1.3.4"
+    version: "1.3.5"
+  petitparser:
+    description: petitparser
+    source: hosted
+    version: "1.4.3"
+  pool:
+    description: pool
+    source: hosted
+    version: "1.0.2"
+  pub_semver:
+    description: pub_semver
+    source: hosted
+    version: "1.2.1"
+  shelf:
+    description: shelf
+    source: hosted
+    version: "0.6.1+2"
+  shelf_static:
+    description: shelf_static
+    source: hosted
+    version: "0.2.2"
+  shelf_web_socket:
+    description: shelf_web_socket
+    source: hosted
+    version: "0.0.1+2"
+  source_map_stack_trace:
+    description: source_map_stack_trace
+    source: hosted
+    version: "1.0.4"
+  source_maps:
+    description: source_maps
+    source: hosted
+    version: "0.10.1"
   source_span:
     description: source_span
     source: hosted
-    version: "1.1.1"
+    version: "1.1.2"
   stack_trace:
     description: stack_trace
     source: hosted
-    version: "1.2.4"
+    version: "1.3.2"
   string_scanner:
     description: string_scanner
     source: hosted
-    version: "0.1.3"
+    version: "0.1.3+1"
+  system_info:
+    description: system_info
+    source: hosted
+    version: "0.0.14"
+  test:
+    description: test
+    source: hosted
+    version: "0.12.3"
   unittest:
     description: unittest
     source: hosted
-    version: "0.11.5+4"
+    version: "0.12.3"
   validate:
     description: validate
     source: hosted
     version: "1.4.2"
+  watcher:
+    description: watcher
+    source: hosted
+    version: "0.9.5"
   yaml:
     description: yaml
     source: hosted

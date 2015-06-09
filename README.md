@@ -130,6 +130,7 @@ Supported vars:
 - usesass: true
 - autoprefixer: true
 - browser: Chromium
+- talktome: true (on OSX, false on all the other OSs)
 
 ## Markdown
 **SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you

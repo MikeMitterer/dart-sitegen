@@ -267,7 +267,7 @@ class Application {
         final ProcessResult result = await Process.run("pwd", []);
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error");
+            _vickiSay("got a sassc error",config);
             return;
         }
         _logger.fine(result.stdout.trim());
@@ -312,7 +312,7 @@ class Application {
         final ProcessResult resultOsascript = await Process.run(executable, [ script.path ]);
         if (resultOsascript.exitCode != 0) {
             _logger.severe("$executable faild with: ${(resultOsascript.stderr as String).trim()}!");
-            _vickiSay("$executable failed");
+            _vickiSay("$executable failed",config);
             return;
         }
 
@@ -341,7 +341,7 @@ class Application {
         final ProcessResult result = Process.runSync(compiler, [ source, target ]);
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error");
+            _vickiSay("got a sassc error",config);
             return;
         }
         _logger.info("Done!");
@@ -361,7 +361,7 @@ class Application {
         final ProcessResult result = Process.runSync(prefixer, [ cssFile ]);
         if (result.exitCode != 0) {
             _logger.info("prefixer faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a prefixer error");
+            _vickiSay("got a prefixer error",config);
             return;
         }
         _logger.info("Done!");
@@ -374,8 +374,13 @@ class Application {
         }).toList();
     }
 
-    void _vickiSay(final String sentence) {
+    void _vickiSay(final String sentence,final Config config) {
         Validate.notBlank(sentence);
+
+        if(config.talktome == false) {
+            _logger.severe("Vicki wants to say: '${sentence}'");
+            return;
+        }
 
         final ProcessResult result = Process.runSync("say", [ '-v', "Vicki", '-r', '200', sentence.replaceFirst("wsk_", "") ]);
         if (result.exitCode != 0) {

@@ -20,6 +20,7 @@ import "package:mustache/mustache.dart" as mustache;
 import "package:yaml/yaml.dart" as yaml;
 
 import 'package:http_server/http_server.dart';
+import 'package:system_info/system_info.dart';
 
 part "src/Application.dart";
 part "src/Options.dart";
@@ -27,6 +28,8 @@ part "src/Config.dart";
 part "src/Init.dart";
 
 part "src/Generator.dart";
+
+bool _runsOnOSX() => (SysInfo.operatingSystemName == "Mac OS X");
 
 void main(List<String> arguments) {
     final Application application = new Application();

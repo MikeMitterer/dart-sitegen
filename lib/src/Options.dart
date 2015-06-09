@@ -18,6 +18,7 @@ class Options {
 
     static const _ARG_USE_SASS              = 'usesass';
     static const _ARG_USE_AUTOPREFIXER      = 'useapfx';
+    static const _ARG_TALK_TO_ME            = 'talktome';
 
     final ArgParser _parser;
 
@@ -68,6 +69,8 @@ class Options {
             ..addFlag(_ARG_USE_SASS,                    negatable: true, help: "Enables / disables SASS to CSS compiler", defaultsTo: true)
 
             ..addFlag(_ARG_USE_AUTOPREFIXER,            negatable: true, help: "Enables / disables Autoprefixer", defaultsTo: true)
+
+            ..addFlag(_ARG_TALK_TO_ME,                  negatable: true, help: "Enables / disables Speek-Output", defaultsTo: _runsOnOSX())
 
             ..addOption(_ARG_PORT,                      help: "Sets the port to listen on", defaultsTo: "8000")
 

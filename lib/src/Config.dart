@@ -24,6 +24,7 @@ class Config {
     static const _CONF_SASS_COMPILER      = 'sasscompiler';
     static const _CONF_USE_SASS           = 'usesass';
     static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
+    static const _CONF_TALK_TO_ME         = 'talktome';
     static const _CONF_BROWSER            = 'browser';
 
     final ArgResults _argResults;
@@ -46,7 +47,7 @@ class Config {
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
         _settings[Config._CONF_SASS_COMPILER]       = "sassc";
-        _settings[Config._CONF_BROWSER]             = "Chromium";
+        _settings[Config._CONF_BROWSER]             = "Chromium-${SysInfo.operatingSystemName}-";
 
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
@@ -56,6 +57,7 @@ class Config {
 
         _settings[Config._CONF_USE_SASS]            = true;
         _settings[Config._CONF_USE_AUTOPREFIXER]    = true;
+        _settings[Config._CONF_TALK_TO_ME]          = _runsOnOSX();
 
 
 
@@ -105,6 +107,8 @@ class Config {
 
     bool get useautoprefixer => _settings[Config._CONF_USE_AUTOPREFIXER];
 
+    bool get talktome => _settings[Config._CONF_TALK_TO_ME];
+
     String get browser =>  _settings[Config._CONF_BROWSER];
 
     Map<String,String> get settings {
@@ -128,6 +132,7 @@ class Config {
         settings["Use markdown"]                            = usemarkdown ? "yes" : "no";
         settings["Use SASS"]                                = usesass ? "yes" : "no";
         settings["Use Autoprefixer"]                        = useautoprefixer ? "yes" : "no";
+        settings["Talk to me"]                              = talktome ? "yes" : "no";
 
         settings["Site options"]                            = siteoptions.toString();
 
@@ -199,6 +204,14 @@ class Config {
 
         if(_argResults.wasParsed(Options._ARG_USE_AUTOPREFIXER)) {
             _settings[Config._CONF_USE_AUTOPREFIXER] = _argResults[Options._ARG_USE_AUTOPREFIXER];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_USE_AUTOPREFIXER)) {
+            _settings[Config._CONF_USE_AUTOPREFIXER] = _argResults[Options._ARG_USE_AUTOPREFIXER];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_TALK_TO_ME)) {
+            _settings[Config._CONF_TALK_TO_ME] = _argResults[Options._ARG_TALK_TO_ME];
         }
 
     }
