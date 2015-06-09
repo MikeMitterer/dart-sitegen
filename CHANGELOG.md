@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v1.1.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.0.1...v1.1.0) - 2015-06-09##
+
+###Feature###
+* Speech output is only enabled on Mac [8a926b4](http://github.com/mikemitterer/dart-sitegen/commit/8a926b4ab0ea3340da11d9e1210e9d531824e4cc)
+
 ##[v1.0.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.0.0...v1.0.1) - 2015-05-29##
 
 ###Chore###
