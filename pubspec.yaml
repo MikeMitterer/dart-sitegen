@@ -32,7 +32,7 @@ dependencies:
   intl: any
   http_server: any
 
-  system_info: "^0.0.14"
+  system_info: "0.0.14"
 
 dev_dependencies:
   unittest: any
