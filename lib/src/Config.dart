@@ -47,7 +47,7 @@ class Config {
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
         _settings[Config._CONF_SASS_COMPILER]       = "sassc";
-        _settings[Config._CONF_BROWSER]             = "Chromium-${SysInfo.operatingSystemName}-";
+        _settings[Config._CONF_BROWSER]             = "Chromium";
 
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
