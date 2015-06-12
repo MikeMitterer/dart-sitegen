@@ -79,6 +79,10 @@ class Application {
                 }
                 watchScss(config.outputfolder, config);
                 watchToRefresh(config.outputfolder, config);
+
+                watchAdditionalFolderScss(config.watchfolder1,config.outputfolder, config);
+                watchAdditionalFolderScss(config.watchfolder2,config.outputfolder, config);
+                watchAdditionalFolderScss(config.watchfolder3,config.outputfolder, config);
             }
 
             if (argResults.wasParsed(Options._ARG_SERVE) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
@@ -183,6 +187,51 @@ class Application {
                     }
 
                 });
+            });
+
+        }
+        on StateError catch (e) {
+            _logger.info("Found no SCSS without a _ at the beginning...");
+        }
+    }
+
+    void watchAdditionalFolderScss(final String additionalWatchFolder, final String cssFolder, final Config config) {
+        Validate.notBlank(cssFolder);
+        Validate.notNull(config);
+
+        if(additionalWatchFolder.isEmpty) {
+            return;
+        }
+
+        _logger.fine('Observing $cssFolder (SCSS)... ');
+
+        final Directory dirToCheck = new Directory(additionalWatchFolder);
+        final Directory dir = new Directory(cssFolder);
+        final List<File> scssFiles = _listSCSSFilesIn(dir);
+
+        if (scssFiles.length == 0) {
+            _logger.info("No SCSS files found");
+            return;
+        }
+
+        _compileSCSSFile(cssFolder,config);
+
+        try {
+
+            _logger.info("Observing: ${dirToCheck.path}");
+
+            dirToCheck.watch(events: FileSystemEvent.MODIFY).listen((final FileSystemEvent event) {
+                _logger.fine(event.toString());
+                //_logger.info("Scss: ${scssFile}, CSS: ${cssFile}");
+
+                if(timerWatchCss == null) {
+                    timerWatchCss = new Timer(new Duration(milliseconds: 500), () {
+
+                        _compileSCSSFile(cssFolder,config);
+                        timerWatchCss = null;
+                    });
+                }
+
             });
 
         }

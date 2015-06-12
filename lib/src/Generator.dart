@@ -16,7 +16,8 @@ typedef mustache.Template PartialsResolver(final String name);
  * Uses [Mustache templates](https://pub.dartlang.org/packages/mustache) by default.
  */
 TemplateRenderer renderTemplate = (final String source,final Map options, final PartialsResolver resolver) {
-    final mustache.Template template = new mustache.Template(source,htmlEscapeValues: false, partialResolver: resolver);
+    final mustache.Template template =
+        new mustache.Template(source,htmlEscapeValues: false, partialResolver: resolver,lenient: true);
 
     return template.renderString(options);
 };

@@ -27,6 +27,10 @@ class Config {
     static const _CONF_TALK_TO_ME         = 'talktome';
     static const _CONF_BROWSER            = 'browser';
 
+    static const _CONF_ADDITIONAL_WATCH_FOLDER1 = "watchfolder1";
+    static const _CONF_ADDITIONAL_WATCH_FOLDER2 = "watchfolder2";
+    static const _CONF_ADDITIONAL_WATCH_FOLDER3 = "watchfolder3";
+
     final ArgResults _argResults;
     final Map<String,dynamic> _settings = new Map<String,dynamic>();
 
@@ -59,7 +63,9 @@ class Config {
         _settings[Config._CONF_USE_AUTOPREFIXER]    = true;
         _settings[Config._CONF_TALK_TO_ME]          = _runsOnOSX();
 
-
+        _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER1]  = "";
+        _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER2]  = "";
+        _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER3]  = "";
 
         _overwriteSettingsWithConfigFile();
         _overwriteSettingsWithArgResults();
@@ -111,6 +117,10 @@ class Config {
 
     String get browser =>  _settings[Config._CONF_BROWSER];
 
+    String get watchfolder1 => _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER1];
+    String get watchfolder2 => _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER2];
+    String get watchfolder3 => _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER3];
+
     Map<String,String> get settings {
         final Map<String,String> settings = new Map<String,String>();
 
@@ -144,6 +154,10 @@ class Config {
 
         settings["Port"]                                    = port;
         settings["Document root"]                           = docroot;
+
+        settings["Additional watchfolder1"]                 = watchfolder1.isNotEmpty ? watchfolder1 : "<not set>";
+        settings["Additional watchfolder2"]                 = watchfolder1.isNotEmpty ? watchfolder2 : "<not set>";
+        settings["Additional watchfolder3"]                 = watchfolder1.isNotEmpty ? watchfolder3 : "<not set>";
 
         if(dirstoscan.length > 0) {
             settings["Dirs to scan"]                        = dirstoscan.join(", ");
