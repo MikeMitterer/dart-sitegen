@@ -133,6 +133,7 @@ Supported vars:
 - autoprefixer: true
 - browser: Chromium
 - talktome: true (on OSX, false on all the other OSs)
+- watchfolder1, watchfolder2 and watchfolder3
 
 ## Markdown
 **SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
@@ -288,6 +289,10 @@ Check out the [sample!][sample]
 ## Hints
 - Just serve a local dir on port 8000 without generating something:  
     `sitegen --serve --docroot .`
+    
+- Sitegen observes automatically it's basefolders like content, web aso. but if
+    you want additional folders that should be observed so that sitegen automatically regenerates it's
+    file - set watchfolder[1-3] in you site.yaml
  
 
 ### Features and bugs
