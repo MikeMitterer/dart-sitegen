@@ -1,6 +1,14 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v1.1.3](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.2...v1.1.3) - 2015-06-15##
+
+###Feature###
+* Additional watch-folders added [b9523c0](http://github.com/mikemitterer/dart-sitegen/commit/b9523c03c08878e5e2f6484312fa2f1150047ac0)
+
+###Docs###
+* Add hint for watchfolder [eab8257](http://github.com/mikemitterer/dart-sitegen/commit/eab82579045d08e0f8f3609917bf3683da06f2b0)
+
 ##[v1.1.2](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.1...v1.1.2) - 2015-06-09##
 
 ###Docs###
