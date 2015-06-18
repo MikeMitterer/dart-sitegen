@@ -297,11 +297,11 @@ Check out the [sample!][sample]
 - Test your App with Chrome and use sitegen as server (MAC + Linux only)  
     `pub build && cd build/web && sitegen --serve --port 9000 --docroot . || cd -`
     
-    *Explanation:*
+    *Explanation:*  
     Runs "pub build" - if this runs without errors cd to "build/web"
     In "build/web" run sitegen as server on port 9000 and set docroot to . (current dir (default would be "web"))  
     || means if the prev command ends with an error (Ctrl + C to cancel sitegen)   
-    jump back where you came from
+    jump back where you came from. You should be back in your base folder (where your pubspec.yaml is)
     
  
 
