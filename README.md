@@ -293,6 +293,15 @@ Check out the [sample!][sample]
 - Sitegen observes automatically it's basefolders like content, web aso. but if
     you want additional folders that should be observed so that sitegen automatically regenerates it's
     file - set watchfolder[1-3] in you site.yaml
+    
+- Test your App with Chrome and use sitegen as server (MAC + Linux only)
+    `pub build && cd build/web && sitegen --serve --port 9000 --docroot . || cd -`
+    
+    *Explanation:*
+    Runs "pub build" - if this runs without errors cd to "build/web"
+    In "build/web" run sitegen as server on port 9000 and set docroot to . (current dir (default would be "web"))
+    || means if the prev command ends with an error (Ctrl + C to cancel sitegen) jump back where you came from
+    
  
 
 ### Features and bugs
