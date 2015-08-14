@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v1.1.7](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.6...v1.1.7) - 2015-08-14##
+
+###Docs###
+* Link to video did not work in pup.dartlang.org [72234cb](https://github.com/mikemitterer/dart-sitegen/commit/72234cb7289c6144048c176276d9bbc7cd9132a0)
+
 ##[v1.1.5](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.4...v1.1.5) - 2015-08-14##
 
 ###Feature###
