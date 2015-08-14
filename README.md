@@ -5,17 +5,19 @@ Static site generator. Includes a webserver, sass + autoprefix support
 **--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)  
 Helps to test your site from within a VM for example. 
 
-With extra assets-folder and partials-support. A static site generator in [Dart](dart), webserver included.  
-You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.
+With extra assets-folder and partials-support. A static site generator in [Dart](https://www.dartlang.org/), webserver included.  
+You can write your pages in HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax). 
+For Templates [Mustache](http://mustache.github.io/mustache.5.html) is supported.
   
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
-platforms you could try [LivePage][livepage] chrome extension for maximum productivity.  
+platforms you could try [LivePage](https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh) 
+chrome extension for maximum productivity.  
 
 Before you read on - check out this video:
 
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
 
-[Here][example] you can see a typical site structure.  
+[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.  
 
 ```
 ├── .sitegen
@@ -102,7 +104,7 @@ or .jpg files.
 **web**: Following Dart conventions - this is your default output directory.
 
 ## site.yaml
-**Optional** [YAML][yaml] file that stores your global values and config options.
+**Optional** [YAML](http://rhnh.net/2011/01/31/yaml-tutorial) file that stores your global values and config options.
 Values set here can be accessed from all templates and markdown files.
 
 ```
@@ -137,8 +139,8 @@ Supported vars:
 - watchfolder1, watchfolder2 and watchfolder3
 
 ## Markdown
-**SiteGen** lets you use [markdown][markdown] to write your site content. At the beginning of each markdown file, you
-have the option to use a [YAML][yaml] block to define custom values that you can inject into your templates. Example:
+**SiteGen** lets you use [markdown](http://daringfireball.net/projects/markdown/syntax) to write your site content. At the beginning of each markdown file, you
+have the option to use a [YAML](http://rhnh.net/2011/01/31/yaml-tutorial) block to define custom values that you can inject into your templates. Example:
 
     title: A Blog Post
     published: 01/01/2014
@@ -152,7 +154,7 @@ have the option to use a [YAML][yaml] block to define custom values that you can
     Normal Markdown content here...
 
 As you can see, a line of tildes (`~`) is used to designate your YAML block. You can access/inject your values into
-your pages using [mustache template syntax][mustache]. You can do this either inside your dedicated HTML/mustache templates:
+your pages using [mustache template syntax](http://mustache.github.io/mustache.5.html). You can do this either inside your dedicated HTML/mustache templates:
 
     <ul>
       {{#tags}}
@@ -210,7 +212,7 @@ dart: ->usage.badge.dart
     
 ## SASS
 If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.      
-Install instruction for SASS can be found [here][installsass]  
+Install instruction for SASS can be found [here](http://sass-lang.com/install)  
 In short it's `gem install sass` and `gem install sassc`  
 
 You can turn off SASS either with `--no-usesass` or with the appropriate setting in site.yaml 
@@ -296,7 +298,7 @@ If you are using Chromium on Mac you will get a automatic page refresh for free!
  
 Now play with sitegen and watch my screencast...
 
-Check out the [sample!][sample]
+Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple)
 
 ## Hints
 - Just serve a local dir on port 8000 without generating something:  
@@ -318,10 +320,11 @@ Check out the [sample!][sample]
  
 
 ### Features and bugs
-Please file feature requests and bugs at the [issue tracker][tracker].
+Please file feature requests and bugs at the [issue tracker](https://github.com/MikeMitterer/dart-sitegen/issues).
 
 ### Thanks
-I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I used as basis for **SiteGen**. 
+I want to thank "Enrique Gavidia" for his [stillshot](https://pub.dartlang.org/packages/stillshot) 
+package that I used as basis for **SiteGen**. 
 
 ### License
 
@@ -343,17 +346,3 @@ I want to thank "Enrique Gavidia" for his [stillshot][stillshot] package that I 
 
 If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.at/) me
 or **star** this repo here on GitHub.
-
-[dart]: https://www.dartlang.org/
-[tracker]: https://github.com/MikeMitterer/dart-sitegen/issues
-[markdown]: http://daringfireball.net/projects/markdown/syntax
-[mustache]: http://mustache.github.io/mustache.5.html
-[livepage]: https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh
-[example]: https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple
-[yaml]: http://rhnh.net/2011/01/31/yaml-tutorial
-[stillshot]: https://pub.dartlang.org/packages/stillshot
-[promoimage]: https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true
-[video]: http://goo.gl/uUTg8s
-[installsass]: http://sass-lang.com/install
-[sample]: https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple
-
