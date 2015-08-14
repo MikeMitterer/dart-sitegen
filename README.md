@@ -13,7 +13,7 @@ A webserver for a quick review is included. On Mac you also get automatic page r
 platforms you could try [LivePage](https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh) 
 chrome extension for maximum productivity.  
 
-Before you read on - check out this video:
+Before you read on - check out this [video](http://goo.gl/uUTg8s):
 
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
 
@@ -208,8 +208,6 @@ dart: ->usage.badge.dart
 ~~~  
 ```
 
-
-    
 ## SASS
 If SiteGen finds a .scss file in your output dir (web) it compiles it to the corresponding .css file.      
 Install instruction for SASS can be found [here](http://sass-lang.com/install)  
