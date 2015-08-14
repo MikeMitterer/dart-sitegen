@@ -5,7 +5,7 @@ Static site generator. Includes a webserver, sass + autoprefix support
 **--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)  
 Helps to test your site from within a VM for example. 
 
-With extra assets-folder and partials-support. A static site generator in [Dart][dart], webserver included.  
+With extra assets-folder and partials-support. A static site generator in [Dart](dart), webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.
   
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
