@@ -13,7 +13,7 @@ platforms you could try [LivePage][livepage] chrome extension for maximum produc
 
 Before you read on - check out this video:
 
-[![ScreenShot][promoimage]](http://goo.gl/uUTg8s)
+[![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
 
 [Here][example] you can see a typical site structure.  
 
