@@ -55,6 +55,7 @@ class Config {
 
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
+        _settings[Options._ARG_IP]                  = "127.0.0.1";
         _settings[Options._ARG_PORT]                = "8080";
 
         _settings[Options._ARG_DOCROOT]             = _settings[Config._CONF_OUTPUT_DIR]; // web
@@ -105,6 +106,8 @@ class Config {
 
     Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
 
+    String get ip => _settings[Options._ARG_IP];
+
     String get port => _settings[Options._ARG_PORT];
 
     String get docroot => _settings[Options._ARG_DOCROOT];
@@ -152,6 +155,7 @@ class Config {
         settings["SASS compiler"]                           = sasscompiler;
         settings["Browser"]                                 = browser;
 
+        settings["IP-Address"]                              = ip;
         settings["Port"]                                    = port;
         settings["Document root"]                           = docroot;
 
@@ -202,6 +206,10 @@ class Config {
 
         if(_argResults.wasParsed(Options._ARG_LOGLEVEL)) {
             _settings[Options._ARG_LOGLEVEL] = _argResults[Options._ARG_LOGLEVEL];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_IP)) {
+            _settings[Options._ARG_IP] = _argResults[Options._ARG_IP];
         }
 
         if(_argResults.wasParsed(Options._ARG_PORT)) {

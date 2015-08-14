@@ -10,6 +10,7 @@ class Options {
     static const _ARG_GENERATE              = 'generate';
     static const _ARG_GENERATE_CSS          = 'generatecss';
     static const _ARG_SERVE                 = 'serve';
+    static const _ARG_IP                    = 'ip';
     static const _ARG_PORT                  = 'port';
     static const _ARG_WATCH                 = 'watch';
     static const _ARG_WATCH_AND_SERVE       = 'watchandserve';
@@ -71,6 +72,8 @@ class Options {
             ..addFlag(_ARG_USE_AUTOPREFIXER,            negatable: true, help: "Enables / disables Autoprefixer", defaultsTo: true)
 
             ..addFlag(_ARG_TALK_TO_ME,                  negatable: true, help: "Enables / disables Speek-Output", defaultsTo: _runsOnOSX())
+
+            ..addOption(_ARG_IP,                        help: "Sets the IP-Address to listen on", defaultsTo: "127.0.0.1")
 
             ..addOption(_ARG_PORT,                      help: "Sets the port to listen on", defaultsTo: "8000")
 

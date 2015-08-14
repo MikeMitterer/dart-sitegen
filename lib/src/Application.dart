@@ -88,7 +88,7 @@ class Application {
             if (argResults.wasParsed(Options._ARG_SERVE) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
                 foundOptionToWorkWith = true;
                 final String port = argResults[Options._ARG_PORT];
-                serve(config.docroot, port);
+                serve(config.docroot, port, config.ip);
             }
 
             if (!foundOptionToWorkWith) {
@@ -103,7 +103,7 @@ class Application {
         }
     }
 
-    void serve(final String folder, final String port) {
+    void serve(final String folder, final String port, final String ip) {
         Validate.notBlank(folder);
         Validate.notBlank(port);
 
@@ -124,7 +124,7 @@ class Application {
         virtDir.directoryHandler = _directoryHandler;
 
         runZoned(() {
-            HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, int.parse(port)).then( (final HttpServer server) {
+            HttpServer.bind(ip, int.parse(port)).then( (final HttpServer server) {
                 _logger.info('Server running on port: $port, $MY_HTTP_ROOT_PATH');
                 server.listen( (final HttpRequest request) {
                     _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} ${request.uri}");
@@ -139,7 +139,7 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.info('Observing $folder...');
+        _logger.info('Observing (watch) $folder...');
 
         final Directory srcDir = new Directory(folder);
 
@@ -172,7 +172,7 @@ class Application {
         try {
 
             scssFiles.forEach((final File file) {
-                _logger.info("Observing: ${file.path}");
+                _logger.info("Observing: (watchScss) ${file.path}");
 
                 file.watch(events: FileSystemEvent.MODIFY).listen((final FileSystemEvent event) {
                     _logger.fine(event.toString());
@@ -218,7 +218,7 @@ class Application {
 
         try {
 
-            _logger.info("Observing: ${dirToCheck.path}");
+            _logger.info("Observing: (watchAdditionalFolderScss) ${dirToCheck.path}");
 
             dirToCheck.watch(events: FileSystemEvent.MODIFY).listen((final FileSystemEvent event) {
                 _logger.fine(event.toString());
@@ -244,7 +244,7 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.fine('Observing $folder...');
+        _logger.fine('Observing: (watchToRefresh) $folder...');
 
         void _schedulePageRefresh() {
             if(timerForPageRefresh == null) {
@@ -268,7 +268,7 @@ class Application {
         Validate.notBlank(folder);
         Validate.notNull(config);
 
-        _logger.fine('Observing $folder (SCSS)... ');
+        _logger.fine('Observing: (_compileSCSSFile) $folder (SCSS)... ');
         final Directory dir = new Directory(folder);
         final List<File> scssFiles = _listSCSSFilesIn(dir);
 

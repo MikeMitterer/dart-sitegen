@@ -1,12 +1,13 @@
-# SiteGen
-Now with Speech output on OSX, disabled for all other OSs.
+# SiteGen 
+Static site generator. Includes a webserver, sass + autoprefix support
+
+### New
+`--ip` option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)  
+Helps to test your site from within a VM for example. 
 
 With extra assets-folder and partials-support. A static site generator in [Dart][dart], webserver included.  
 You can write your pages in HTML or [Markdown][markdown]. For Templates [Mustache][mustache] is supported.
   
-### Breaking change in v1.0.0
-html-Folder moved into .sitegen!!!!!   
-
 A webserver for a quick review is included. On Mac you also get automatic page refresh. On other 
 platforms you could try [LivePage][livepage] chrome extension for maximum productivity.  
 
@@ -243,6 +244,7 @@ Usage: sitegen [options]
     -s, --settings         Prints settings
     -h, --help             Shows this message
     -g, --generate         Generate site
+    -c, --generatecss      Generate CSS (compile SCSS2CSS)
     -w, --watch            Observes SRC-dir
     -x, --watchandserve    Shortcut to watch and serve
     -i, --init             Initializes your site
@@ -255,8 +257,17 @@ Usage: sitegen [options]
         --[no-]useapfx     Enables / disables Autoprefixer
                            (defaults to on)
 
+        --[no-]talktome    Enables / disables Speek-Output
+                           (defaults to on)
+
+        --ip               Sets the IP-Address to listen on
+                           (defaults to "127.0.0.1")
+
         --port             Sets the port to listen on
                            (defaults to "8000")
+
+        --docroot          Document root
+                           (defaults to "web")
 
     -v, --loglevel         Sets the appropriate loglevel
                            [info, debug, warning]
@@ -265,6 +276,7 @@ Sample:
 
     'Generates all basic files and folders:                'sitegen -i'
     'Observes the default dirs and serves the web-folder:  'sitegen -w --serve'
+    'Observes the default dirs and serves the web-folder:  'sitegen -x'
     'Generates the static site in your 'web-folder':       'sitegen -g'
 ```
 
