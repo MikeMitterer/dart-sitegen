@@ -13,7 +13,7 @@ platforms you could try [LivePage][livepage] chrome extension for maximum produc
 
 Before you read on - check out this video:
 
-[![ScreenShot][promoimage]][video]
+[![ScreenShot][promoimage]](http://goo.gl/uUTg8s)
 
 [Here][example] you can see a typical site structure.  
 
