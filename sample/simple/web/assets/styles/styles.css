@@ -78,8 +78,7 @@ body.mdl-upgrading .loading {
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
       -ms-flex-align: end;
-          align-items: flex-end;
-  min-height: 56px; }
+          align-items: flex-end; }
 
 .main-section {
   width: calc(100% - 112px);
