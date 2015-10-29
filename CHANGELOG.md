@@ -1,6 +1,11 @@
 #Change Log for sitegen#
 Static site generator for Dart, webserver included.
 
+##[v1.2.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.7...v1.2.0) - 2015-10-29##
+
+###Feature###
+* Makes it much easier to generate a menu, better sample [8884e95](https://github.com/mikemitterer/dart-sitegen/commit/8884e95d750bfdc7bceeef8859ac2cfb7cdba5db)
+
 ##[v1.1.7](http://github.com/mikemitterer/dart-sitegen/compare/v1.1.6...v1.1.7) - 2015-08-14##
 
 ###Docs###
