@@ -1,3 +1,6 @@
+// template: none
+// logger: I am your logger
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import 'dart:html' as html;
 
 import 'package:logging/logging.dart';
@@ -5,7 +8,7 @@ import 'package:console_log_handler/console_log_handler.dart';
 
 import 'package:mdl/mdl.dart';
 
-final Logger _logger = new Logger('I am your logger');
+final Logger _logger = new Logger('{{logger}}');
 
 main() async {
     configLogging();

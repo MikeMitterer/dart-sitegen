@@ -3,7 +3,7 @@
 # This is an example of a YAML comment which will be completely ignored.
 
 # A basic variable definition
-title: About SiteGen
+title: Markdown
 
 # A list of strings. Surrounding your strings in quotes is optional,
 # but some may require it so they  don't interfere with YAML syntax.
@@ -43,16 +43,16 @@ date_format: yMd
 # with any template file-type, though mustache embedded in plain
 # old HTML is the default. If no template is defined here, SiteGen
 # will use the one listed for 'default_template' in your site.yaml
-# template: info_page
+
+#template: info_page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#{{title}} (Content)
-###Subheadline
+### {{title}} (Content)
+#### Subheadline
 
 3 `~`'s is the minimum for designating and separating a [YAML][yaml] block, but they can be extended longer -- all that matters
 is that the tildes (`~`) are on their own line.
 
 And anything beyond that gets interpreted as [Markdown][markdown]!
-    [Markdown][markdown]!
     
 You can even use template tags in here, for any variables you set in in the top YAML block, or in your `site.yaml` file:
 
@@ -61,28 +61,28 @@ This post's title is: "{{ title }}"
 This file was last modified on {{ _date }}
 
 
-Note that variables beginning with an underscore designate *implicit* metadata added by __SiteGen__.  
-
+Note that variables beginning with an underscore designate *implicit* metadata added by __SiteGen__.
+  
 Some vars that are always available by default:
 
 {{#default_vars}}
     {{.}}
 {{/default_vars}}
 
+You can see all the vars you can use if you start __SiteGen__ with `--loglevel debug`.   
+
 And as you can see, you can also use mustache logic to iterate through yaml maps and lists:
-Links are rendered incorrectly.  
-Bug: [https://github.com/dpeek/dart-markdown/issues/35](https://github.com/dpeek/dart-markdown/issues/35)
 
 {{#links}}
-    - [{{name}}]({{url}})
+[{{name}}]({{url}})   
 {{/links}}
 
 {{#tags}}
-    * {{.}}
+* {{.}}
 {{/tags}}
 
 {{#authors}}
-    - {{.}}
+- {{.}}
 {{/authors}}
 
 Note how you need to use a `.` to access a list item, but can access map/dict keys directly.

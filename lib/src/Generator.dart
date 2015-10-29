@@ -25,6 +25,9 @@ TemplateRenderer renderTemplate = (final String source,final Map options, final 
 class Generator {
     final Logger _logger = new Logger("sitegen.Generator");
 
+    /// Mustache-Renderer strips out newlines
+    static const String _NEWLINE_PROTECTOR = "@@@#@@@";
+
     /// Render and output your static site (WARNING: overwrites existing HTML files in output directory).
     void generate(final Config config) {
         final Directory contentDir = new Directory(path.absolute(config.contentfolder));
@@ -53,7 +56,9 @@ class Generator {
             final String extension = path.extension(relativeFileName).replaceFirst(".","").toLowerCase();
 
             _logger.fine("\nFile: ${relativeFileName}, Path: $relativePath");
-            final List<String> lines = file.readAsLinesSync();
+
+            String fileContent = file.readAsStringSync();
+            final List<String> lines = fileContent.replaceAll("\r","").split(new RegExp("\n",multiLine: true));
             Map<String,dynamic> pageOptions = {};
 
             final bool hasYamlBlock = _hasYamlBlock(config.yamldelimeter,lines,extension);
@@ -69,18 +74,29 @@ class Generator {
                     lines.removeRange(0,1);
                 }
             }
+            // Now remove the YAML-Block
+            fileContent = _removeYamlBlock(fileContent,config);
 
             pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
             pageOptions['_data'] = dataMap;
-            pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
+
+            //_logger.info("---- ${relativeFileName}:\n$fileContent");
+
+            pageOptions['_content'] = renderTemplate(fileContent, pageOptions,
                 _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
+            // pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
+            //  _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
 
             pageOptions['_template'] = "none";
 
+            // Set add the newlines back into _content (_removeYamlBlock replaced them)
+            pageOptions['_content'] = (pageOptions['_content'] as String).replaceAll(new RegExp(_NEWLINE_PROTECTOR,multiLine: true),"\n");
+            //_logger.info("**** ${relativeFileName}:\n${pageOptions['_content']}");
+
             String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
-                pageOptions['_content'] = md.markdownToHtml(pageOptions['_content']);
+                pageOptions['_content'] = md.markdownToHtml(pageOptions['_content'],inlineSyntaxes: [ ]);
                 outputExtension = "html";
             }
 
@@ -92,6 +108,8 @@ class Generator {
 
                 templateContent = template.readAsStringSync();
             }
+
+            _showPageOptions(relativeFileName,relativePath,pageOptions,config);
 
             final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions,
                 _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)),config);
@@ -360,6 +378,12 @@ class Generator {
     /**
      * Sample: <link rel="stylesheet" href="{{_page.relative_to_root}}/styles/main.css">
      *   produces <link rel="stylesheet" href="../styles/main.css"> for about/index.html
+     *
+     * Sample:
+     *   <a href="index.html" class="mdl-layout__tab {{#_page.index}}{{_page.index}}{{/_page.index}}">Overview</a>
+     *   produces:
+     *      <a href="index.html" class="mdl-layout__tab is-active">Overview</a>
+     *   if the current page is index.html
      */
     Map<String,dynamic> _fillInPageNestingLevel(final String relativeFileName, Map<String,dynamic> pageOptions) {
         Validate.notBlank(relativeFileName);
@@ -372,10 +396,19 @@ class Generator {
                 backPath = backPath + "../";
             }
         }
-        //backPath = backPath.replaceFirst(new RegExp(r"/$"),"");
+
+        final String pathWithoutExtension = path.withoutExtension(relativeFileName);
+        final String portablePath = pathWithoutExtension.replaceAll(new RegExp("(/|\\\\\)"),":");
+        final String pageIndicator = pathWithoutExtension.replaceAll(new RegExp("(/|\\\\\)"),"_");
         pageOptions["_page"] = {
+            "filename" : pathWithoutExtension,
+            "pageindicator" : pageIndicator,
             "relative_to_root" : backPath,
-            "nesting_level" : nestingLevel
+            "nesting_level" : nestingLevel,
+
+            /// you can use this like
+            ///     {{#_page.index}}{{_page.index}}{{/_page.index}
+            pageIndicator : "is-active",
         };
 
         return pageOptions;
@@ -423,5 +456,55 @@ class Generator {
         .replaceAll('href="$relative_output', 'href="');
 
         return html;
+    }
+
+    /**
+     * Removes everything before ~~~
+     */
+    String _removeYamlBlock(String fileContent,final Config config) {
+
+        fileContent = fileContent.replaceFirst(new RegExp("(?:.|\n)*${config.yamldelimeter}(?:\r\n|\n)",multiLine: true),"");
+
+        /// if there is something like ~~~ (xtreme-sample)
+        fileContent = fileContent.replaceFirst(new RegExp("^${config.yamldelimeter}\$"),"");
+
+        /// Replace all newlines with some silly characters to protect the newlines because
+        /// Mustache-Renderer strips them
+        fileContent = fileContent.replaceAll(new RegExp("\n",multiLine: true),_NEWLINE_PROTECTOR);
+
+        return fileContent;
+    }
+
+    /**
+     * Shows all the available vars for the current page
+     */
+    void _showPageOptions(final String relativeFileName,final String relativePath,
+        final Map<String, dynamic> pageOptions,final Config config) {
+
+        Validate.notBlank(relativeFileName);
+        Validate.notNull(relativePath);
+        Validate.notNull(pageOptions);
+        Validate.notNull(config);
+
+        _logger.fine("   --- ${(relativeFileName + " ").padRight(76,"-")}");
+
+        void _showMap(final Map<String, dynamic> values,final int nestingLevel) {
+            values.forEach((final String key,final dynamic value) {
+                _logger.fine("    ${"".padRight(nestingLevel * 2)} $key.");
+
+                if(value is Map) {
+                    _showMap(value,nestingLevel + 1);
+
+                } else {
+                    String valueAsString = value.toString().replaceAll(new RegExp("(\n|\r|\\s{2,}|${_NEWLINE_PROTECTOR})",multiLine: true),"");
+
+                    valueAsString = valueAsString.substring(0,min(50,max(valueAsString.length,0)));
+                    _logger.fine("    ${"".padRight(nestingLevel * 2)} $key -> [${valueAsString}]");
+                }
+            });
+        }
+
+        _showMap(pageOptions,0);
+        _logger.fine("   ${"".padRight(80,"-")}");
     }
 }

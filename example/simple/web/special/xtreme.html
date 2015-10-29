@@ -19,7 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Markdown | MDL/Dart + SiteGen Sample</title>
+    <title>xtreme | MDL/Dart + SiteGen Sample</title>
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="images/android-desktop.png">
@@ -39,73 +39,39 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/styles.css">
-    <link rel="stylesheet" href="packages/mdl/assets/styles/material.min.css">
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+    <link rel="stylesheet" href="../packages/mdl/assets/styles/material.min.css">
 </head>
-<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base mdl-upgrading markdown"><div class="loading mdl-color--primary">Loading...</div>
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base mdl-upgrading special_xtreme"><div class="loading mdl-color--primary">Loading...</div>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-300">
     <!-- Usage of "partials" -->
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-            <h3>Markdown</h3>
+            <h3>xtreme</h3>
         </div>
         <div class="tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-            <a href="index.html" class="mdl-layout__tab ">
+            <a href="../index.html" class="mdl-layout__tab ">
                 Overview
             </a>
-            <a href="features.html" class="mdl-layout__tab ">
+            <a href="../features.html" class="mdl-layout__tab ">
                 Features
             </a>
-            <a href="markdown.html" class="mdl-layout__tab is-active">
+            <a href="../markdown.html" class="mdl-layout__tab ">
                 Markdown
             </a>
-            <a href="technology.html" class="mdl-layout__tab ">
+            <a href="../technology.html" class="mdl-layout__tab ">
                 Technology
             </a>
-            <a href="about/index.html" class="mdl-layout__tab ">
+            <a href="../about/index.html" class="mdl-layout__tab ">
                 About
             </a>
         </div>
     </header>    <main class="mdl-layout__content">
         <section class="main-section">
             <!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
-            <h3>Markdown (Content)</h3>
-<h4>Subheadline</h4>
-<p>3 <code>~</code>'s is the minimum for designating and separating a <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a> block, but they can be extended longer -- all that matters
-is that the tildes (<code>~</code>) are on their own line.</p>
-<p>And anything beyond that gets interpreted as <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>!</p>
-<p>You can even use template tags in here, for any variables you set in in the top YAML block, or in your <code>site.yaml</code> file:</p>
-<p>This post's title is: "Markdown"</p>
-<p>This file was last modified on 10/29/2015</p>
-<p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>SiteGen</strong>.</p>
-<p>Some vars that are always available by default:</p>
-<pre><code>`title`: post title, automatically set to name of markdown file if left blank
-
-`_site`: site.yaml values
-
-`_date`: post 'last modified' date
-
-`_content`: post content (only accessible from templates, not markdown)
-</code></pre>
-<p>You can see all the vars you can use if you start <strong>SiteGen</strong> with <code>--loglevel debug</code>.   </p>
-<p>And as you can see, you can also use mustache logic to iterate through yaml maps and lists:</p>
-<p><a href="https://dartlang.org">Dart</a>   </p>
-<p><a href="https://pub.dartlang.org">Pub</a>   </p>
-<p><a href="http://google.com">Google</a>   </p>
-<p><a href="http://github.com">Github</a>   </p><ul><li>
-<p><a href="https://github.com/MikeMitterer/dart-sitegen">SiteGen</a></p></li><li>
-<p><a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a></p></li><li>
-<p><a href="http://mustache.github.io/mustache.5.html">Mustache</a></p></li><li>
-<p><a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a></p></li><li>
-<p>foo</p></li><li>
-<p>bar</p></li><li>
-<p>baz</p></li></ul>
-<p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.</p>
-<p>You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your <a href="../site.yaml">site.yaml</a> file.
-Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
-
+            
         </section>
         <footer class="mdl-mega-footer">
             <div class="mdl-mega-footer--middle-section">
@@ -162,7 +128,7 @@ Same ideas apply when writing your actual HTML templates. See <a href="http://mu
         </footer>
     </main>
 </div>
-<script type="application/dart" src="main.dart"></script>
-<script data-pub-inline src="packages/browser/dart.js"></script>
+<script type="application/dart" src="../main.dart"></script>
+<script data-pub-inline src="../packages/browser/dart.js"></script>
 </body>
 </html>

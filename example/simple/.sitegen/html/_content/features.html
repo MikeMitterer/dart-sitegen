@@ -1,0 +1,25 @@
+title: Features
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<div class="mdl-panel mdl-shadow--2dp">
+    <h5 class="mdl-color-text--primary">Use as JSON-File</h5>
+    <h7>families.json</h7>
+    <ul>
+        {{#_data.families}}
+        <li>{{surname}}
+            <ul>
+                {{#members}}
+                <li>{{given}}</li>
+                {{/members}}
+            </ul>
+        </li>
+        {{/_data.families}}
+    </ul>
+
+    <h5 class="mdl-color-text--primary">Here it is a YAML-File</h5>
+    <h7>xmen.yaml</h7>
+    <ul>
+        {{#_data.xmen}}
+        <li>{{.}}</li>
+        {{/_data.xmen}}
+    </ul>
+</div>

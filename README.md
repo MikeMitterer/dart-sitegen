@@ -2,6 +2,7 @@
 Static site generator. Includes a webserver, sass + autoprefix support
 
 ### New
+**--v debug** - shows you all the vars available for your page
 **--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)  
 Helps to test your site from within a VM for example. 
 

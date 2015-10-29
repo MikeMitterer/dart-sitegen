@@ -2,7 +2,8 @@
 
 site_options:
   name: Mike
-  site_name: HudriWudri
+  site_name: MDL/Dart + SiteGen Sample
   author: Mike Mitterer
 
-browser: Chrome
+#browser: Chrome
+#browser: Dartium
