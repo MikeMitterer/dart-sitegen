@@ -2,9 +2,9 @@
 Static site generator. Includes a webserver, sass + autoprefix support
 
 ### New
-**--v debug** - shows you all the vars available for your page
-**--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)  
-Helps to test your site from within a VM for example. 
+**--v debug** - shows you all the vars available for your page   
+**--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)   
+Helps to test your site from within a VM for example.    
 
 With extra assets-folder and partials-support. A static site generator in [Dart](https://www.dartlang.org/), webserver included.  
 You can write your pages in HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax). 
@@ -14,12 +14,13 @@ A webserver for a quick review is included. On Mac you also get automatic page r
 platforms you could try [LivePage](https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh) 
 chrome extension for maximum productivity.  
 
+[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.   
+And under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!   
+
 Before you read on - check out this [video](http://goo.gl/uUTg8s):
 
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
 
-[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.   
-And under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!
 
 
 ```
