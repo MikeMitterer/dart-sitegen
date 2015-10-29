@@ -14,7 +14,7 @@ A webserver for a quick review is included. On Mac you also get automatic page r
 platforms you could try [LivePage](https://chrome.google.com/webstore/detail/livepage/pilnojpmdoofaelbinaeodfpjheijkbh) 
 chrome extension for maximum productivity.  
 
-[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.   
+[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/sample/simple) you can see a typical site structure.   
 And under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!   
 
 Before you read on - check out this [video](http://goo.gl/uUTg8s):
@@ -314,7 +314,7 @@ If you are using Chromium on Mac you will get a automatic page refresh for free!
  
 Now play with sitegen and watch my screencast...
 
-Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple)
+Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/sample/simple)
 
 ## Hints
 - Just serve a local dir on port 8000 without generating something:  
