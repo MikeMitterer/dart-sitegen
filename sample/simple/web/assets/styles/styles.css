@@ -72,13 +72,15 @@ body.mdl-upgrading .loading {
   -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-align-content: space-between;
-      -ms-flex-line-pack: justify;
-          align-content: space-between;
+  -webkit-align-content: stretch;
+      -ms-flex-line-pack: stretch;
+          align-content: stretch;
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
       -ms-flex-align: end;
           align-items: flex-end; }
+  .is-small-screen .tab-bar {
+    min-height: 56px; }
 
 .main-section {
   width: calc(100% - 112px);

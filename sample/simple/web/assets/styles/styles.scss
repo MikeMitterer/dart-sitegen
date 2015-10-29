@@ -52,8 +52,12 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start; // ⇾
-    align-content: space-between; // ||
+    align-content: stretch; // ||
     align-items: flex-end; // ↓
+
+    .is-small-screen & {
+        min-height: 56px;
+    }
 
     //min-height: 56px;
 
