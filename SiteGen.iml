@@ -5,8 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/bin/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/simple/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sample/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/sample/simple/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/html/_content/about/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/html/_content/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/html/_data/packages" />
@@ -15,8 +15,8 @@
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/html/_templates/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/html/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/simple/.sitegen/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/simple/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/simple/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/sample/simple/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages" />
     </content>
     <orderEntry type="inheritedJdk" />

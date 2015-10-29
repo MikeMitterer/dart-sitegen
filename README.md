@@ -18,50 +18,66 @@ Before you read on - check out this [video](http://goo.gl/uUTg8s):
 
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
 
-[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.  
+[Here](https://github.com/MikeMitterer/dart-sitegen/tree/master/example/simple) you can see a typical site structure.   
+And under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!
+
 
 ```
 ├── .sitegen
-│   ├── refreshChromium-1.0.applescript
-│   ├── html
-│   │   ├── _assets
-│   │   │   └── demo.scss
-│   │   │
-│   │   ├── _content
+│   ├── html
+│   │   ├── _content
 │   │   │   ├── about
 │   │   │   │   └── index.html
+│   │   │   ├── assets
+│   │   │   │   ├── images
+│   │   │   │   │   ├── android-desktop.png
+│   │   │   │   │   ├── favicon.png
+│   │   │   │   │   └── ios-desktop.png
+│   │   │   │   └── styles
+│   │   │   │       └── styles.scss
+│   │   │   ├── features.html
 │   │   │   ├── index.html
+│   │   │   ├── main.dart
 │   │   │   ├── markdown.md
-│   │   │   ├── piratenames.json
-│   │   │   └── xtreme.html
-│   │   │
+│   │   │   ├── special
+│   │   │   │   ├── template.html
+│   │   │   │   └── xtreme.html
+│   │   │   └── technology.html
 │   │   ├── _data
-│   │   │   ├── xmen.yaml
-│   │   │   └── families.json
-│   │   │
-│   │   └── _templates
+│   │   │   ├── families.json
+│   │   │   ├── menu.json
+│   │   │   └── xmen.yaml
+│   │   ├── _partials
+│   │   │   ├── cards
+│   │   │   │   └── wide.html
+│   │   │   └── header.html
+│   │   └── _templates
 │   │       ├── default.html
 │   │       └── info_page.html
-│   │   
-│   └── site.yaml (Optional!)
-│
+│   ├── refreshChrome-1.0.applescript
+│   ├── refreshChromium-1.0.applescript
+│   ├── refreshDartium-1.0.applescript
+│   └── site.yaml
+├── pubspec.yaml
 └── web
     ├── about
-    │   ├── index.html
-    │   └── packages -> ../../packages
-    │
+    │   └── index.html
+    ├── assets
+    │   ├── images
+    │   │   ├── android-desktop.png
+    │   │   ├── favicon.png
+    │   │   └── ios-desktop.png
+    │   └── styles
+    │       ├── styles.css
+    │       └── styles.scss
+    ├── features.html
     ├── index.html
     ├── main.dart
     ├── markdown.html
-    ├── packages -> ../packages
-    ├── piratenames.json
-    │
-    ├── styles
-    │   ├── main.css
-    │   ├── main.scss
-    │   └── packages -> ../../packages
-    │
-    └── xtreme.html
+    ├── special
+    │   ├── template.html
+    │   └── xtreme.html
+    └── technology.html
 ```
 
 **.sitegen**: This is where your (optional) site.yaml lives  
