@@ -13,6 +13,7 @@ dependencies:
 
   browser: ^0.10.0
   mdl: ^1.0.0
+    # path: /Volumes/Daten/DevLocal/DevDart/MaterialDesignLite
 
   di: ^3.3.0
 
