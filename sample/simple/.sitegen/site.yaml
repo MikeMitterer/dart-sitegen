@@ -1,5 +1,7 @@
 #template_dir: ../_templates
 
+# Usage: _site.<var name>
+# Sample: _site.site_name
 site_options:
   name: Mike
   site_name: MDL/Dart + SiteGen Sample
