@@ -13,3 +13,4 @@ packages
 *.js.map
 .pub
 refreshChromium-1.0.applescript
+*.lock

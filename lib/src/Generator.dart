@@ -56,9 +56,7 @@ class Generator {
             final String extension = path.extension(relativeFileName).replaceFirst(".","").toLowerCase();
 
             _logger.fine("\nFile: ${relativeFileName}, Path: $relativePath");
-
-            String fileContent = file.readAsStringSync();
-            final List<String> lines = fileContent.replaceAll("\r","").split(new RegExp("\n",multiLine: true));
+            final List<String> lines = file.readAsLinesSync();
             Map<String,dynamic> pageOptions = {};
 
             final bool hasYamlBlock = _hasYamlBlock(config.yamldelimeter,lines,extension);
@@ -74,29 +72,18 @@ class Generator {
                     lines.removeRange(0,1);
                 }
             }
-            // Now remove the YAML-Block
-            fileContent = _removeYamlBlock(fileContent,config);
 
             pageOptions = _fillInPageNestingLevel(relativeFileName,pageOptions);
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
             pageOptions['_data'] = dataMap;
-
-            //_logger.info("---- ${relativeFileName}:\n$fileContent");
-
-            pageOptions['_content'] = renderTemplate(fileContent, pageOptions,
+            pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
                 _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
-            // pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
-            //  _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
 
             pageOptions['_template'] = "none";
 
-            // Set add the newlines back into _content (_removeYamlBlock replaced them)
-            pageOptions['_content'] = (pageOptions['_content'] as String).replaceAll(new RegExp(_NEWLINE_PROTECTOR,multiLine: true),"\n");
-            //_logger.info("**** ${relativeFileName}:\n${pageOptions['_content']}");
-
             String outputExtension = extension;
             if (isMarkdown(file) && _isMarkdownSupported(config.usemarkdown, pageOptions)) {
-                pageOptions['_content'] = md.markdownToHtml(pageOptions['_content'],inlineSyntaxes: [ ]);
+                pageOptions['_content'] = md.markdownToHtml(pageOptions['_content']);
                 outputExtension = "html";
             }
 
@@ -109,7 +96,9 @@ class Generator {
                 templateContent = template.readAsStringSync();
             }
 
-            _showPageOptions(relativeFileName,relativePath,pageOptions,config);
+            if(config.loglevel == "debug") {
+                _showPageOptions(relativeFileName,relativePath,pageOptions,config);
+            }
 
             final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions,
                 _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)),config);
