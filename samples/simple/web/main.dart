@@ -22,4 +22,3 @@ void configLogging() {
     Logger.root.level = Level.INFO;
     Logger.root.onRecord.listen(new LogConsoleHandler());
 }
-

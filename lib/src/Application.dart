@@ -190,7 +190,7 @@ class Application {
             });
 
         }
-        on StateError catch (e) {
+        on StateError {
             _logger.info("Found no SCSS without a _ at the beginning...");
         }
     }
@@ -235,7 +235,7 @@ class Application {
             });
 
         }
-        on StateError catch (e) {
+        on StateError {
             _logger.info("Found no SCSS without a _ at the beginning...");
         }
     }

@@ -387,7 +387,7 @@ class Generator {
         }
 
         final String pathWithoutExtension = path.withoutExtension(relativeFileName);
-        final String portablePath = pathWithoutExtension.replaceAll(new RegExp("(/|\\\\\)"),":");
+        // final String portablePath = pathWithoutExtension.replaceAll(new RegExp("(/|\\\\\)"),":");
         final String pageIndicator = pathWithoutExtension.replaceAll(new RegExp("(/|\\\\\)"),"_");
         pageOptions["_page"] = {
             "filename" : pathWithoutExtension,
@@ -447,22 +447,22 @@ class Generator {
         return html;
     }
 
-    /**
-     * Removes everything before ~~~
-     */
-    String _removeYamlBlock(String fileContent,final Config config) {
-
-        fileContent = fileContent.replaceFirst(new RegExp("(?:.|\n)*${config.yamldelimeter}(?:\r\n|\n)",multiLine: true),"");
-
-        /// if there is something like ~~~ (xtreme-sample)
-        fileContent = fileContent.replaceFirst(new RegExp("^${config.yamldelimeter}\$"),"");
-
-        /// Replace all newlines with some silly characters to protect the newlines because
-        /// Mustache-Renderer strips them
-        fileContent = fileContent.replaceAll(new RegExp("\n",multiLine: true),_NEWLINE_PROTECTOR);
-
-        return fileContent;
-    }
+//    /**
+//     * Removes everything before ~~~
+//     */
+//    String _removeYamlBlock(String fileContent,final Config config) {
+//
+//        fileContent = fileContent.replaceFirst(new RegExp("(?:.|\n)*${config.yamldelimeter}(?:\r\n|\n)",multiLine: true),"");
+//
+//        /// if there is something like ~~~ (xtreme-sample)
+//        fileContent = fileContent.replaceFirst(new RegExp("^${config.yamldelimeter}\$"),"");
+//
+//        /// Replace all newlines with some silly characters to protect the newlines because
+//        /// Mustache-Renderer strips them
+//        fileContent = fileContent.replaceAll(new RegExp("\n",multiLine: true),_NEWLINE_PROTECTOR);
+//
+//        return fileContent;
+//    }
 
     /**
      * Shows all the available vars for the current page

@@ -7,8 +7,8 @@
       <excludeFolder url="file://$MODULE_DIR$/bin/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages" />
       <excludeFolder url="file://$MODULE_DIR$/sample/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/build" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/build" />
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/android/packages" />
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/android/web/fonts/packages" />
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/android/web/images/packages" />
@@ -34,13 +34,13 @@
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/text-only/packages" />
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/text-only/web/images/packages" />
       <excludeFolder url="file://$MODULE_DIR$/sample/simple/build/web/packages/mdl/_templates/text-only/web/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/about/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/assets/images/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/assets/styles/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/sample/simple/web/special/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/about/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/assets/images/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/assets/styles/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/simple/web/special/packages" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

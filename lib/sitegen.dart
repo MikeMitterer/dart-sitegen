@@ -2,7 +2,6 @@ library sitegen;
 
 import 'dart:io';
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 
