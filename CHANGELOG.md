@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.3.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.2.4...v1.3.0) - 2015-12-08
+
+### Docs
+* Grinder added [8a557ab](https://github.com/mikemitterer/dart-sitegen/commit/8a557ab8d4d8eac5f1b947fb4c1e63eea31e66cb)
+
 ## [v1.2.4](http://github.com/mikemitterer/dart-sitegen/compare/v1.2.3...v1.2.4) - 2015-11-16
 
 ### Feature
