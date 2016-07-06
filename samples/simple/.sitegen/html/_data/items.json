@@ -1,0 +1,30 @@
+[
+  {
+    "name" : "foo1"
+  },
+  {
+    "name" : "foo2"
+  },
+  {
+    "name" :  "foo3",
+    "items" : [
+      {
+        "name" : "foo4"
+      },
+      {
+        "name" : "foo5"
+      },
+      {
+        "name" :  "foo6",
+        "items" : [
+          {
+            "name" : "foo7"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name" : "foo8"
+  }
+]

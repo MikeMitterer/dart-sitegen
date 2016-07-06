@@ -1,5 +1,3 @@
-import 'dart:html' as html;
-
 import 'package:logging/logging.dart';
 import 'package:console_log_handler/console_log_handler.dart';
 

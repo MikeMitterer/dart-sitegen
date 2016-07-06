@@ -235,9 +235,11 @@ In short it's `gem install sass` and `gem install sassc`
 
 You can turn off SASS either with `--no-usesass` or with the appropriate setting in site.yaml 
 
+Or - event better, **install sassc**: `brew install sassc`
+
 ## Autoprefixer
 After compiling .SCSS to .CSS SiteGen calls autoprefixer <yourcss>  
-Install autoprefixer with `npm install --global autoprefixer`
+Install autoprefixer with `npm install --global autoprefixer-cli`
 
 You can turn off Autoprefixer either with `--no-useapfx` or with the appropriate setting in site.yaml 
     

@@ -91,9 +91,11 @@ is that the tildes (<code>~</code>) are on their own line.</p>
 <p>And anything beyond that gets interpreted as <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>!</p>
 <p>You can even use template tags in here, for any variables you set in in the top YAML block, or in your <code>site.yaml</code> file:</p>
 <p>This post's title is: "Markdown"</p>
-<p>This file was last modified on 10/29/2015</p>
+<p>This file was last modified on 2/19/2016</p>
+<p>Link to <a href="about/">subpages</a></p>
 <p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>SiteGen</strong>.</p>
 <p>Some vars that are always available by default:</p>
+<p>Image: <a href="assets/images/ios-desktop.png"><img alt="Logo" src="assets/images/ios-desktop.png"></img></a></p>
 <pre><code>`title`: post title, automatically set to name of markdown file if left blank
 `_site`: site.yaml values
 `_date`: post 'last modified' date
@@ -108,7 +110,7 @@ is that the tildes (<code>~</code>) are on their own line.</p>
 <p><a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a></p></li><li>
 <p>foo</p></li><li>bar</li><li>baz</li></ul>
 <p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.</p>
-<p>You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your <a href="../site.yaml">site.yaml</a> file.
+<p>You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your site.yaml file.
 Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
 
         </section>

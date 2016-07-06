@@ -1,0 +1,39 @@
+[
+  {
+    "name" :       "Home",
+    "path" :       "/",
+    "navigation" : false
+  },
+  {
+    "name" :       "Test Page 1",
+    "path" :       "/test-page",
+    "navigation" : true,
+    "children" :   [
+      {
+        "name" :       "Sub Test 1",
+        "path" :       "/sub-test-1",
+        "navigation" : true
+      },
+      {
+        "name" :       "Sub Test 2",
+        "path" :       "/sub-test-2",
+        "navigation" : true
+      }
+    ]
+  },
+  {
+    "name" :       "Test Page 2",
+    "path" :       "/test-page-2",
+    "navigation" : true
+  },
+  {
+    "name" :       "Sitemap",
+    "path" :       "/sitemap",
+    "navigation" : false
+  },
+  {
+    "name" :       "Privacy",
+    "path" :       "/privacy-policy",
+    "navigation" : false
+  }
+]

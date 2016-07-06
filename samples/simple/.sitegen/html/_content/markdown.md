@@ -60,10 +60,25 @@ This post's title is: "{{ title }}"
 
 This file was last modified on {{ _date }}
 
+Link to [subpages](about/)
 
 Note that variables beginning with an underscore designate *implicit* metadata added by __SiteGen__.
   
 Some vars that are always available by default:
+
+Image: ![Logo](assets/images/ios-desktop.png)
+
+{{#each items}}
+<li>
+    {{name}}
+    {{#if items}}
+    <ul>
+    {{> list}}
+    </ul>
+    {{/if}}
+</li>
+{{/each}}
+    
 
 {{#default_vars}}
     {{.}}
@@ -87,7 +102,7 @@ And as you can see, you can also use mustache logic to iterate through yaml maps
 
 Note how you need to use a `.` to access a list item, but can access map/dict keys directly.
 
-You can of course disable these markdown templating features by setting `markdown_templating: true` in your [site.yaml](../site.yaml) file.
+You can of course disable these markdown templating features by setting `markdown_templating: true` in your site.yaml file.
 Same ideas apply when writing your actual HTML templates. See [mustache's docs][mustache] for more templating info.
 
 [yaml]: http://rhnh.net/2011/01/31/yaml-tutorial

@@ -41,9 +41,9 @@ analyze() {
         "bin/sitegen.dart"
     ];
 
-    final List<String> samples = [
-        "simple/web/main.dart"
-    ];
+    // final List<String> samples = [
+    //    "simple/web/main.dart"
+    // ];
 
     libs.forEach((final String lib) => Analyzer.analyze(lib));
 
@@ -54,5 +54,6 @@ analyze() {
 
     // Analyzer.analyze("test");
 }
+
 @Task()
 clean() => defaultClean();

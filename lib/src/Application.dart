@@ -293,7 +293,7 @@ class Application {
 
         _logger.info("Main SCSS: $scssFile");
         _compileScss(scssFile, cssFile,config);
-        _autoPrefixer("autoprefixer",cssFile,config);
+        _autoPrefixer(cssFile,config);
     }
 
     /**
@@ -396,8 +396,7 @@ class Application {
         _logger.info("Done!");
     }
 
-    void _autoPrefixer(final String prefixer,final String cssFile, final Config config) {
-        Validate.notBlank(prefixer);
+    void _autoPrefixer(final String cssFile, final Config config) {
         Validate.notBlank(cssFile);
         Validate.notNull(config);
 
@@ -407,7 +406,7 @@ class Application {
         }
 
         _logger.info("Autoprefixing $cssFile");
-        final ProcessResult result = Process.runSync(prefixer, [ cssFile ]);
+        final ProcessResult result = Process.runSync("autoprefixer-cli", [ cssFile ]);
         if (result.exitCode != 0) {
             _logger.info("prefixer faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a prefixer error",config);
