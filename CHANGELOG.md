@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.3.2](http://github.com/mikemitterer/dart-sitegen/compare/v1.3.1...v1.3.2) - 2016-07-06
+
+### Feature
+* Works now with autoprefixer-cli [713f325](https://github.com/mikemitterer/dart-sitegen/commit/713f3252472fabea9055d838a497847b6b1b4417)
+
 ## [v1.3.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.2.4...v1.3.0) - 2015-12-08
 
 ### Docs
