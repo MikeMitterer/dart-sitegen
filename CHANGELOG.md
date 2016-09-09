@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.3.3](http://github.com/mikemitterer/dart-sitegen/compare/v1.3.2...v1.3.3) - 2016-09-09
+
+### Feature
+* You can overwrite the port in .sitegen/site.yaml with port: "7000" [b15fa01](https://github.com/mikemitterer/dart-sitegen/commit/b15fa01604f13bc1e87821425c7af351f466f397)
+
 ## [v1.3.2](http://github.com/mikemitterer/dart-sitegen/compare/v1.3.1...v1.3.2) - 2016-07-06
 
 ### Feature
