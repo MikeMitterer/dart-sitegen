@@ -26,6 +26,7 @@ class Config {
     static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
     static const _CONF_TALK_TO_ME         = 'talktome';
     static const _CONF_BROWSER            = 'browser';
+    static const _CONF_PORT               = 'port';
 
     static const _CONF_ADDITIONAL_WATCH_FOLDER1 = "watchfolder1";
     static const _CONF_ADDITIONAL_WATCH_FOLDER2 = "watchfolder2";
@@ -56,7 +57,7 @@ class Config {
         _settings[Config._CONF_SITE_OPTIONS]        = {};
 
         _settings[Options._ARG_IP]                  = "127.0.0.1";
-        _settings[Options._ARG_PORT]                = "8080";
+        _settings[Config._CONF_PORT]                = "8080";
 
         _settings[Options._ARG_DOCROOT]             = _settings[Config._CONF_OUTPUT_DIR]; // web
 
@@ -108,7 +109,7 @@ class Config {
 
     String get ip => _settings[Options._ARG_IP];
 
-    String get port => _settings[Options._ARG_PORT];
+    String get port => _settings[Config._CONF_PORT];
 
     String get docroot => _settings[Options._ARG_DOCROOT];
 
@@ -203,7 +204,7 @@ class Config {
         }
 
         if(_argResults.wasParsed(Options._ARG_PORT)) {
-            _settings[Options._ARG_PORT] = _argResults[Options._ARG_PORT];
+            _settings[Config._CONF_PORT] = _argResults[Options._ARG_PORT];
         }
 
         if(_argResults.wasParsed(Options._ARG_DOCROOT)) {
@@ -237,7 +238,7 @@ class Config {
         _settings.keys.forEach((final String key) {
             if(map != null && map.containsKey(key)) {
                 _settings[key] = map[key];
-                //print("Found $key in $configfile: ${map[key]}");
+                print("Found $key in $configfile: ${map[key]}");
             }
         });
     }

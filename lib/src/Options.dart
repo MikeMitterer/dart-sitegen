@@ -75,7 +75,7 @@ class Options {
 
             ..addOption(_ARG_IP,                        help: "Sets the IP-Address to listen on", defaultsTo: "127.0.0.1")
 
-            ..addOption(_ARG_PORT,                      help: "Sets the port to listen on", defaultsTo: "8000")
+            ..addOption(_ARG_PORT,                      help: "Sets the port to listen on")
 
             ..addOption(_ARG_DOCROOT,                   help: "Document root", defaultsTo: "web")
 
