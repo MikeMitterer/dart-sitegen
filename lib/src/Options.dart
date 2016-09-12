@@ -73,7 +73,7 @@ class Options {
 
             ..addFlag(_ARG_TALK_TO_ME,                  negatable: true, help: "Enables / disables Speek-Output", defaultsTo: _runsOnOSX())
 
-            ..addOption(_ARG_IP,                        help: "Sets the IP-Address to listen on", defaultsTo: "127.0.0.1")
+            ..addOption(_ARG_IP,                        help: "Sets the IP-Address to listen on", defaultsTo: "0.0.0.0")
 
             ..addOption(_ARG_PORT,                      help: "Sets the port to listen on")
 
