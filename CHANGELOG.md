@@ -1,6 +1,16 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.4.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.0...v1.4.1) - 2016-10-20
+
+### Feature
+* Support for SASS_PATH [014b7e8](https://github.com/mikemitterer/dart-sitegen/commit/014b7e8ec5d830608dd9f16b3e15100a5cd601e7)
+
+## [v1.4.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.3.3...v1.4.0) - 2016-09-12
+
+### Refactor
+* Server defaults to 0.0.0.0 instead of 127.0.0.1 [7a0ca46](https://github.com/mikemitterer/dart-sitegen/commit/7a0ca46ea110931c59a11ba1a092eb1f3bed67fc)
+
 ## [v1.3.3](http://github.com/mikemitterer/dart-sitegen/compare/v1.3.2...v1.3.3) - 2016-09-09
 
 ### Feature
