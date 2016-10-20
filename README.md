@@ -2,13 +2,35 @@
 Static site generator. Includes a webserver, sass + autoprefix support
 
 ### New
-**--v debug** - shows you all the vars available for your page   
+Support for SASS_PATH added!
+[Understanding and Using Sass Load Paths](http://technology.customink.com/blog/2014/10/09/understanding-and-using-sass-load-paths/)   
 
-**--ip** option - now you can set the IP the server listens to. (Defaults to 127.0.0.1)
-   
-Helps to test your site from within a VM for example.    
+These settings in your .sitegen/site.yaml ()
+```yaml
+    sasscompiler: sass
+    sass_path:
+      - "package:zengen"
+      - "package:mdl"
+```
 
-With extra assets-folder and partials-support. A static site generator in [Dart](https://www.dartlang.org/), webserver included.  
+```bash
+sitegen -s
+
+    Settings:
+        Loglevel:                  info
+        ...
+        SASS compiler:             sass
+        SASS_PATH (only for sass): /Users/mikemitterer/.pub-cache/hosted/pub.dartlang.org/zengen-0.3.2/lib
+                                   /Volumes/Daten/DevLocal/DevDart/MaterialDesignLite/lib
+        ...
+
+```
+As you can see the first path is resolved to .pub-cache, the second path
+is resolve to my local working dir where the mdl-library resides
+
+### What it does
+SiteGen is a static site generator in [Dart](https://www.dartlang.org/), webserver included.
+With extra assets-folder and partials-support.  
 You can write your pages in HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax). 
 For Templates [Mustache](http://mustache.github.io/mustache.5.html) is supported.
   

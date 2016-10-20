@@ -22,6 +22,7 @@ class Config {
     static const _CONF_DEFAULT_TEMPLATE   = 'default_template';
     static const _CONF_SITE_OPTIONS       = 'site_options';
     static const _CONF_SASS_COMPILER      = 'sasscompiler';
+    static const _CONF_SASS_PATH          = 'sass_path';
     static const _CONF_USE_SASS           = 'usesass';
     static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
     static const _CONF_TALK_TO_ME         = 'talktome';
@@ -32,8 +33,11 @@ class Config {
     static const _CONF_ADDITIONAL_WATCH_FOLDER2 = "watchfolder2";
     static const _CONF_ADDITIONAL_WATCH_FOLDER3 = "watchfolder3";
 
+    static final String _SEARCH_PATH_SEPARATOR = Platform.isWindows ? ";" : ":";
+
     final ArgResults _argResults;
     final Map<String,dynamic> _settings = new Map<String,dynamic>();
+    final Packages _packages = new Packages();
 
     Config(this._argResults) {
 
@@ -52,6 +56,7 @@ class Config {
         _settings[Config._CONF_USE_MARKDOWN]        = true;
         _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
         _settings[Config._CONF_SASS_COMPILER]       = "sassc";
+        _settings[Config._CONF_SASS_PATH]           = "";
         _settings[Config._CONF_BROWSER]             = "Chromium";
 
         _settings[Config._CONF_SITE_OPTIONS]        = {};
@@ -105,6 +110,8 @@ class Config {
 
     String get sasscompiler => _settings[Config._CONF_SASS_COMPILER];
 
+    String get sasspath => _sasspath;
+
     Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
 
     String get ip => _settings[Options._ARG_IP];
@@ -154,6 +161,7 @@ class Config {
         settings["Config file"]                             = configfile;
 
         settings["SASS compiler"]                           = sasscompiler;
+        settings["SASS_PATH (only for sass)"]               = sasspath.isNotEmpty ? _sasspath : "<not set>";
         settings["Browser"]                                 = browser;
 
         settings["IP-Address"]                              = ip;
@@ -183,12 +191,27 @@ class Config {
         final int maxKeyLeght = getMaxKeyLength();
 
         String prepareKey(final String key) {
-            return "${key[0].toUpperCase()}${key.substring(1)}:".padRight(maxKeyLeght + 1);
+            if(!key.isEmpty) {
+                return "${key[0].toUpperCase()}${key.substring(1)}:".padRight(maxKeyLeght + 1);
+            } else {
+                // this is only the case if setting is "sass_path..."
+                return key.padRight(maxKeyLeght + 1);
+            }
         }
 
         print("Settings:");
-        settings.forEach((final String key,final String value) {
-            print("    ${prepareKey(key)} $value");
+        settings.forEach((final String key,final value) {
+            if(key.toLowerCase().startsWith("sass_path") && sasspath.isNotEmpty) {
+                final List<String> segments = value.split(_SEARCH_PATH_SEPARATOR);
+                print("    ${prepareKey(key)} ${segments.first}");
+                segments.skip(1).forEach((final String path) {
+                    print("    ${prepareKey('')} $path");
+                });
+
+            } else {
+                print("    ${prepareKey(key)} $value");
+            }
+
         });
     }
 
@@ -241,5 +264,53 @@ class Config {
                 print("Found $key in $configfile: ${map[key]}");
             }
         });
+    }
+
+    /// Interprets the "sass_path" settings in .sitegen/site.yaml
+    String get _sasspath {
+        // Can be a String or a YamlList
+        final pathInSettings = _settings[Config._CONF_SASS_PATH];
+
+        // Nothing to do here - return an empty string
+        if(pathInSettings.isEmpty) { return pathInSettings; }
+
+        final List<String> tempPathList = new List<String>();
+        if(pathInSettings is String) {
+
+            // Config-Path can be separated by a |
+            tempPathList.addAll(pathInSettings.split("|"));
+
+        } else if(pathInSettings is yaml.YamlList) {
+
+            pathInSettings.toList().forEach((final element) => tempPathList.add(element.toString()));
+
+        } else {
+            _logger.warning("sass_path must be either a String or a YamlList but was ${pathInSettings.runtimeType}...");
+        }
+
+
+        final List<String> sasspath = new List<String>();
+        tempPathList.forEach((final String pathEntry) {
+            if(pathEntry.startsWith("package:")) {
+                final Uri uri = Uri.parse(pathEntry);
+                try {
+                    final Package package = _packages.resolvePackageUri(uri);
+                    final String packageUri = package.uri.toString().replaceFirst("file://","");
+                    sasspath.add(path.normalize(path.absolute(packageUri)));
+
+                } catch( error) {
+                    _logger.shout(error.toString());
+                }
+
+            } else {
+                sasspath.add(path.normalize(pathEntry));
+            }
+        });
+
+        if(sasspath.isEmpty) {
+            return '';
+        }
+
+        return sasspath.join(_SEARCH_PATH_SEPARATOR);
     }
 }

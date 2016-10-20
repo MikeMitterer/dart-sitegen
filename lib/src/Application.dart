@@ -386,9 +386,22 @@ class Application {
         }
 
         final String compiler = config.sasscompiler;
+        final Map<String,String> environment = new Map<String,String>();
+
+        if(config.sasspath.isNotEmpty) {
+
+            // only sass supports SASS_PATH (not sassc)
+            if(!compiler.endsWith("c")) {
+                environment["SASS_PATH"] = config.sasspath;
+                _logger.info("Using SASS_PATH: ${config.sasspath}");
+            } else {
+                _logger.warning("SASS_PATH ist not supported by your compiler!");
+            }
+
+        }
 
         _logger.info("Compiling $source -> $target");
-        final ProcessResult result = Process.runSync(compiler, [ source, target ]);
+        final ProcessResult result = Process.runSync(compiler, [ source, target ], environment: environment);
         if (result.exitCode != 0) {
             _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
             _vickiSay("got a sassc error",config);

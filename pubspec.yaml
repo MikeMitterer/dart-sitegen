@@ -34,6 +34,9 @@ dependencies:
 
   system_info: 0.0.16
 
+  packages: ^0.1.0
+    #path: /Volumes/Daten/DevLocal/DevDart/Packages
+
 dev_dependencies:
   test: any
   grinder: any

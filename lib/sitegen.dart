@@ -3,6 +3,7 @@ library sitegen;
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+import 'dart:isolate';
 import 'dart:math';
 
 import 'package:intl/intl.dart';
@@ -20,6 +21,7 @@ import "package:yaml/yaml.dart" as yaml;
 
 import 'package:http_server/http_server.dart';
 import 'package:system_info/system_info.dart';
+import 'package:packages/packages.dart';
 
 part "src/Application.dart";
 part "src/Options.dart";
