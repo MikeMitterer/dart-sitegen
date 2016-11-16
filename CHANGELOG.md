@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.4.2](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.1...v1.4.2) - 2016-11-16
+
+### Docs
+* Strong-Mode support [8604ad8](https://github.com/mikemitterer/dart-sitegen/commit/8604ad8fa63721dabf58a11102278dee73df6082)
+
 ## [v1.4.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.0...v1.4.1) - 2016-10-20
 
 ### Feature
