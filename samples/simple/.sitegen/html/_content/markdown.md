@@ -14,7 +14,7 @@ default_vars:
   - "`_content`: post content (only accessible from templates, not markdown)"
 
 # Alternate List Syntax
-authors: [foo, bar, baz]
+authors: [hallo,foo,bar,baz]
 
 # A list of Dictionaries
 links:
@@ -68,17 +68,19 @@ Some vars that are always available by default:
 
 Image: ![Logo](assets/images/ios-desktop.png)
 
-{{#each items}}
+----
+{{#_data.items}}
 <li>
     {{name}}
     {{#if items}}
     <ul>
     {{> list}}
     </ul>
-    {{/if}}
+    {{/if items}}
 </li>
-{{/each}}
-    
+{{/_data.items}}
+
+----    
 
 {{#default_vars}}
     {{.}}

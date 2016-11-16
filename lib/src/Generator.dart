@@ -57,13 +57,13 @@ class Generator {
 
             _logger.fine("\nFile: ${relativeFileName}, Path: $relativePath");
             final List<String> lines = file.readAsLinesSync();
-            Map<String,dynamic> pageOptions = {};
+            Map<String,dynamic> pageOptions = <String,dynamic>{};
 
             final bool hasYamlBlock = _hasYamlBlock(config.yamldelimeter,lines,extension);
             if (hasYamlBlock) {
                 List<String> yamlBlock = _extractYamlBlockFrom(config.yamldelimeter,lines,extension);
                 if(yamlBlock.length > 0) {
-                    pageOptions.addAll(yaml.loadYaml(yamlBlock.join('\n')));
+                    pageOptions.addAll(yaml.loadYaml(yamlBlock.join('\n')) as Map<String,String>);
                     _resolvePartialsInYamlBlock(partialsDir,pageOptions,config.usemarkdown);
 
                     // +1 for the YAML-Block-Delimiter ("~~~") line
@@ -77,7 +77,8 @@ class Generator {
             pageOptions = _fillInDefaultPageOptions(config.dateformat,file, pageOptions,config.siteoptions);
             pageOptions['_data'] = dataMap;
             pageOptions['_content'] = renderTemplate(lines.join('\n'), pageOptions,
-                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown));
+                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)
+            );
 
             pageOptions['_template'] = "none";
 
@@ -101,7 +102,8 @@ class Generator {
             }
 
             final String content = _fixPathRefs(renderTemplate(templateContent, pageOptions,
-                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)),config);
+                _partialsResolver(partialsDir,isMarkdownSupported: config.usemarkdown)
+                ),config);
 
             final String outputFilename = "${path.basenameWithoutExtension(relativeFileName)}.${outputExtension}";
             final Directory outputPath = _createOutputPath(outputDir,relativePath);
@@ -166,7 +168,7 @@ class Generator {
      * Example:
      *  Name: category.house -> category/house.[html | md]
      */
-    Function _partialsResolver(final Directory partialsDir,{ final bool isMarkdownSupported: true}) {
+    PartialsResolver _partialsResolver(final Directory partialsDir,{ final bool isMarkdownSupported: true}) {
         Validate.notNull(partialsDir);
 
         mustache.Template resolver(final String name) {
@@ -319,7 +321,7 @@ class Generator {
         return startsWithString;
     }
 
-    Map _fillInDefaultPageOptions(final String defaultDateFormat,final File file, Map pageOptions,final Map<String,String> siteOptions) {
+    Map<String,dynamic> _fillInDefaultPageOptions(final String defaultDateFormat,final File file,final Map<String,dynamic> pageOptions,final Map<String,String> siteOptions) {
         final String filename = path.basenameWithoutExtension(file.path);
         pageOptions.putIfAbsent('title', () => filename);
 
@@ -482,7 +484,7 @@ class Generator {
                 _logger.fine("    ${"".padRight(nestingLevel * 2)} $key.");
 
                 if(value is Map) {
-                    _showMap(value,nestingLevel + 1);
+                    _showMap(value as Map<String,dynamic>,nestingLevel + 1);
 
                 } else {
                     String valueAsString = value.toString().replaceAll(new RegExp("(\n|\r|\\s{2,}|${_NEWLINE_PROTECTOR})",multiLine: true),"");

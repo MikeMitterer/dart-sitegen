@@ -59,7 +59,7 @@ class Config {
         _settings[Config._CONF_SASS_PATH]           = "";
         _settings[Config._CONF_BROWSER]             = "Chromium";
 
-        _settings[Config._CONF_SITE_OPTIONS]        = {};
+        _settings[Config._CONF_SITE_OPTIONS]        = <String,String>{};
 
         _settings[Options._ARG_IP]                  = "127.0.0.1";
         _settings[Config._CONF_PORT]                = "8080";
@@ -112,7 +112,7 @@ class Config {
 
     String get sasspath => _sasspath;
 
-    Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS];
+    Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS] as Map<String,String>;
 
     String get ip => _settings[Options._ARG_IP];
 
