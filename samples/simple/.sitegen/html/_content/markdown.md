@@ -3,7 +3,7 @@
 # This is an example of a YAML comment which will be completely ignored.
 
 # A basic variable definition
-title: Markdown
+title: Markdown2
 
 # A list of strings. Surrounding your strings in quotes is optional,
 # but some may require it so they  don't interfere with YAML syntax.
@@ -49,11 +49,12 @@ date_format: yMd
 ### {{title}} (Content)
 #### Subheadline
 
+
 3 `~`'s is the minimum for designating and separating a [YAML][yaml] block, but they can be extended longer -- all that matters
 is that the tildes (`~`) are on their own line.
 
 And anything beyond that gets interpreted as [Markdown][markdown]!
-    
+
 You can even use template tags in here, for any variables you set in in the top YAML block, or in your `site.yaml` file:
 
 This post's title is: "{{ title }}"
@@ -63,7 +64,7 @@ This file was last modified on {{ _date }}
 Link to [subpages](about/)
 
 Note that variables beginning with an underscore designate *implicit* metadata added by __SiteGen__.
-  
+
 Some vars that are always available by default:
 
 Image: ![Logo](assets/images/ios-desktop.png)

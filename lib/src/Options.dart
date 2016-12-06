@@ -19,6 +19,7 @@ class Options {
 
     static const _ARG_USE_SASS              = 'usesass';
     static const _ARG_USE_AUTOPREFIXER      = 'useapfx';
+    static const _ARG_USE_SECURE_CONNECTION = 'usesec';
     static const _ARG_TALK_TO_ME            = 'talktome';
 
     final ArgParser _parser;
@@ -42,6 +43,7 @@ class Options {
         print("    'Generates all basic files and folders:                '$APPNAME -i'");
         print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -w --serve'");
         print("    'Observes the default dirs and serves the web-folder:  '$APPNAME -x'");
+        print("    'Serve your site via https:                            '$APPNAME -x --usesec'");
         print("    'Generates the static site in your 'web-folder':       '$APPNAME -g'");
         print("");
     }
@@ -70,6 +72,8 @@ class Options {
             ..addFlag(_ARG_USE_SASS,                    negatable: true, help: "Enables / disables SASS to CSS compiler", defaultsTo: true)
 
             ..addFlag(_ARG_USE_AUTOPREFIXER,            negatable: true, help: "Enables / disables Autoprefixer", defaultsTo: true)
+
+            ..addFlag(_ARG_USE_SECURE_CONNECTION,       negatable: false, help: "Use secure connection", defaultsTo: false)
 
             ..addFlag(_ARG_TALK_TO_ME,                  negatable: true, help: "Enables / disables Speek-Output", defaultsTo: _runsOnOSX())
 

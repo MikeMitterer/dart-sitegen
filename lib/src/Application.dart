@@ -88,8 +88,7 @@ class Application {
             if (argResults.wasParsed(Options._ARG_SERVE) || argResults.wasParsed(Options._ARG_WATCH_AND_SERVE)) {
                 foundOptionToWorkWith = true;
 
-                final String port = config.port;
-                serve(config.docroot, port, config.ip);
+                serve(config);
             }
 
             if (!foundOptionToWorkWith) {
@@ -104,11 +103,14 @@ class Application {
         }
     }
 
-    void serve(final String folder, final String port, final String ip) {
-        Validate.notBlank(folder);
-        Validate.notBlank(port);
+    void serve(final Config config) {
+        Validate.notBlank(config.ip);
+        Validate.notBlank(config.docroot);
+        Validate.notBlank(config.port);
 
-        final String MY_HTTP_ROOT_PATH = folder; //Platform.script.resolve(folder).toFilePath();
+        final String ip = config.ip;
+        final String port = config.port;
+        final String MY_HTTP_ROOT_PATH = config.docroot; //Platform.script.resolve(folder).toFilePath();
 
         VirtualDirectory virtDir;
         void _directoryHandler(final Directory dir,final HttpRequest request) {
@@ -126,9 +128,23 @@ class Application {
 
         final Packages packages = new Packages();
 
+        Future<HttpServer> connect;
+        if(config.usesecureconnection) {
+            final SecurityContext context = new SecurityContext();
+            context.useCertificateChain(config.certfile);
+            context.usePrivateKey(config.keyfile);
+            connect = HttpServer.bindSecure(ip,int.parse(port),context);
+            _logger.info('Using a secure connection on $ip - Scheme should be https!');
+
+        } else {
+            connect = HttpServer.bind(ip, int.parse(port));
+        }
+
         runZoned(() {
-            HttpServer.bind(ip, int.parse(port)).then( (final HttpServer server) {
-                _logger.info('Server running on port: $port, $MY_HTTP_ROOT_PATH');
+            //HttpServer.bindSecure(ip,int.parse(port),context)
+            //HttpServer.bind(ip, int.parse(port))
+            connect.then( (final HttpServer server) {
+                _logger.info('Server running $ip on port: $port, $MY_HTTP_ROOT_PATH');
                 server.listen( (final HttpRequest request) {
                     if(request.uri.path.startsWith("/packages")) {
                         final List<String> parts = request.uri.path.split(new RegExp(r"(?:/|\\)"));
@@ -138,9 +154,9 @@ class Application {
                         final Package package = packages.resolvePackageUri(
                             Uri.parse("package:${packageName}")
                         );
-                        final Uri newUri = Uri.parse("${package.lib.path}/$path");
+                        final String rewritten = "${package.lib.path}/$path".replaceFirst(new RegExp(r"^.*pub\.dartlang\.org/"),"package:");
 
-                        _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} [Rewritten] ${newUri}");
+                        _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} [Rewritten] ${rewritten}");
                         virtDir.serveFile(new File("${package.lib.path}/$path"),request);
 
                     } else {

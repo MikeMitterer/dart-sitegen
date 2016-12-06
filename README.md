@@ -1,8 +1,23 @@
 # SiteGen 
-Static site generator. Includes a webserver, sass + autoprefix support
+> Static site generator. Includes a webserver, sass + autoprefix support  
+> Wants to be Jekyll for Dart 
+
+Before you read on - check out this [video](https://www.youtube.com/watch?v=smf1uvy0yNQ):
+
+[![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](https://www.youtube.com/watch?v=smf1uvy0yNQ)
+
 
 ### New
-Support for SASS_PATH added!
+#### Support for https-connection! 
+This is absolutely mandatory if your REST-Server
+uses [HTTP Strict Transport Security (HSTS)](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security)
+
+[Here](https://github.com/MikeMitterer/dart-sitegen/blob/master/samples/simple/.sitegen/site.yaml) 
+you can see the necessary configuration for HTTPS-Support   
+Generate a self-signed certificate, name it dart.cert and dart.key, place it under <project root>/etc 
+and run `sitegen -x --usesec` and - voila. That's it!
+
+#### Support for SASS_PATH
 [Understanding and Using Sass Load Paths](http://technology.customink.com/blog/2014/10/09/understanding-and-using-sass-load-paths/)   
 
 These settings in your .sitegen/site.yaml ()
@@ -42,10 +57,7 @@ chrome extension for maximum productivity.
 
 Under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!   
 
-Before you read on - check out this [video](http://goo.gl/uUTg8s):
-
-[![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](http://goo.gl/uUTg8s)
-
+[Download](https://github.com/MikeMitterer/dart-sitegen/tree/master/dowloads/simple.tgz) the sample structure.
 
 ```
 ├── .sitegen

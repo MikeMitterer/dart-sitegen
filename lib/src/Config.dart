@@ -9,25 +9,29 @@ class Config {
 
     static const String _CONFIG_FOLDER     = ".sitegen";
 
-    static const _CONF_CONTENT_DIR        = 'content_dir';
-    static const _CONF_TEMPLATE_DIR       = 'template_dir';
-    static const _CONF_OUTPUT_DIR         = 'output_dir';
-    static const _CONF_DATA_DIR           = 'data_dir';
-    static const _CONF_PARTIALS_DIR       = 'partials_dir';
-    static const _CONF_ASSETS_DIR         = 'assets_dir';
-    static const _CONF_WORKSPACE_DIR      = 'workspace';
-    static const _CONF_DATE_FORMAT        = 'date_format';
-    static const _CONF_YAML_DELIMITER     = 'yaml_delimeter';
-    static const _CONF_USE_MARKDOWN       = 'use_markdown';
-    static const _CONF_DEFAULT_TEMPLATE   = 'default_template';
-    static const _CONF_SITE_OPTIONS       = 'site_options';
-    static const _CONF_SASS_COMPILER      = 'sasscompiler';
-    static const _CONF_SASS_PATH          = 'sass_path';
-    static const _CONF_USE_SASS           = 'usesass';
-    static const _CONF_USE_AUTOPREFIXER   = 'autoprefixer';
-    static const _CONF_TALK_TO_ME         = 'talktome';
-    static const _CONF_BROWSER            = 'browser';
-    static const _CONF_PORT               = 'port';
+    static const _CONF_CONTENT_DIR              = 'content_dir';
+    static const _CONF_TEMPLATE_DIR             = 'template_dir';
+    static const _CONF_OUTPUT_DIR               = 'output_dir';
+    static const _CONF_DATA_DIR                 = 'data_dir';
+    static const _CONF_PARTIALS_DIR             = 'partials_dir';
+    static const _CONF_ASSETS_DIR               = 'assets_dir';
+    static const _CONF_WORKSPACE_DIR            = 'workspace';
+    static const _CONF_DATE_FORMAT              = 'date_format';
+    static const _CONF_YAML_DELIMITER           = 'yaml_delimeter';
+    static const _CONF_USE_MARKDOWN             = 'use_markdown';
+    static const _CONF_DEFAULT_TEMPLATE         = 'default_template';
+    static const _CONF_SITE_OPTIONS             = 'site_options';
+    static const _CONF_SASS_COMPILER            = 'sasscompiler';
+    static const _CONF_SASS_PATH                = 'sass_path';
+    static const _CONF_USE_SASS                 = 'usesass';
+    static const _CONF_USE_AUTOPREFIXER         = 'autoprefixer';
+    static const _CONF_TALK_TO_ME               = 'talktome';
+    static const _CONF_BROWSER                  = 'browser';
+    static const _CONF_PORT                     = 'port';
+
+    static const _CONF_USE_SECURE_CONNECTION    = 'usesec';
+    static const _CONF_CERT_FILE                = 'cert_file';
+    static const _CONF_KEY_FILE                 = 'key_file';
 
     static const _CONF_ADDITIONAL_WATCH_FOLDER1 = "watchfolder1";
     static const _CONF_ADDITIONAL_WATCH_FOLDER2 = "watchfolder2";
@@ -41,34 +45,41 @@ class Config {
 
     Config(this._argResults) {
 
-        _settings[Options._ARG_LOGLEVEL]            = 'info';
+        _settings[Options._ARG_LOGLEVEL]                = 'info';
 
-        _settings[Config._CONF_CONTENT_DIR]         = '${_CONFIG_FOLDER}/html/_content';
-        _settings[Config._CONF_TEMPLATE_DIR]        = '${_CONFIG_FOLDER}/html/_templates';
-        _settings[Config._CONF_DATA_DIR]            = '${_CONFIG_FOLDER}/html/_data';
-        _settings[Config._CONF_PARTIALS_DIR]        = '${_CONFIG_FOLDER}/html/_partials';
-        _settings[Config._CONF_ASSETS_DIR]          = '${_CONFIG_FOLDER}/html/_assets';
+        _settings[Config._CONF_CONTENT_DIR]             = '${_CONFIG_FOLDER}/html/_content';
+        _settings[Config._CONF_TEMPLATE_DIR]            = '${_CONFIG_FOLDER}/html/_templates';
+        _settings[Config._CONF_DATA_DIR]                = '${_CONFIG_FOLDER}/html/_data';
+        _settings[Config._CONF_PARTIALS_DIR]            = '${_CONFIG_FOLDER}/html/_partials';
+        _settings[Config._CONF_ASSETS_DIR]              = '${_CONFIG_FOLDER}/html/_assets';
 
-        _settings[Config._CONF_OUTPUT_DIR]          = 'web';
-        _settings[Config._CONF_WORKSPACE_DIR]       = '.';
-        _settings[Config._CONF_DATE_FORMAT]         = 'dd.MM.yyyy';
-        _settings[Config._CONF_YAML_DELIMITER]      = '~~~';
-        _settings[Config._CONF_USE_MARKDOWN]        = true;
-        _settings[Config._CONF_DEFAULT_TEMPLATE]    = "default.html";
-        _settings[Config._CONF_SASS_COMPILER]       = "sassc";
-        _settings[Config._CONF_SASS_PATH]           = "";
-        _settings[Config._CONF_BROWSER]             = "Chromium";
+        _settings[Config._CONF_OUTPUT_DIR]              = 'web';
+        _settings[Config._CONF_WORKSPACE_DIR]           = '.';
+        _settings[Config._CONF_DATE_FORMAT]             = 'dd.MM.yyyy';
+        _settings[Config._CONF_YAML_DELIMITER]          = '~~~';
+        _settings[Config._CONF_USE_MARKDOWN]            = true;
+        _settings[Config._CONF_DEFAULT_TEMPLATE]        = "default.html";
+        _settings[Config._CONF_SASS_COMPILER]           = "sassc";
+        _settings[Config._CONF_SASS_PATH]               = "";
+        _settings[Config._CONF_BROWSER]                 = "Chromium";
 
-        _settings[Config._CONF_SITE_OPTIONS]        = <String,String>{};
+        _settings[Config._CONF_BROWSER]                 = "Chromium";
 
-        _settings[Options._ARG_IP]                  = "127.0.0.1";
-        _settings[Config._CONF_PORT]                = "8080";
+        _settings[Config._CONF_SITE_OPTIONS]            = <String,String>{};
 
-        _settings[Options._ARG_DOCROOT]             = _settings[Config._CONF_OUTPUT_DIR]; // web
+        _settings[Options._ARG_IP]                      = "127.0.0.1";
+        _settings[Config._CONF_PORT]                    = "8080";
 
-        _settings[Config._CONF_USE_SASS]            = true;
-        _settings[Config._CONF_USE_AUTOPREFIXER]    = true;
-        _settings[Config._CONF_TALK_TO_ME]          = _runsOnOSX();
+        _settings[Options._ARG_DOCROOT]                 = _settings[Config._CONF_OUTPUT_DIR]; // web
+
+        _settings[Config._CONF_USE_SASS]                = true;
+        _settings[Config._CONF_USE_AUTOPREFIXER]        = true;
+
+        _settings[Config._CONF_USE_SECURE_CONNECTION]   = false;
+        _settings[Config._CONF_CERT_FILE]               = 'dart.crt';
+        _settings[Config._CONF_KEY_FILE]                = 'dart.key';
+
+        _settings[Config._CONF_TALK_TO_ME]              = _runsOnOSX();
 
         _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER1]  = "";
         _settings[Config._CONF_ADDITIONAL_WATCH_FOLDER2]  = "";
@@ -124,6 +135,11 @@ class Config {
 
     bool get useautoprefixer => _settings[Config._CONF_USE_AUTOPREFIXER];
 
+    bool get usesecureconnection => _settings[Config._CONF_USE_SECURE_CONNECTION];
+
+    String get certfile => _settings[Config._CONF_CERT_FILE];
+    String get keyfile => _settings[Config._CONF_KEY_FILE];
+
     bool get talktome => _settings[Config._CONF_TALK_TO_ME];
 
     String get browser =>  _settings[Config._CONF_BROWSER];
@@ -153,6 +169,11 @@ class Config {
         settings["Use markdown"]                            = usemarkdown ? "yes" : "no";
         settings["Use SASS"]                                = usesass ? "yes" : "no";
         settings["Use Autoprefixer"]                        = useautoprefixer ? "yes" : "no";
+
+        settings["Use secure connection"]                   = usesecureconnection ? "yes" : "no";
+        settings["Cert-file for secure connection"]         = certfile;
+        settings["Key-file for secure connection"]          = keyfile;
+
         settings["Talk to me"]                              = talktome ? "yes" : "no";
 
         settings["Site options"]                            = siteoptions.toString();
@@ -244,6 +265,10 @@ class Config {
 
         if(_argResults.wasParsed(Options._ARG_USE_AUTOPREFIXER)) {
             _settings[Config._CONF_USE_AUTOPREFIXER] = _argResults[Options._ARG_USE_AUTOPREFIXER];
+        }
+
+        if(_argResults.wasParsed(Options._ARG_USE_SECURE_CONNECTION)) {
+            _settings[Config._CONF_USE_SECURE_CONNECTION] = _argResults[Options._ARG_USE_SECURE_CONNECTION];
         }
 
         if(_argResults.wasParsed(Options._ARG_TALK_TO_ME)) {

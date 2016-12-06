@@ -9,3 +9,9 @@ site_options:
 
 #browser: Chrome
 #browser: Dartium
+
+# Use secure connection
+usesec: true
+
+cert_file: etc/dart.crt
+key_file: etc/dart.key

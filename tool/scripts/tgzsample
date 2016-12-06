@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+##################################################################
+#
+# TGZs one or all samples
+#
+##################################################################
+
+APPNAME="tgzsample"
+
+#------------------------------------------------------------------------------
+# BASIS
+
+#------------------------------------------------------------------------------
+# COLORS
+#   Sample: echo -e "I ${RED}love${NC} Stack Overflow\n"
+#
+
+BLACK='\033[0;30m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BROWN='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT_GRAY='\033[0;37m'
+
+DARK_GREY='\033[1;30m'
+LIGHT_RED='\033[1;31m'
+LIGHT_GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+LIGHT_BLUE='\033[1;34m'
+LIGHT_PURPLE='\033[1;35m'
+LIGHT_CYAN='\033[1;36m'
+WHITE='\033[1;37m'
+
+NC='\033[0m' # No Color
+
+
+LOGFILE="${APPNAME}_`date +"%Y%m%d"`.log"
+
+SAMPLES="samples"
+
+#------------------------------------------------------------------------------
+# Functions
+#
+
+genTGZ() {
+    SAMPLE=$1
+    SAMPLESFOLDER="${SAMPLES}/${SAMPLE}"
+    TARGETFOLDER="downloads"
+
+    # Check if DIR exists
+    if [ -d "$SAMPLESFOLDER" ];then
+        echo "Generating ${SAMPLE}.tgz for ${SAMPLESFOLDER}..."
+    else
+        echo "${SAMPLESFOLDER} does not exist!!"
+        exit -1
+    fi
+
+    mv ${SAMPLESFOLDER}/pubspec.yaml ${SAMPLESFOLDER}/pubspec.yaml.tmp
+    cat ${SAMPLESFOLDER}/pubspec.yaml.tmp | sed "s/mdl:.*/mdl: ^1.0.0/" | sed "s/^[\t ]*path: .*$//" > ${SAMPLESFOLDER}/pubspec.yaml
+
+    tar -czvf ${TARGETFOLDER}/${SAMPLE}.tgz \
+        --exclude='*packages/*' \
+        --exclude='build' \
+        --exclude="*.lock" \
+        --exclude="*/pubspec.yaml.tmp" \
+        --exclude="*/.pub/" \
+        --exclude="*/.sass-cache" \
+        --exclude="*/.sitegen/refresh*" \
+        ${SAMPLESFOLDER}/
+
+    rm -f ${SAMPLESFOLDER}/pubspec.yaml
+    mv ${SAMPLESFOLDER}/pubspec.yaml.tmp ${SAMPLESFOLDER}/pubspec.yaml
+
+    echo
+    echo "${TARGETFOLDER}/${SAMPLE}.tgz created!"
+}
+
+genAll() {
+    for i in $(ls -d ${SAMPLES}/*/); do
+        SAMPLE=`echo ${i%%/} | sed "s#${SAMPLES}/##"`
+        if [[ ${SAMPLE} =~ ^[^_]+ ]];
+        then
+            genTGZ ${SAMPLE}
+        fi
+    done
+}
+
+listSamples() {
+    for i in $(ls -d ${SAMPLES}/*/); do
+        SAMPLE=`echo ${i%%/} | sed "s#${SAMPLES}/##"`
+        if [[ ${SAMPLE} =~ ^[^_]+ ]];
+        then
+            echo ${SAMPLE}
+        fi
+    done
+}
+
+#------------------------------------------------------------------------------
+# Options
+#
+
+usage() {
+    echo
+    echo "Usage: `basename $0` [ options ]"
+    echo -e "\t--gen <samplename>       Generates TGZ for 'samplename'"
+    echo -e "\t--genall                 Generates all samples"
+    echo -e "\t--list                   List all samples"
+    echo
+    echo "Example:"
+    echo -e "\ttgzsample --gen simple"
+    echo
+}
+
+
+case "$1" in
+    help|-help|--help)
+        usage
+    ;;
+
+    gen|-gen|--gen)
+        genTGZ $2
+    ;;
+
+    genall|-genall|--genall)
+        genAll
+    ;;
+
+    list|-list|--list)
+        listSamples
+    ;;
+
+    *)
+        usage
+    ;;
+
+esac
+
+#------------------------------------------------------------------------------
+# Alles OK...
+
+exit 0
