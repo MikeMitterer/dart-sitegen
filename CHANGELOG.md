@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.6.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.5.0...v1.6.0) - 2016-12-06
+
+### Feature
+* HTTPS support [50ff854](https://github.com/mikemitterer/dart-sitegen/commit/50ff854945f14e18b68736127194408e9024bc7f)
+
 ## [v1.5.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.2...v1.5.0) - 2016-12-06
 
 ### Feature
