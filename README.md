@@ -58,7 +58,7 @@ chrome extension for maximum productivity.
 Under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!   
 
 Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/samples/simple) or
-[download](https://github.com/MikeMitterer/dart-sitegen/tree/master/dowloads/simple.tgz) the sample as .TGZ.
+[download](https://github.com/MikeMitterer/dart-sitegen/blob/master/downloads/simple.tgz) the sample as .TGZ.
 
 ```
 ├── .sitegen
