@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.5.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.2...v1.5.0) - 2016-12-06
+
+### Feature
+* No need for packages-folder anymore [39adc76](https://github.com/mikemitterer/dart-sitegen/commit/39adc76de0b77e376b17441abae27b0afb5e470c)
+
 ## [v1.4.2](http://github.com/mikemitterer/dart-sitegen/compare/v1.4.1...v1.4.2) - 2016-11-16
 
 ### Docs
