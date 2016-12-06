@@ -57,7 +57,8 @@ chrome extension for maximum productivity.
 
 Under [sitegen.mikemitterer.at](http://sitegen.mikemitterer.at) you can see the result!   
 
-[Download](https://github.com/MikeMitterer/dart-sitegen/tree/master/dowloads/simple.tgz) the sample structure.
+Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/samples/simple) or
+[download](https://github.com/MikeMitterer/dart-sitegen/tree/master/dowloads/simple.tgz) the sample as .TGZ.
 
 ```
 ├── .sitegen
@@ -350,10 +351,6 @@ This servers your files under http://localhost:8000/
         
 If you are using Chromium on Mac you will get a automatic page refresh for free!
  
-Now play with sitegen and watch my screencast...
-
-Check out the [sample!](https://github.com/MikeMitterer/dart-sitegen/tree/master/sample/simple)
-
 ## Hints
 - Just serve a local dir on port 8000 without generating something:  
     `sitegen --serve --docroot .`
