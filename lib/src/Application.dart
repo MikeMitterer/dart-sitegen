@@ -124,12 +124,29 @@ class Application {
         ;
         virtDir.directoryHandler = _directoryHandler;
 
+        final Packages packages = new Packages();
+
         runZoned(() {
             HttpServer.bind(ip, int.parse(port)).then( (final HttpServer server) {
                 _logger.info('Server running on port: $port, $MY_HTTP_ROOT_PATH');
                 server.listen( (final HttpRequest request) {
-                    _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} ${request.uri}");
-                    virtDir.serveRequest(request);
+                    if(request.uri.path.startsWith("/packages")) {
+                        final List<String> parts = request.uri.path.split(new RegExp(r"(?:/|\\)"));
+                        final String path = parts.sublist(3).join("/");
+                        final String packageName = parts[2];
+
+                        final Package package = packages.resolvePackageUri(
+                            Uri.parse("package:${packageName}")
+                        );
+                        final Uri newUri = Uri.parse("${package.lib.path}/$path");
+
+                        _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} [Rewritten] ${newUri}");
+                        virtDir.serveFile(new File("${package.lib.path}/$path"),request);
+
+                    } else {
+                        _logger.info("${request.connectionInfo.remoteAddress.address}:${request.connectionInfo.localPort} - ${request.method} ${request.uri}");
+                        virtDir.serveRequest(request);
+                    }
                 });
             });
         },
