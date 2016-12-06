@@ -4,9 +4,7 @@
 
 Before you read on - check out this [video](https://www.youtube.com/watch?v=smf1uvy0yNQ):
 
-<div style="text-align:center">
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](https://www.youtube.com/watch?v=smf1uvy0yNQ)
-</div>
 
 ### New
 #### Support for https-connection! 
