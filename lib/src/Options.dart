@@ -7,6 +7,7 @@ class Options {
     static const _ARG_HELP                  = 'help';
     static const _ARG_LOGLEVEL              = 'loglevel';
     static const _ARG_SETTINGS              = 'settings';
+    static const _ARG_SITE_KEYS             = 'keys';
     static const _ARG_GENERATE              = 'generate';
     static const _ARG_GENERATE_CSS          = 'generatecss';
     static const _ARG_SERVE                 = 'serve';
@@ -54,6 +55,8 @@ class Options {
         final ArgParser parser = new ArgParser()
 
             ..addFlag(_ARG_SETTINGS,         abbr: 's', negatable: false, help: "Prints settings")
+
+            ..addFlag(_ARG_SITE_KEYS,        abbr: 'k', negatable: false, help: "Shows keys for site.yaml")
 
             ..addFlag(_ARG_HELP,             abbr: 'h', negatable: false, help: "Shows this message")
 

@@ -37,6 +37,11 @@ class Application {
                 return;
             }
 
+            if (argResults.wasParsed(Options._ARG_SITE_KEYS)) {
+                config.printSiteKeys();
+                return;
+            }
+
             bool foundOptionToWorkWith = false;
 
             if (argResults.wasParsed(Options._ARG_INIT)) {

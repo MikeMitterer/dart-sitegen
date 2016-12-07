@@ -209,18 +209,19 @@ class Config {
             return length;
         }
 
-        final int maxKeyLeght = getMaxKeyLength();
+        final int maxKeyLength = getMaxKeyLength();
 
         String prepareKey(final String key) {
             if(!key.isEmpty) {
-                return "${key[0].toUpperCase()}${key.substring(1)}:".padRight(maxKeyLeght + 1);
+                return "${key[0].toUpperCase()}${key.substring(1)}:".padRight(maxKeyLength + 1);
             } else {
                 // this is only the case if setting is "sass_path..."
-                return key.padRight(maxKeyLeght + 1);
+                return key.padRight(maxKeyLength + 1);
             }
         }
 
         print("Settings:");
+        //print("    ${'Name'.padRight(maxKeyLeght)}  ${'Value'.padRight(25)} ${'Key (site.yaml)'}");
         settings.forEach((final String key,final value) {
             if(key.toLowerCase().startsWith("sass_path") && sasspath.isNotEmpty) {
                 final List<String> segments = value.split(_SEARCH_PATH_SEPARATOR);
@@ -230,9 +231,16 @@ class Config {
                 });
 
             } else {
-                print("    ${prepareKey(key)} $value");
+                print("    ${prepareKey(key)} ${value.padRight(25)}");
             }
 
+        });
+    }
+
+    void printSiteKeys() {
+        print("Keys for ${configfile}:");
+        _settings.forEach((final String key,final dynamic value) {
+            print("    ${(key + ':').padRight(20)} $value");
         });
     }
 
