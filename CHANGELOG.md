@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.6.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.0...v1.6.1) - 2016-12-07
+
+### Feature
+* -k cmdline option added, shows available keys for site.yaml [8decde6](https://github.com/mikemitterer/dart-sitegen/commit/8decde6544595273513f3dcca8f12adcd0a9e5fd)
+
 ## [v1.6.0](http://github.com/mikemitterer/dart-sitegen/compare/v1.5.0...v1.6.0) - 2016-12-06
 
 ### Feature
