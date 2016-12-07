@@ -45,7 +45,8 @@ is resolve to my local working dir where the mdl-library resides
 
 Now you can define your SASS-Import as follows:
 ```scss
-    
+    // Imports package:mdl/lib/assets/styles/button/variables
+    @import "assets/styles/button/variables";
 ```
 
 ### What it does
