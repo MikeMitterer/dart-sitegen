@@ -127,7 +127,7 @@ class Config {
 
     String get ip => _settings[Options._ARG_IP];
 
-    String get port => _settings[Config._CONF_PORT];
+    String get port => _settings[Config._CONF_PORT].toString();
 
     String get docroot => _settings[Options._ARG_DOCROOT];
 
