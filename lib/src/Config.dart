@@ -231,7 +231,7 @@ class Config {
                 });
 
             } else {
-                print("    ${prepareKey(key)} ${value.padRight(25)}");
+                print("    ${prepareKey(key)} ${value}");
             }
 
         });

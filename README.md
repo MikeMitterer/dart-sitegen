@@ -27,6 +27,7 @@ These settings in your .sitegen/site.yaml ()
       - "package:mdl"
 ```
 
+generate generate the following SASS_PATH:
 ```bash
 sitegen -s
 
@@ -41,6 +42,11 @@ sitegen -s
 ```
 As you can see the first path is resolved to .pub-cache, the second path
 is resolve to my local working dir where the mdl-library resides
+
+Now you can define your SASS-Import as follows:
+```scss
+    
+```
 
 ### What it does
 SiteGen is a static site generator in [Dart](https://www.dartlang.org/), webserver included.
