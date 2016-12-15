@@ -1,6 +1,14 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.6.4](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.3...v1.6.4) - 2016-12-15
+
+### Fixes
+* sitegen --serve did not check if .packages-file is available [a36b0e5](https://github.com/mikemitterer/dart-sitegen/commit/a36b0e5ee2190cc1a7fff99a1b3cb0ad91c1ca67)
+
+### Docs
+* Import (scss) sample added to README [670fbeb](https://github.com/mikemitterer/dart-sitegen/commit/670fbeb915d8d00f9a23acb658f4c91168c05885)
+
 ## [v1.6.1](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.0...v1.6.1) - 2016-12-07
 
 ### Feature
