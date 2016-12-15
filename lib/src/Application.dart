@@ -133,6 +133,9 @@ class Application {
 
         final Packages packages = new Packages();
 
+        // if hasPackages is false then we are not in a Dart-Project
+        final bool hasPackages = packages.hasPackages;
+
         Future<HttpServer> connect;
         if(config.usesecureconnection) {
             final SecurityContext context = new SecurityContext();
@@ -151,7 +154,7 @@ class Application {
             connect.then( (final HttpServer server) {
                 _logger.info('Server running $ip on port: $port, $MY_HTTP_ROOT_PATH');
                 server.listen( (final HttpRequest request) {
-                    if(request.uri.path.startsWith("/packages")) {
+                    if(request.uri.path.startsWith("/packages") && hasPackages) {
                         final List<String> parts = request.uri.path.split(new RegExp(r"(?:/|\\)"));
                         final String path = parts.sublist(3).join("/");
                         final String packageName = parts[2];
