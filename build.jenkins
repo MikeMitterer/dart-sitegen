@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        label 'kde_neon'
+    }
+    stages {
+        stage('Prepare') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    ansiColor('xterm') {
+                        sh 'pub update'
+                        sh 'pub global activate grinder'
+                    }
+                }
+            }
+        }
+        stage('Analyze') {
+            steps {
+                ansiColor('xterm') {
+                    sh 'grind analyze'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                ansiColor('xterm') {
+                    sh 'grind deploy'
+                }
+            }
+        }
+        stage('Build samples') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    ansiColor('xterm') {
+                        sh 'grind build-samples'
+                    }
+                }
+            }
+        }
+    }
+}
+                       

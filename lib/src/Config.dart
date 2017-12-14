@@ -285,6 +285,7 @@ class Config {
 
     }
 
+
     void _overwriteSettingsWithConfigFile() {
         final File file = new File("${configfolder}/${configfile}");
         if(!file.existsSync()) {
@@ -298,7 +299,6 @@ class Config {
             }
         });
     }
-
     /// Interprets the "sass_path" settings in .sitegen/site.yaml
     String get _sasspath {
         // Can be a String or a YamlList

@@ -8,19 +8,22 @@ build() {
 }
 
 @Task()
+clean() => defaultClean();
+
+@Task()
 @Depends(analyze)
 buildSamples() async {
     // Sitegen Sample
-    await runAsync("/Users/mikemitterer/.pub-cache/bin/buildSamples",arguments: [ "--sitegen" ]);
+    await runAsync("buildSamples",arguments: [ "--sitegen" ]);
 
     // Update Sample
-    await runAsync("/Users/mikemitterer/.pub-cache/bin/buildSamples",arguments: [ "-u" ]);
+    await runAsync("buildSamples",arguments: [ "-u" ]);
 
     // Analyze
     analyze();
 
     // Build!
-    await runAsync("/Users/mikemitterer/.pub-cache/bin/buildSamples",arguments: [ "-bc" ]);
+    await runAsync("buildSamples",arguments: [ "-bc" ]);
 }
 
 @Task()
@@ -41,19 +44,13 @@ analyze() {
         "bin/sitegen.dart"
     ];
 
-    // final List<String> samples = [
-    //    "simple/web/main.dart"
-    // ];
-
     libs.forEach((final String lib) => Analyzer.analyze(lib));
-
-    // samples.forEach((final String sample ) {
-    //    final String sampleFolder = sample.replaceAll("/web/main.dart","");
-    //    run("tool/scripts/analyze-sample.sh",arguments: [ "samples/${sampleFolder}", "web/main.dart" ]);
-    // });
-
     // Analyzer.analyze("test");
 }
 
-@Task()
-clean() => defaultClean();
+@Task('Deploy built app.')
+deploy() {
+    run(sdkBin('pub'),arguments: [ "global", "activate", "--source", "path", "."]);
+}
+
+

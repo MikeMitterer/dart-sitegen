@@ -1,0 +1,190 @@
+<!DOCTYPE html><!--
+   Copyright (c) 2015, Michael Mitterer (office@mikemitterer.at),
+   IT-Consulting and Development Limited.
+
+   All Rights Reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown2 | MDL/Dart + SiteGen Sample</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="stylesheet" href="packages/mdl/assets/styles/splashscreen/dots.css">
+    <link rel="stylesheet" href="packages/mdl/assets/styles/material.min.css">
+</head>
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base mdl-upgrading markdown">
+<div class="mdl-splashscreen mdl-color--primary"><div class="spinner"><div class="dot1 mdl-color--white"></div><div class="dot2 mdl-color--accent"></div></div></div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-300">
+    <!-- Usage of "partials" -->
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            <h3>Markdown2</h3>
+        </div>
+        <div class="tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+            <a href="index.html" class="mdl-layout__tab ">
+                Overview
+            </a>
+            <a href="features.html" class="mdl-layout__tab ">
+                Features
+            </a>
+            <a href="markdown.html" class="mdl-layout__tab is-active">
+                Markdown
+            </a>
+            <a href="technology.html" class="mdl-layout__tab ">
+                Technology
+            </a>
+            <a href="about/index.html" class="mdl-layout__tab ">
+                About
+            </a>
+        </div>
+    </header>    <main class="mdl-layout__content">
+        <section class="main-section">
+            <!-- '_content' contains the contents of the markdown file (minus the yaml variables in the header) -->
+            <h3>Markdown2 (Content)</h3>
+<h4>Subheadline</h4>
+<p>3 <code>~</code>'s is the minimum for designating and separating a <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a> block, but they can be extended longer -- all that matters
+is that the tildes (<code>~</code>) are on their own line.</p>
+<p>And anything beyond that gets interpreted as <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>!</p>
+<p>You can even use template tags in here, for any variables you set in in the top YAML block, or in your <code>site.yaml</code> file:</p>
+<p>This post's title is: "Markdown2"</p>
+<p>This file was last modified on 12/6/2016</p>
+<p>Link to <a href="about/">subpages</a></p>
+<p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>SiteGen</strong>.</p>
+<p>Some vars that are always available by default:</p>
+<p>Image: <a href="assets/images/ios-desktop.png"><img alt="Logo" src="assets/images/ios-desktop.png"></a></p>
+<hr><li>
+    foo1
+</li>
+<li>
+    foo2
+</li>
+<li>
+    foo3
+</li>
+<li>
+    foo8
+</li>
+<hr>
+<pre><code>`title`: post title, automatically set to name of markdown file if left blank
+`_site`: site.yaml values
+`_date`: post 'last modified' date
+`_content`: post content (only accessible from templates, not markdown)
+</code></pre>
+<p>You can see all the vars you can use if you start <strong>SiteGen</strong> with <code>--loglevel debug</code>.   </p>
+<p>And as you can see, you can also use mustache logic to iterate through yaml maps and lists:</p>
+<p><a href="https://dartlang.org">Dart</a><br>
+<a href="https://pub.dartlang.org">Pub</a><br>
+<a href="http://google.com">Google</a><br>
+<a href="http://github.com">Github</a>   </p><ul><li><a href="https://github.com/MikeMitterer/dart-sitegen">SiteGen</a></li><li><a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a></li><li><a href="http://mustache.github.io/mustache.5.html">Mustache</a></li><li>
+<p><a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a></p></li><li>
+<p>hallo</p></li><li>foo</li><li>bar</li><li>baz</li></ul>
+<p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.</p>
+<p>You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your site.yaml file.
+Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
+
+        </section>
+        <footer class="mdl-mega-footer">
+            <div class="mdl-mega-footer--middle-section">
+                <div class="mdl-mega-footer--drop-down-section">
+                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked="">
+
+                    <h1 class="mdl-mega-footer--heading">Features</h1>
+                    <ul class="mdl-mega-footer--link-list">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="mdl-mega-footer--drop-down-section">
+                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked="">
+
+                    <h1 class="mdl-mega-footer--heading">Details</h1>
+                    <ul class="mdl-mega-footer--link-list">
+                        <li><a href="#">Spec</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="mdl-mega-footer--drop-down-section">
+                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked="">
+
+                    <h1 class="mdl-mega-footer--heading">Technology</h1>
+                    <ul class="mdl-mega-footer--link-list">
+                        <li><a href="#">How it works</a></li>
+                        <li><a href="#">Patterns</a></li>
+                        <li><a href="#">Usage</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contracts</a></li>
+                    </ul>
+                </div>
+                <div class="mdl-mega-footer--drop-down-section">
+                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked="">
+
+                    <h1 class="mdl-mega-footer--heading">FAQ</h1>
+                    <ul class="mdl-mega-footer--link-list">
+                        <li><a href="#">Questions</a></li>
+                        <li><a href="#">Answers</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdl-mega-footer--bottom-section">
+                <div class="mdl-logo">
+                    More Information
+                </div>
+                <ul class="mdl-mega-footer--link-list">
+                    <li><a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy and Terms</a></li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+</div>
+
+<script src="main.dart.js"></script>
+
+
+
+</body></html>

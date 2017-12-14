@@ -1,0 +1,65 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0; }
+
+.main-section {
+  width: calc(100% - 112px);
+  margin: 24px 0 0 56px;
+  min-height: 480px; }
+  .main-section .mdl-panel {
+    margin-bottom: 24px; }
+  .main-section .mdl-card .mdl-card__title {
+    background-color: darkslateblue; }
+  .main-section .mdl-card.demo-card-wide {
+    width: 600px; }
+    .is-small-screen .main-section .mdl-card.demo-card-wide {
+      width: auto; }
+
+.tab-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end; }
+  .is-small-screen .tab-bar {
+    min-height: 56px; }
+
+/**
+    Overwrites some essential MDL-Styles
+    This should go into the main MDL-Branch
+*/
+.mdl-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch; }
+  .mdl-card .mdl-card__supporting-text {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
