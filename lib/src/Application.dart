@@ -32,7 +32,7 @@ class Application {
                 _testPreconditions(cm);
 
             } catch(error) {
-                _logger.shout(error.toString());
+                stderr.writeln(error.toString());
                 return 1;
             }
 
