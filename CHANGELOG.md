@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [v1.7](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.4...v1.7) - 2017-12-15
+
+### Feature
+* Testing for necessary, installed commands [6477ea7](https://github.com/mikemitterer/dart-sitegen/commit/6477ea7eadc75f6557619f21a87b8ad3a84bb243)
+
 ## [v1.6.4](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.3...v1.6.4) - 2016-12-15
 
 ### Fixes
@@ -188,7 +193,7 @@ Static site generator for Dart, webserver included.
 ### Docs
 * Screenshot did not work on pub [96d17d8](https://github.com/mikemitterer/dart-sitegen/commit/96d17d8e2e6306cd5f700e7b9e1a21acf41f69ba)
 
-## [0.0.1](http://github.com/mikemitterer/dart-sitegen/compare/0.0.1) - 2015-03-30
+## [v0.0.2](http://github.com/mikemitterer/dart-sitegen/compare/v0.0.2) - 2015-03-30
 
 ### Feature
 * Page refresh works [0a98736](https://github.com/mikemitterer/dart-sitegen/commit/0a98736841c711c2c40723a9c0d41e0b0b299f35)
