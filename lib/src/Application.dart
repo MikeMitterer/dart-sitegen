@@ -33,7 +33,7 @@ class Application {
 
             } catch(error) {
                 _logger.shout(error.toString());
-                return -1;
+                return 1;
             }
 
             if (argResults.wasParsed(Options._ARG_HELP) || (config.dirstoscan.length == 0 && args.length == 0)) {
@@ -114,7 +114,7 @@ class Application {
         catch (error) {
             _logger.shout(error);
             options.showUsage();
-            return -1;
+            return 1;
         }
 
         return 0;
