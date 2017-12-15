@@ -7,6 +7,8 @@ import 'dart:math';
 
 import 'package:intl/intl.dart';
 import 'package:args/args.dart';
+import 'package:command_wrapper/command_wrapper.dart';
+import 'package:which/which.dart';
 
 import 'package:logging/logging.dart';
 import 'package:logging_handlers/logging_handlers_shared.dart';
@@ -23,6 +25,7 @@ import 'package:system_info/system_info.dart';
 import 'package:packages/packages.dart';
 
 part "src/Application.dart";
+part "src/CommandManager.dart";
 part "src/Options.dart";
 part "src/Config.dart";
 part "src/Init.dart";
@@ -31,8 +34,14 @@ part "src/Generator.dart";
 
 bool _runsOnOSX() => (SysInfo.operatingSystemName == "Mac OS X");
 
-void main(List<String> arguments) {
+final _commands = new List<CommandWrapper>();
+
+Future main(List<String> arguments) async {
     final Application application = new Application();
+
     application.run( arguments );
 }
+
+
+
 

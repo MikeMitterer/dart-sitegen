@@ -36,7 +36,9 @@ dependencies:
 
   packages: ^0.1.0
     #path: /Volumes/Daten/DevLocal/DevDart/Packages
-
+    
+  command_wrapper: "^0.2.0"
+  
 dev_dependencies:
   test: any
   grinder: any

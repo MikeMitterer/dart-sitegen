@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:sitegen/sitegen.dart';
 
-void main(List<String> arguments) {
+Future main(List<String> arguments) async {
     final Application application = new Application();
-    application.run( arguments );
+    await application.run( arguments );
 }

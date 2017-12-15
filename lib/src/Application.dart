@@ -19,13 +19,22 @@ class Application {
 
     Application() : options = new Options();
 
-    void run(List<String> args) {
+    Future run(final List<String> args) async {
 
         try {
+            final CommandManager cm = await CommandManager.getInstance();
             final ArgResults argResults = options.parse(args);
-            final Config config = new Config(argResults);
+            final Config config = new Config(argResults, cm);
 
             _configLogging(config.loglevel);
+
+            try {
+                _testPreconditions(cm);
+
+            } catch(error) {
+                _logger.shout(error.toString());
+                return;
+            }
 
             if (argResults.wasParsed(Options._ARG_HELP) || (config.dirstoscan.length == 0 && args.length == 0)) {
                 options.showUsage();
@@ -306,6 +315,15 @@ class Application {
 
     // -- private -------------------------------------------------------------
 
+    void _testPreconditions(final CommandManager cm) {
+        if((cm.containsKey(CommandManager.SASS) || cm.containsKey(CommandManager.SASSC))
+            && cm.containsKey(CommandManager.AUTOPREFIXER)) {
+            return;
+        }
+        throw "Please install SASS (${CommandManager.SASS} | ${CommandManager.SASSC}) "
+            "and AutoPrefixer (${CommandManager.AUTOPREFIXER})";
+    }
+
     void _compileSCSSFile(final String folder, final Config config) {
         Validate.notBlank(folder);
         Validate.notNull(config);
@@ -353,15 +371,6 @@ class Application {
             _logger.info("Page refresh is only supported on Mac");
             return;
         }
-
-        // Nur zum testen!
-        final ProcessResult result = await Process.run("pwd", []);
-        if (result.exitCode != 0) {
-            _logger.info("sassc faild with: ${(result.stderr as String).trim()}!");
-            _vickiSay("got a sassc error",config);
-            return;
-        }
-        _logger.fine(result.stdout.trim());
 
         final String content = """
                 tell application "${config.browser}"
