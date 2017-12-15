@@ -33,22 +33,22 @@ class Application {
 
             } catch(error) {
                 _logger.shout(error.toString());
-                return;
+                return -1;
             }
 
             if (argResults.wasParsed(Options._ARG_HELP) || (config.dirstoscan.length == 0 && args.length == 0)) {
                 options.showUsage();
-                return;
+                return 0;
             }
 
             if (argResults.wasParsed(Options._ARG_SETTINGS)) {
                 config.printSettings();
-                return;
+                return 0;
             }
 
             if (argResults.wasParsed(Options._ARG_SITE_KEYS)) {
                 config.printSiteKeys();
-                return;
+                return 0;
             }
 
             bool foundOptionToWorkWith = false;
@@ -57,7 +57,7 @@ class Application {
                 foundOptionToWorkWith = true;
                 final Init init = new Init();
                 init.createDirs(config).then((_) => init.createFiles(config));
-                return;
+                return 0;
             }
 
 
@@ -114,7 +114,10 @@ class Application {
         catch (error) {
             _logger.shout(error);
             options.showUsage();
+            return -1;
         }
+
+        return 0;
     }
 
     void serve(final Config config) {
