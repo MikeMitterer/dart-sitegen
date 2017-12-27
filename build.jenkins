@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'kde_neon'
+        label 'linux'
     }
     stages {
         stage('Prepare') {
