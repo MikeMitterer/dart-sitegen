@@ -73,7 +73,7 @@ class Config {
 
         _settings[Options._ARG_DOCROOT]                 = _settings[Config._CONF_OUTPUT_DIR]; // web
 
-        _settings[Config._CONF_USE_SASS]                = true;
+        _settings[Config._CONF_USE_SASS]                = false;
         _settings[Config._CONF_USE_AUTOPREFIXER]        = true;
 
         _settings[Config._CONF_USE_SECURE_CONNECTION]   = false;
@@ -124,7 +124,7 @@ class Config {
 
     String get sasspath => _sasspath;
 
-    Map<String,String> get siteoptions => _settings[Config._CONF_SITE_OPTIONS] as Map<String,String>;
+    Map<String,String> get siteoptions => _toMap(_settings[Config._CONF_SITE_OPTIONS]);
 
     String get ip => _settings[Options._ARG_IP];
 
@@ -349,5 +349,20 @@ class Config {
         }
 
         return sasspath.join(_SEARCH_PATH_SEPARATOR);
+    }
+
+    Map<String,String> _toMap(final configOption) {
+        if(configOption is Map<String,String>) {
+            return configOption;
+        }
+
+        if(configOption is yaml.YamlMap) {
+            return configOption
+                .map((key,value) => MapEntry<String,String>(key.toString(),value.toString()));
+            
+        } else {
+            return configOption;
+        }
+
     }
 }

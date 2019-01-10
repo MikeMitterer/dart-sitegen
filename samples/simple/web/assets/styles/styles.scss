@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// Copyright (c) 2015, Michael Mitterer (office@mikemitterer.at),
+// Copyright (c) 2019, Michael Mitterer (office@mikemitterer.at),
 // IT-Consulting and Development Limited.
 //
 // All Rights Reserved.
@@ -17,11 +17,18 @@
 // limitations under the License.
 //
 
+@import "package:m4d_components/assets/styles/material-design-lite";
+@import "package:m4d_components/assets/styles/splashscreen/dots";
+
 html, body {
     font-family : 'Roboto', 'Helvetica', sans-serif;
     margin      : 0;
     padding     : 0;
 }
+
+//.mdl-layout {
+//    background-color: green !important;
+//}
 
 // ----------------------------------------------------------------------------
 // ---- Application specific part

@@ -63,7 +63,12 @@ class Generator {
             if (hasYamlBlock) {
                 List<String> yamlBlock = _extractYamlBlockFrom(config.yamldelimeter,lines,extension);
                 if(yamlBlock.length > 0) {
-                    pageOptions.addAll(yaml.loadYaml(yamlBlock.join('\n')) as Map<String,String>);
+                    final String block = yamlBlock.join('\n');
+                    final yaml.YamlMap ym = yaml.loadYaml(block);
+
+                    pageOptions.addAll(ym.map((key,value)
+                        => MapEntry<String,String>(key.toString(),value.toString())));
+
                     _resolvePartialsInYamlBlock(partialsDir,pageOptions,config.usemarkdown);
 
                     // +1 for the YAML-Block-Delimiter ("~~~") line
@@ -212,19 +217,20 @@ class Generator {
         }
 
         return contentDir.listSync(recursive: true)
-            .where((file) => file is File && (
+            .where((final FileSystemEntity entity) => entity is File && (
 
-                    file.path.endsWith('.md') ||
-                    file.path.endsWith(".markdown") ||
-                    file.path.endsWith(".dart") ||
-                    file.path.endsWith(".js") ||
-                    file.path.endsWith(".json") ||
-                    file.path.endsWith(".html") ||
-                    file.path.endsWith(".scss") ||
-                    file.path.endsWith(".css") ||
-                    file.path.endsWith(".svg")
-
-                    ) && !file.path.contains("packages") ).toList();
+                entity.path.endsWith('.md') ||
+                entity.path.endsWith(".markdown") ||
+                entity.path.endsWith(".dart") ||
+                entity.path.endsWith(".js") ||
+                entity.path.endsWith(".json") ||
+                entity.path.endsWith(".html") ||
+                entity.path.endsWith(".scss") ||
+                entity.path.endsWith(".css") ||
+                entity.path.endsWith(".svg"))
+            && !entity.path.contains("packages") )
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
     List<File> _listImagesFilesIn(final Directory contentDir) {
@@ -235,7 +241,9 @@ class Generator {
             file.path.endsWith(".jpg") ||
             file.path.endsWith(".gif")
 
-        ) && !file.path.contains("packages") ).toList();
+        ) && !file.path.contains("packages") )
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
     List<File> _listAssetsFilesIn(final Directory contentDir) {
@@ -252,12 +260,16 @@ class Generator {
             file.path.endsWith(".css") ||
             file.path.endsWith(".svg")
 
-        ) && !file.path.contains("packages") ).toList();
+        ) && !file.path.contains("packages") )
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
 
     List<File> _listTemplatesIn(final Directory templateDir) {
-        return templateDir.listSync().where((file) => file is File && !file.path.contains("packages")).toList();
+        return templateDir.listSync().where((file) => file is File && !file.path.contains("packages"))
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
     List<File> _listDataFilesIn(final Directory contentDir) {
@@ -267,7 +279,9 @@ class Generator {
             file.path.endsWith('.yaml') ||
             file.path.endsWith(".json")
 
-        ) && !file.path.contains("packages")).toList();
+        ) && !file.path.contains("packages"))
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
     bool _isMarkdownSupported(final bool markdownForSite, final Map page_options) {
@@ -355,7 +369,7 @@ class Generator {
 
                 } else {
 
-                    data = JSON.decode(file.readAsStringSync());
+                    data = json.decode(file.readAsStringSync());
                 }
 
                 final String filename = path.basenameWithoutExtension(file.path).toLowerCase();

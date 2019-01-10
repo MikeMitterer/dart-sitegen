@@ -3,9 +3,9 @@ part of sitegen;
 class CommandManager {
     static String SASS = "sass";
     static String SASSC = "sassc";
-    static String OSASCRIPT = "osascript";
     static String AUTOPREFIXER = "autoprefixer-cli";
     static String SAY = "say";
+    // static String OSASCRIPT = "osascript";
 
     static CommandManager _commandmanager;
 
@@ -31,9 +31,9 @@ class CommandManager {
 class Command {
     final String name;
     final String exe;
-    final CommandWrapper wrapper;
+    //final CommandWrapper wrapper;
 
-    Command(this.name, this.exe, this.wrapper);
+    Command(this.name, this.exe);
 
 }
 
@@ -45,15 +45,15 @@ Future<Map<String,Command>> _getAvailableCommands() async {
 
             CommandManager.SASS,
             CommandManager.SASSC,
-            CommandManager.OSASCRIPT,
             CommandManager.AUTOPREFIXER,
-            CommandManager.SAY
+            CommandManager.SAY,
+            //CommandManager.OSASCRIPT,
         ];
 
     await Future.forEach(names, (final String binName) async {
         try {
-            final String exe = await which(binName);
-            commands[binName] = new Command(binName,exe,new CommandWrapper(binName));
+            final String exe = await where(binName);
+            commands[binName] = new Command(binName,exe);
         } catch(_) {  }
 
     });

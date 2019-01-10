@@ -7,21 +7,18 @@ description: >
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
 
-  browser: ^0.10.0
-  mdl: ^1.0.0
-    # path: /Volumes/Daten/DevLocal/DevDart/MaterialDesignLite
+  m4d_components: '>=0.1.29 <2.0.0'
+    # git:
+    #  url: git@github.com:MikeMitterer/dart-material-design-lite.git
+    #  ref: v2.2
 
-  di: ^3.3.0
+dev_dependencies:
+  build_runner: any
+  build_web_compilers: any
+  sass_builder: any
 
-  dart_to_js_script_rewriter: ^0.1.0
 
-transformers:
-  - di
-  - dart_to_js_script_rewriter
-
-  - $dart2js:
-      commandLineOptions: [--enable-experimental-mirrors]

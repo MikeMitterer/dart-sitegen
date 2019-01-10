@@ -6,7 +6,7 @@ homepage: https://github.com/MikeMitterer/dart-sitegen
 version: 1.7.0
 
 environment:
-  sdk: ">=1.8.0 <2.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 # Add the bin/sitegen.dart script to the scripts pub installs.
 # Activate local repo:
@@ -16,29 +16,29 @@ executables:
   sitegen:
 
 dependencies:
-  browser: ^0.10.0
-
-  logging: ^0.11.0
-  logging_handlers: ^0.8.0
-  console_log_handler: ^0.1.0
+  logging: '>=0.11.3 <1.0.0'
+  console_log_handler: ^1.0.0
+  # path: /Volumes/Daten/DevLocal/DevDart/ConsoleLogHandler
 
   validate: ^1.0.0
 
-  args: ^0.13.0
-  path: ^1.3.0
+  args: ^1.4.0
   yaml: ^2.1.0
-  markdown: ^0.9.0
-  mustache: ^0.2.0
-  intl: ^0.12.0
+  path: ^1.0.0
+  markdown: ^2.0.0
+  mustache: ^1.0.0
+  intl: ^0.15.0
   http_server: ^0.9.0
 
-  system_info: 0.0.16
-
-  packages: ^0.1.0
+  system_info: ^0.1.0
+  where: ^6.0.0
+  
+  packages: ^0.4.0
     #path: /Volumes/Daten/DevLocal/DevDart/Packages
     
-  command_wrapper: "^0.2.0"
-  
 dev_dependencies:
   test: any
   grinder: any
+
+  build_runner: any
+  build_test: any

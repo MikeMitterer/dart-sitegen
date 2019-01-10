@@ -6,7 +6,15 @@ Before you read on - check out this [video](https://www.youtube.com/watch?v=smf1
 
 [![ScreenShot](https://github.com/MikeMitterer/dart-sitegen/blob/master/assets/screenshot.jpg?raw=true)](https://www.youtube.com/watch?v=smf1uvy0yNQ)
 
-### New
+## Example
+
+   - Install SiteGen `pub global activate sitegen`
+   - Clone the example from `https://github.com/MikeMitterer/dart-sitegen/tree/master/samples/simple`
+   - run `sitegen -w` 
+   - open another console window and run `pub run build_runner serve --delete-conflicting-outputs --live-reload`
+
+Play with the sample files...
+     
 #### Support for https-connection! 
 This is absolutely mandatory if your REST-Server
 uses [HTTP Strict Transport Security (HSTS)](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security)
@@ -385,7 +393,7 @@ package that I used as basis for **SiteGen**.
 
 ### License
 
-    Copyright 2015 Michael Mitterer (office@mikemitterer.at),
+    Copyright 2019 Michael Mitterer (office@mikemitterer.at),
     IT-Consulting and Development Limited, Austrian Branch
 
     Licensed under the Apache License, Version 2.0 (the "License");

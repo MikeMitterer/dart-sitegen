@@ -7,11 +7,10 @@ import 'dart:math';
 
 import 'package:intl/intl.dart';
 import 'package:args/args.dart';
-import 'package:command_wrapper/command_wrapper.dart';
-import 'package:which/which.dart';
+import 'package:where/where.dart';
 
 import 'package:logging/logging.dart';
-import 'package:logging_handlers/logging_handlers_shared.dart';
+import 'package:console_log_handler/print_log_handler.dart';
 
 import 'package:validate/validate.dart';
 
@@ -34,7 +33,7 @@ part "src/Generator.dart";
 
 bool _runsOnOSX() => (SysInfo.operatingSystemName == "Mac OS X");
 
-final _commands = new List<CommandWrapper>();
+// final _commands = new List<CommandWrapper>();
 
 Future main(List<String> arguments) async {
     final Application application = new Application();

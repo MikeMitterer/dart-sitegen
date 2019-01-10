@@ -92,7 +92,7 @@ class Application {
                     new Generator().generate(config);
                 }
                 watchScss(config.outputfolder, config);
-                watchToRefresh(config.outputfolder, config);
+                // watchToRefresh(config.outputfolder, config);
 
                 watchAdditionalFolderScss(config.watchfolder1,config.outputfolder, config);
                 watchAdditionalFolderScss(config.watchfolder2,config.outputfolder, config);
@@ -294,6 +294,7 @@ class Application {
         }
     }
 
+    /*
     void watchToRefresh(final String folder, final Config config) {
         Validate.notBlank(folder);
         Validate.notNull(config);
@@ -315,6 +316,7 @@ class Application {
             _schedulePageRefresh();
         });
     }
+    */
 
     // -- private -------------------------------------------------------------
 
@@ -358,6 +360,9 @@ class Application {
         _compileScss(scssFile, cssFile,config);
         _autoPrefixer(cssFile,config);
     }
+
+    /*
+    REMINDER!
 
     /**
      * Weitere Infos:
@@ -421,6 +426,7 @@ class Application {
 
         _logger.info("$executable ${script.path} successful!");
     }
+    */
 
     bool _isFolderAvailable(final String folder) {
         Validate.notBlank(folder);
@@ -486,7 +492,9 @@ class Application {
         Validate.notNull(dir);
         return dir.listSync(recursive: true).where((final file) {
             return file is File && file.path.endsWith(".scss") && !file.path.contains("packages");
-        }).toList();
+        })
+            .map((final FileSystemEntity entity) => entity as File)
+            .toList();
     }
 
     void _vickiSay(final String sentence,final Config config) {
@@ -497,7 +505,7 @@ class Application {
             return;
         }
 
-        final ProcessResult result = Process.runSync("say", [ '-v', "Vicki", '-r', '200', sentence.replaceFirst("wsk_", "") ]);
+        final ProcessResult result = Process.runSync("say", [ '-r', '200', sentence.replaceFirst("wsk_", "") ]);
         if (result.exitCode != 0) {
             _logger.severe("run faild with: ${(result.stderr as String).trim()}!");
         }
@@ -524,6 +532,6 @@ class Application {
                 Logger.root.level = Level.INFO;
         }
 
-        Logger.root.onRecord.listen(new LogPrintHandler(messageFormat: "%m"));
+        Logger.root.onRecord.listen(new LogPrintHandler(transformer: transformerMessageOnly));
     }
 }

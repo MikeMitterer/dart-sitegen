@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-   Copyright (c) 2015, Michael Mitterer (office@mikemitterer.at),
+   Copyright (c) 2019, Michael Mitterer (office@mikemitterer.at),
    IT-Consulting and Development Limited.
 
    All Rights Reserved.
@@ -51,8 +51,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/styles/styles.css">
-    <link rel="stylesheet" href="packages/mdl/assets/styles/splashscreen/dots.css">
-    <link rel="stylesheet" href="packages/mdl/assets/styles/material.min.css">
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base mdl-upgrading markdown">
 <div class="mdl-splashscreen mdl-color--primary"><div class="spinner"><div class="dot1 mdl-color--white"></div><div class="dot2 mdl-color--accent"></div></div></div>
@@ -95,7 +93,7 @@ is that the tildes (<code>~</code>) are on their own line.</p>
 <p>Link to <a href="about/">subpages</a></p>
 <p>Note that variables beginning with an underscore designate <em>implicit</em> metadata added by <strong>SiteGen</strong>.</p>
 <p>Some vars that are always available by default:</p>
-<p>Image: <a href="assets/images/ios-desktop.png"><img alt="Logo" src="assets/images/ios-desktop.png"></img></a></p>
+<p>Image: <img alt="Logo" src="assets/images/ios-desktop.png" /></p>
 <hr /><li>
     foo1
 </li>
@@ -109,19 +107,11 @@ is that the tildes (<code>~</code>) are on their own line.</p>
     foo8
 </li>
 <hr />
-<pre><code>`title`: post title, automatically set to name of markdown file if left blank
-`_site`: site.yaml values
-`_date`: post 'last modified' date
-`_content`: post content (only accessible from templates, not markdown)
+<pre><code>[`title`: post title, automatically set to name of markdown file if left blank, `_site`: site.yaml values, `_date`: post 'last modified' date, `_content`: post content (only accessible from templates, not markdown)]
 </code></pre>
 <p>You can see all the vars you can use if you start <strong>SiteGen</strong> with <code>--loglevel debug</code>.   </p>
 <p>And as you can see, you can also use mustache logic to iterate through yaml maps and lists:</p>
-<p><a href="https://dartlang.org">Dart</a><br />
-<a href="https://pub.dartlang.org">Pub</a><br />
-<a href="http://google.com">Google</a><br />
-<a href="http://github.com">Github</a>   </p><ul><li><a href="https://github.com/MikeMitterer/dart-sitegen">SiteGen</a></li><li><a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a></li><li><a href="http://mustache.github.io/mustache.5.html">Mustache</a></li><li>
-<p><a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a></p></li><li>
-<p>hallo</p></li><li>foo</li><li>bar</li><li>baz</li></ul>
+<p><a href=""></a>   </p><ul><li>[<a href="https://github.com/MikeMitterer/dart-sitegen">SiteGen</a>, <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>, <a href="http://mustache.github.io/mustache.5.html">Mustache</a>, <a href="http://rhnh.net/2011/01/31/yaml-tutorial">YAML</a>]</li></ul><ul><li>[hallo, foo, bar, baz]</li></ul>
 <p>Note how you need to use a <code>.</code> to access a list item, but can access map/dict keys directly.</p>
 <p>You can of course disable these markdown templating features by setting <code>markdown_templating: true</code> in your site.yaml file.
 Same ideas apply when writing your actual HTML templates. See <a href="http://mustache.github.io/mustache.5.html">mustache's docs</a> for more templating info.</p>
@@ -180,14 +170,13 @@ Same ideas apply when writing your actual HTML templates. See <a href="http://mu
                 <ul class="mdl-mega-footer--link-list">
                     <li><a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a></li>
                     <li><a href="#">Help</a></li>
-                    <li><a href="#">Privacy and Terms</a></li>
+                    <li><a href="#">Privacy and Terms - </a></li>
                 </ul>
             </div>
         </footer>
     </main>
 </div>
 
-<script type="application/dart" src="main.dart"></script>
-<script data-pub-inline src="packages/browser/dart.js"></script>
+<script defer src="main.dart.js"></script>
 </body>
 </html>
