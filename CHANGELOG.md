@@ -1,6 +1,11 @@
 # Change Log for sitegen
 Static site generator for Dart, webserver included.
 
+## [Unreleased](http://github.com/mikemitterer/dart-sitegen/compare/v2.0...HEAD)
+
+### Feature
+* Works with Dart 2.0 [59b65c2](https://github.com/mikemitterer/dart-sitegen/commit/59b65c26d90d1f4891f8861642db81bc2dba1b66)
+
 ## [v1.7](http://github.com/mikemitterer/dart-sitegen/compare/v1.6.4...v1.7) - 2017-12-15
 
 ### Feature
